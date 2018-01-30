@@ -3,12 +3,11 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { ProductComponent } from './components/product/product.component';
-import { ProductListComponent } from './components/product-list/product-list.component';
-
-import { ProductsService } from './services/products.service';
-import { CartComponent } from './components/cart/cart.component';
-import { CartService } from './services/cart.service';
+import { ProductComponent } from './product/product.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductService } from './product/product.service';
+import { CartComponent } from './cart/cart.component';
+import { CartService } from './cart/cart.service';
 
 
 @NgModule({
@@ -22,7 +21,7 @@ import { CartService } from './services/cart.service';
     BrowserModule
   ],
   providers: [
-    ProductsService,
+    ProductService,
     CartService,
   ],
   bootstrap: [AppComponent]

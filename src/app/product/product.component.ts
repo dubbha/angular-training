@@ -1,10 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Product } from '../../models/product.model';
-import { Category } from '../../models/product.enum';
-
-import { CartService } from '../../services/cart.service';
-import { ProductsService } from '../../services/products.service';
+import { Product } from './product.model';
+import { Category } from './product.enum';
+import { ProductService } from './product.service';
+import { CartService } from '../cart/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -18,7 +17,7 @@ export class ProductComponent implements OnInit {
 
   constructor(
     public cartService: CartService,
-    public productsService: ProductsService,
+    public productsService: ProductService,
   ) {}
 
   ngOnInit() {}
