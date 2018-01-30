@@ -17,7 +17,7 @@ export class ProductComponent implements OnInit {
 
   constructor(
     public cartService: CartService,
-    public productsService: ProductService,
+    public productService: ProductService,
   ) {}
 
   ngOnInit() {}
@@ -27,6 +27,6 @@ export class ProductComponent implements OnInit {
   }
 
   getAlternative(id) {
-    return this.productsService.getProductById(id);
+    return this.productService.getProductById(id);
   }
 }

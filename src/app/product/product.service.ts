@@ -19,7 +19,7 @@ export class ProductService {
   }
 
   getProductById(id) {
-    return this.getProducts().filter(el => el.id === id)[0];
+    return this.getProducts().find(el => el.id === id);
   }
 
 }
