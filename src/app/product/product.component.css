@@ -1,0 +1,34 @@
+.product-name,
+.product-description {
+  display: inline-block;
+  width: 150px;
+}
+
+.product-price {
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+  background-color: grey;
+  color: white;
+}
+
+.product-category {
+  display: inline-block;
+  width: 100px;
+  text-transform: lowercase;
+}
+
+.product-available {
+  display: inline-block;
+  width: 20px;
+}
+
+.product-ingredients {
+  display: inline-block;
+  width: 150px;
+}
+
+.product-equivalents {
+  display: inline-block;
+  width: 250px;
+}
