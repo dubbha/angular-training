@@ -6,10 +6,10 @@ import { ProductService } from '../product/product.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.sass']
 })
 export class ProductListComponent implements OnInit {
-  products: Array<Product>;
+  products: Array<Product> = [];
 
   constructor(
     public productService: ProductService,
@@ -18,5 +18,4 @@ export class ProductListComponent implements OnInit {
   ngOnInit() {
     this.products = this.productService.getProducts();
   }
-
 }

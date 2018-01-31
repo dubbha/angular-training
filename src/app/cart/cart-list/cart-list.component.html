@@ -1,0 +1,8 @@
+<div *ngIf="cartService.products.length">
+  <h3>Cart:</h3>
+  <app-cart-item
+    *ngFor="let product of cartService.products"
+    [product]="product"
+  ></app-cart-item>
+  <h4>Total: {{cartService.totalPrice()}}</h4>
+</div>

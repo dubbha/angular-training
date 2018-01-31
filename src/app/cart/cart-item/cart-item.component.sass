@@ -1,0 +1,22 @@
+.cart-item
+  &__info
+    display: inline-block
+    width: 300px
+    height: 24px
+    text-align: center
+
+  &__button
+    width: 24px
+    height: 24px
+    vertical-align: middle
+    padding: 0
+
+\:host
+  &.basic
+    color: green
+
+  &.highlighted
+    color: red
+
+    & div > span
+      background-color: yellow
