@@ -4,7 +4,7 @@
       [{{product.quantity}} x ${{product.price}} = <strong>${{product.quantity * product.price}}</strong>]
   </span>
 
-  <button class="cart-item__button" (click)="cartService.updateQuantity(product.id, '+')">&#x2795;</button>
-  <button class="cart-item__button" (click)="cartService.updateQuantity(product.id, '-')">&#x2796;</button>
-  <button class="cart-item__button" (click)="cartService.removeProduct(product.id)">&#x2716;</button>
+  <button class="cart-item__button" (click)="cartService.updateQuantity(product.id, '+')">+</button>
+  <button class="cart-item__button" (click)="cartService.updateQuantity(product.id, '-')">-</button>
+  <button class="cart-item__button" (click)="cartService.removeProduct(product.id)">&#x2715;</button>
 </div>

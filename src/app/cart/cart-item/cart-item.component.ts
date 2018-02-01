@@ -14,11 +14,11 @@ export class CartItemComponent implements OnInit, OnDestroy {
   @HostBinding('class')
   className = 'basic';
 
-  @HostListener('mouseenter', ['$event'])
-  onMoutseEnter(event) { event.target.className = 'highlighted'; }
+  @HostListener('mouseenter')
+  onMoutseEnter() { this.className = 'highlighted'; }
 
   @HostListener('mouseleave', ['$event'])
-  onMoutseLeave(event) { event.target.className = 'basic'; }
+  onMoutseLeave() { this.className = 'basic'; }
 
 
   constructor(

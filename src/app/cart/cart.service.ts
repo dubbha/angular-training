@@ -20,19 +20,21 @@ export class CartService {
   updateQuantity(id, way?) {
     switch (way) {
       case '-':
-        this.products = this.products.map(item =>
-          item.id === id
-            ? {
-                ...item,
-                quantity: item.quantity > 1 ? item.quantity - 1 : 1
-              }
-            : item
-        );
+        this.products = this.products.map(item => {
+          if (item.id === id && item.quantity > 1) {
+            item.quantity -= 1;
+          }
+          return item;
+        });
         break;
       case '+':
       default:
-        this.products = this.products.map(item =>
-          item.id === id ? { ...item, quantity: item.quantity + 1 } : item);
+        this.products = this.products.map(item => {
+          if (item.id === id) {
+            item.quantity += 1;
+          }
+          return item;
+        });
     }
   }
 
