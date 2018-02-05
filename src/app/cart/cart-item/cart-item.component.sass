@@ -1,22 +1,24 @@
 .cart-item
-  &__info
+  &-info
     display: inline-block
-    width: 300px
+    width: 80%
     height: 24px
-    text-align: center
 
-  &__button
-    width: 24px
-    height: 24px
-    vertical-align: middle
-    padding: 0
+  &-buttons
+    width: 20%
+
+    &__button
+      width: 24px
+      height: 24px
+      vertical-align: middle
+      padding: 0
 
 \:host
   &.basic
     color: green
 
   &.highlighted
-    color: red
+    color: grey
 
-    & div > span
-      background-color: yellow
+    & div
+      background-color: orange

@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 import { CartService } from '../cart.service';
+import { LocalStorageService } from '../../shared/local-storage.service';
 
 @Component({
   selector: 'app-cart-list',
   templateUrl: './cart-list.component.html',
   styleUrls: ['./cart-list.component.sass']
 })
-export class CartListComponent implements OnInit {
+export class CartListComponent {
 
   constructor(
     public cartService: CartService,
+    private localStorageService: LocalStorageService,
   ) { }
 
-  ngOnInit() {
+  clearCart() {
+    this.cartService.clear();
+    this.localStorageService.removeItem('lastAddedProduct');
   }
-
 }
