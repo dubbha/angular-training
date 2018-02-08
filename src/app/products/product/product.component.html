@@ -1,7 +1,7 @@
 <div>
   <span class="product__name">{{product.name}}</span>
   <span class="product__description">{{product.description}}</span>
-  <span class="product__category">{{product.category}}</span>
+  <span class="product__category product__category_lowercase">{{product.category}}</span>
   <span class="product__ingredients">
     <span *ngFor="let ingredient of product.ingredients; let isLast=last">
       {{ingredient}}{{isLast ? '' : ', '}}
@@ -13,7 +13,7 @@
     </span>
   </span>
   <span class="product__availability">{{product.isAvailable ? '&#x2714;' : '&#x2716;'}}</span>
-  <span class="product__price">${{product.price}}</span>
+  <span class="product__price">{{product.price | currency:'UAH':'symbol-narrow':'.2':'uk'}}</span>
   <input
     class="product__quantity"
     type="number"
@@ -31,5 +31,5 @@
     (click)="buyProduct()"
     [disabled]="!product.isAvailable"
     [ngClass]="{'product__button_available': product.isAvailable, 'product__button_unavailable': !product.isAvailable}"
-  >{{ product.isAvailable ? 'Buy' : 'N/A' }}</button>
+  >{{ (product.isAvailable ? 'buy' : 'n/a') | uppercase }}</button>
 </div>

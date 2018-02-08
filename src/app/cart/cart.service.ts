@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Product } from '../products/product/product.model';
 
 @Injectable()
 export class CartService {
@@ -66,6 +67,11 @@ export class CartService {
     this.products = [];
     this.totalPrice = 0;
     this.totalQuantity = 0;
+  }
+
+  getProductPercentage(id) {
+    const product = this.products.find(item => item.id === id);
+    return product ? ((product.price * product.quantity) / this.totalPrice) : 0;
   }
 
   notifyServerOnInit(product) {
