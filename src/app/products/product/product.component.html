@@ -14,9 +14,22 @@
   </span>
   <span class="product__availability">{{product.isAvailable ? '&#x2714;' : '&#x2716;'}}</span>
   <span class="product__price">${{product.price}}</span>
+  <input
+    class="product__quantity"
+    type="number"
+    min="1"
+    max="9"
+    [value]="quantity"
+    (change)="onChangeQuantity($event)"
+    (blur)="onBlurQuantity($event)"
+    [disabled]="!product.isAvailable"
+  />
   <button
+    appHighlight
+    seconds="2"
+    class="product__button"
     (click)="buyProduct()"
     [disabled]="!product.isAvailable"
     [ngClass]="{'product__button_available': product.isAvailable, 'product__button_unavailable': !product.isAvailable}"
-  >Buy Me</button>
+  >{{ product.isAvailable ? 'Buy' : 'N/A' }}</button>
 </div>

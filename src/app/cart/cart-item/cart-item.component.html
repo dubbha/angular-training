@@ -1,10 +1,12 @@
 <div>
-  <span class="cart-item__info">
+  <span class="cart-item-info">
       {{product.name}}
       [{{product.quantity}} x ${{product.price}} = <strong>${{product.quantity * product.price}}</strong>]
   </span>
 
-  <button class="cart-item__button" (click)="cartService.updateQuantity(product.id, '+')">+</button>
-  <button class="cart-item__button" (click)="cartService.updateQuantity(product.id, '-')">-</button>
-  <button class="cart-item__button" (click)="cartService.removeProduct(product.id)">&#x2715;</button>
+  <span class="cart-item-buttons">
+      <button class="cart-item-buttons__button" (click)="cartService.updateQuantity(product.id, '+')">+</button>
+      <button class="cart-item-buttons__button" (click)="cartService.updateQuantity(product.id, '-')">-</button>
+      <button class="cart-item-buttons__button" (click)="cartService.removeProduct(product.id)">&#x2715;</button>
+  </span>
 </div>
