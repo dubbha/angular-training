@@ -1,5 +1,16 @@
 <div>
   <div class="title">Products List:</div>
+  <header class="product-list__header">
+    <span class="product-list__name sortable" (click)="sortProducts('name')">Name</span>
+    <span class="product-list__description sortable" (click)="sortProducts('description')">Description</span>
+    <span class="product-list__category sortable" (click)="sortProducts('category')">Category</span>
+    <span class="product-list__ingredients">Ingredients</span>
+    <span class="product-list__equivalents">Equivalents</span>
+    <span class="product-list__availability sortable" (click)="sortProducts('isAvailable')">Available</span>
+    <span class="product-list__price sortable" (click)="sortProducts('price')">Price</span>
+    <span class="product-list__quantity">Qty</span>
+    <span class="product-list__button">Buy</span>
+  </header>
   <app-product
     *ngFor="let product of products"
     [product]="product"

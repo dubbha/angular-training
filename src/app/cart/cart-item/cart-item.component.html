@@ -1,12 +1,15 @@
 <div>
   <span class="cart-item-info">
       {{product.name}}
-      [{{product.quantity}} x ${{product.price}} = <strong>${{product.quantity * product.price}}</strong>]
+      [{{product.quantity}} x {{product.price | currency:'UAH':'code':'.0':'uk'}} =
+      <strong>{{product.quantity * product.price | currency:'UAH':'code':'.0':'uk'}}</strong>,
+      {{cartService.getProductPercentage(product.id) | percent:'.2':'uk'}}
+      ]
   </span>
 
   <span class="cart-item-buttons">
       <button class="cart-item-buttons__button" (click)="cartService.updateQuantity(product.id, '+')">+</button>
       <button class="cart-item-buttons__button" (click)="cartService.updateQuantity(product.id, '-')">-</button>
-      <button class="cart-item-buttons__button" (click)="cartService.removeProduct(product.id)">&#x2715;</button>
+      <button class="cart-item-buttons__button" (click)="cartService.removeProduct(product.id)">✕</button>
   </span>
 </div>

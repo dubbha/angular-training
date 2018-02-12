@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Product } from '../products/product/product.model';
 
 @Injectable()
 export class CartService {
@@ -50,11 +51,11 @@ export class CartService {
   }
 
   updateTotalPrice() {
-    this.totalPrice =  this.products.reduce((acc, cur) => acc += cur.price * cur.quantity, 0);
+    this.totalPrice =  this.products.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
   }
 
   updateTotalQuantity() {
-    this.totalQuantity = this.products.reduce((acc, cur) => acc += cur.quantity, 0);
+    this.totalQuantity = this.products.reduce((acc, cur) => acc + cur.quantity, 0);
   }
 
   updateTotals() {
@@ -66,6 +67,11 @@ export class CartService {
     this.products = [];
     this.totalPrice = 0;
     this.totalQuantity = 0;
+  }
+
+  getProductPercentage(id) {
+    const product = this.products.find(item => item.id === id);
+    return product ? ((product.price * product.quantity) / this.totalPrice) : 0;
   }
 
   notifyServerOnInit(product) {

@@ -5,6 +5,7 @@ import { ProductComponent } from './product/product.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductService } from './product/product.service';
 import { HighlightDirective } from './product/highlight.directive';
+import { SortProductsPipe } from './product-list/sort-products.pipe';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { HighlightDirective } from './product/highlight.directive';
     ProductComponent,
     ProductListComponent,
     HighlightDirective,
+    SortProductsPipe,
   ],
   exports: [
     ProductListComponent,

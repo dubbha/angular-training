@@ -7,12 +7,12 @@
   <div class="cart-list__totals">
       <div>
           <span class="cart-list__total-name">Total Quantity: </span>
-          <span class="cart-list__total-value">{{cartService.totalQuantity}} pcs</span>
+          <span class="cart-list__total-value">{{cartService.totalQuantity}} {{'PCS' | lowercase}}</span>
         </div>
         <div>
           <span class="cart-list__total-name">Total Price: </span>
-          <span class="cart-list__total-value">${{cartService.totalPrice}}</span>
+          <span class="cart-list__total-value">{{cartService.totalPrice | currency:'UAH':'code':'.0':'uk'}}</span>
         </div>
   </div>
-  <button class="cart-list__button" (click)="clearCart()">Clear Cart</button>
+  <button class="cart-list__button" (click)="clearCart()">{{ 'clear' | uppercase }}</button>
 </div>
