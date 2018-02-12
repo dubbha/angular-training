@@ -51,11 +51,11 @@ export class CartService {
   }
 
   updateTotalPrice() {
-    this.totalPrice =  this.products.reduce((acc, cur) => acc += cur.price * cur.quantity, 0);
+    this.totalPrice =  this.products.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
   }
 
   updateTotalQuantity() {
-    this.totalQuantity = this.products.reduce((acc, cur) => acc += cur.quantity, 0);
+    this.totalQuantity = this.products.reduce((acc, cur) => acc + cur.quantity, 0);
   }
 
   updateTotals() {

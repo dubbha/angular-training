@@ -12,7 +12,7 @@
       {{getAlternative(equivalent).name}}{{isLast ? '' : ', '}}
     </span>
   </span>
-  <span class="product__availability">{{product.isAvailable ? '&#x2714;' : '&#x2716;'}}</span>
+  <span class="product__availability">{{product.isAvailable ? '✔' : '✖'}}</span>
   <span class="product__price">{{product.price | currency:'UAH':'symbol-narrow':'.2':'uk'}}</span>
   <input
     class="product__quantity"

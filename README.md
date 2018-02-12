@@ -18,9 +18,14 @@
  - Task7. NgRX
  - Task8. Forms
 
-## Run
-```js
-ng serve -o
+## Run Development Server
+```
+npm run start
+```
+
+## Run Production Build
+```
+npm run build && npm run prod
 ```
 
 ## Powered by Angular CLI
