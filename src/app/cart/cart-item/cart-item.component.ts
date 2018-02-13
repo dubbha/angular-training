@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Input, HostBinding, HostListener } from '
 
 import { CartService } from '../cart.service';
 import { CartItem } from './cart-item.model';
-import { LocalStorageService } from '../../shared/local-storage.service';
+import { LocalStorageService } from '../../core/services';
 
 @Component({
   selector: 'app-cart-item',

@@ -5,9 +5,8 @@ import localeUk from '@angular/common/locales/uk';
 import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
 
-import { ConfigOptionsService } from './shared/config-options.service';
-import { ConstantsService } from './shared/constants.service';
-import { GeneratorService } from './shared/generator.service';
+import { ConfigOptionsService, ConstantsService } from './core/services';
+import { GeneratorService } from './shared/services';
 
 registerLocaleData(localeUk);
 

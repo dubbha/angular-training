@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 
 import { CartService } from '../cart.service';
-import { LocalStorageService } from '../../shared/local-storage.service';
+import { LocalStorageService } from '../../core/services';
 
 @Component({
   selector: 'app-cart-list',
