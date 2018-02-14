@@ -14,5 +14,8 @@
           <span class="cart-list__total-value">{{cartService.totalPrice | currency:'UAH':'code':'.0':'uk'}}</span>
         </div>
   </div>
-  <button class="cart-list__button" (click)="clearCart()">{{ 'clear' | uppercase }}</button>
+  <div class="cart-list__buttons">
+    <button class="cart-list__button cart-list__button_first" (click)="clearCart()">{{ 'clear' | uppercase }}</button>
+    <button class="cart-list__button" (click)="clearCart()">{{ 'checkout' | uppercase }}</button>
+  </div>
 </div>

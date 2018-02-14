@@ -2,38 +2,72 @@
 
   &__header
     margin: 5px 0
+    user-select: none
+    overflow: hidden
 
     & > span
-      display: inline-block
       border: 1px solid grey
       box-sizing: border-box
       height: 32px
       line-height: 32px
       text-align: center
+      float: left
 
   &__name,
   &__description
-    width: 150px
+    display: inline-block
+    width: 15%
 
-  &__price
-    height: 24px
-    width: 84px
+    @media screen and (max-width: 1200px)
+      width: 23%
 
   &__category
-    width: 100px
+    display: inline-block
+    width: 12%
 
-  &__availability
-    width: 100px
-    text-align: center
+    @media screen and (max-width: 1200px)
+      width: 14%
 
   &__ingredients
-    width: 150px
+    display: inline-block
+    width: 12%
+
+    @media screen and (max-width: 1200px)
+      display: none
 
   &__equivalents
-    width: 250px
+    display: inline-block
+    width: 18%
+
+    @media screen and (max-width: 1200px)
+      display: none
+
+  &__availability
+    display: inline-block
+    text-align: center
+    width: 8%
+
+    @media screen and (max-width: 1200px)
+      width: 14%
+
+  &__price
+    display: inline-block
+    height: 24px
+    width: 8%
+
+    @media screen and (max-width: 1200px)
+      width: 10%
 
   &__quantity
-    width: 48px
+    display: inline-block
+    width: 5%
+
+    @media screen and (max-width: 1200px)
+      width: 7%
 
   &__button
-    width: 48px
+    display: inline-block
+    width: 7%
+
+    @media screen and (max-width: 1200px)
+      width: 9%

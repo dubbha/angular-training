@@ -3,9 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { NotFoundComponent } from './shared/components';
 import { ProductListComponent } from './products/product-list/product-list.component';
+import { ProductCardComponent } from './products/product-card/product-card.component';
 
 const routes: Routes = [
   { path: 'shop', component: ProductListComponent },
+  { path: 'product/:id', component: ProductCardComponent },
   { path: '', redirectTo: '/shop', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];

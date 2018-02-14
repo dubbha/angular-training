@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, HostListener } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { Product } from './product.model';
 import { Category } from './product.enum';
@@ -16,20 +17,38 @@ export class ProductComponent implements OnInit {
 
   @Input() product: Product;
 
+  @HostBinding('class')
+  className = 'basic';
+
+  @HostListener('mouseenter')
+  onMouseEnter() { this.className = 'highlighted'; }
+
+  @HostListener('mouseleave')
+  onMouseLeave() { this.className = 'basic'; }
+
+  @HostListener('click')
+  onClick() { this.openProductCard(); }
+
   constructor(
-    public cartService: CartService,
-    public productService: ProductService,
+    private cartService: CartService,
+    private productService: ProductService,
+    private router: Router,
   ) {}
 
   ngOnInit() {}
 
-  buyProduct() {
+  buyProduct(event) {
+    event.stopPropagation();    // prevent the host click listener from firing
     this.cartService.addToCart({
       id: this.product.id,
       name: this.product.name,
       price: this.product.price,
     },
     this.quantity);
+  }
+
+  stopPropagation(event) {
+    event.stopPropagation();
   }
 
   onChangeQuantity(event) {
@@ -50,5 +69,9 @@ export class ProductComponent implements OnInit {
 
   getAlternative(id) {
     return this.productService.getProductById(id);
+  }
+
+  openProductCard() {
+    this.router.navigate([`/product/${this.product.id}`]);
   }
 }

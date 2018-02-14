@@ -1,0 +1,33 @@
+.param
+  &:nth-of-type(odd)
+    background-color: lightgrey
+    display: inline-block         // keep the floats inside
+    width: 100%
+
+.key
+  font-weight: bold
+  display: inline-block
+  width: 30%
+  float: left
+
+.value
+  display: inline-block
+  width: 70%
+  float: left
+
+  & ul
+    margin: 0;
+    padding: 0
+
+  & li
+    margin-left: 20px
+
+.link
+  cursor: pointer
+  color: orange
+
+  &:hover
+    text-decoration: underline
+
+.button
+  margin: 10px

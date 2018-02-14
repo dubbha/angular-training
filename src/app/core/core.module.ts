@@ -1,6 +1,6 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule, APP_BASE_HREF } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
@@ -24,7 +24,6 @@ const config = new ConfigOptionsService({
   ],
   declarations: [],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },
     WindowRefService,
     LocalStorageService,
     { provide: ConfigOptionsService, useValue: config },

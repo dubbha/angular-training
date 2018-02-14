@@ -23,6 +23,7 @@
     [disabled]="!product.isAvailable"
     (change)="onChangeQuantity($event)"
     (blur)="onBlurQuantity($event)"
+    (click)="stopPropagation($event)"
   />
   <button
     appHighlight
@@ -30,6 +31,6 @@
     class="product__button"
     [disabled]="!product.isAvailable"
     [ngClass]="{'product__button_available': product.isAvailable, 'product__button_unavailable': !product.isAvailable}"
-    (click)="buyProduct()"
+    (click)="buyProduct($event)"
   >{{ (product.isAvailable ? 'buy' : 'n/a') | uppercase }}</button>
 </div>
