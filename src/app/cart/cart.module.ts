@@ -15,7 +15,6 @@ import { CartService } from './cart.service';
   ],
   exports: [
     CartListComponent,
-    CartItemComponent,
   ],
   providers: [
     CartService,

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { ProductsModule } from './products/products.module';
+import { CheckoutModule } from './checkout/checkout.module';
 import { AppRoutingModule, appRouterComponents } from './app.routing.module';
 
 import { AppComponent } from './app.component';
@@ -18,8 +19,9 @@ import { AppComponent } from './app.component';
     BrowserModule,
     CoreModule,
     SharedModule,
-    AppRoutingModule,
     ProductsModule,
+    CheckoutModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
