@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { Product } from './product.model';
 import { Category } from './product.enum';
-import { ProductService } from './product.service';
+import { ProductService } from '../products.service';
 import { CartService } from '../../cart/cart.service';
 
 @Component({

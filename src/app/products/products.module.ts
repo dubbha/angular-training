@@ -7,7 +7,7 @@ import { ProductComponent } from './product/product.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 
-import { ProductService } from './product/product.service';
+import { ProductService } from './products.service';
 import { HighlightDirective } from './product/highlight.directive';
 import { SortProductsPipe } from './product-list/sort-products.pipe';
 

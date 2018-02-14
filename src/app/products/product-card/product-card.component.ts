@@ -1,7 +1,9 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { Product } from '../product/product.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProductService } from '../product/product.service';
+
+import { Product } from '../product/product.model';
+import { ProductService } from '../products.service';
+import { CartService } from '../../cart/cart.service';
 
 @Component({
   templateUrl: './product-card.component.html',
