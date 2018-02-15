@@ -1,9 +1,7 @@
 import { Component, OnInit, Input, HostBinding, HostListener } from '@angular/core';
-import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { Product } from './product.model';
-import { Category } from './product.enum';
 import { ProductService } from '../products.service';
 import { CartService } from '../../cart/cart.service';
 

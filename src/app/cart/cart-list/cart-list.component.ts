@@ -1,4 +1,5 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { CartService } from '../cart.service';
 import { LocalStorageService } from '../../core/services';
@@ -13,10 +14,15 @@ export class CartListComponent {
   constructor(
     public cartService: CartService,
     private localStorageService: LocalStorageService,
+    private router: Router,
   ) { }
 
   clearCart() {
     this.cartService.clear();
     this.localStorageService.removeItem('lastAddedProduct');
+  }
+
+  openCheckout() {
+    this.router.navigate(['/checkout']);
   }
 }

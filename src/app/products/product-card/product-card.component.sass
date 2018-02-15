@@ -1,33 +1,56 @@
-.param
-  &:nth-of-type(odd)
-    background-color: lightgrey
-    display: inline-block         // keep the floats inside
-    width: 100%
+.product-card
 
-.key
-  font-weight: bold
-  display: inline-block
-  width: 30%
-  float: left
+  &__param
+    &:nth-of-type(odd)
+      background-color: lightgrey
+      display: inline-block         // keep the floats inside
+      width: 100%
 
-.value
-  display: inline-block
-  width: 70%
-  float: left
+  &__key
+    font-weight: bold
+    display: inline-block
+    width: 30%
+    min-width: 180px
+    float: left
 
-  & ul
-    margin: 0;
-    padding: 0
+  &__value
+    display: inline-block
+    width: 70%
+    float: left
 
-  & li
-    margin-left: 20px
+    & ul
+      margin: 0
+      padding: 0
+      list-style: inside square
 
-.link
-  cursor: pointer
-  color: orange
+  &__link
+    cursor: pointer
+    color: green
 
-  &:hover
-    text-decoration: underline
+    &:hover
+      text-decoration: underline
 
-.button
-  margin: 10px
+  &__button
+    display: inline-block
+    float: left
+    height: 24px
+    border: 1px solid grey
+    outline: none
+    cursor: pointer
+    width: calc(30% - 20px)
+    min-width: 160px
+    margin: 10px 0 10px 10px
+
+
+    &_available
+      color: white
+      background-color: green
+
+    &_highlighted
+      color: white
+      background-color: orange
+
+    &_unavailable
+      color: #999
+      background-color: #666
+      cursor: default

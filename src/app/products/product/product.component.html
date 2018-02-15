@@ -27,10 +27,12 @@
   />
   <button
     appHighlight
-    seconds="2"
+    seconds="1"
     class="product__button"
     [disabled]="!product.isAvailable"
     [ngClass]="{'product__button_available': product.isAvailable, 'product__button_unavailable': !product.isAvailable}"
     (click)="buyProduct($event)"
-  >{{ (product.isAvailable ? 'buy' : 'n/a') | uppercase }}</button>
+  >
+    {{ (product.isAvailable ? 'buy' : 'n/a') | uppercase }}
+  </button>
 </div>

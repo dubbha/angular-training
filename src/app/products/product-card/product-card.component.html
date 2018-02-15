@@ -1,19 +1,19 @@
 <div class="title">{{product.name}}</div>
-<div class="param">
-  <span class="key">Name</span>
-  <span class="value">{{product.name}}</span>
+<div class="product-card__param">
+  <span class="product-card__key">Name</span>
+  <span class="product-card__value">{{product.name}}</span>
 </div>
-<div class="param">
-  <span class="key">Description</span>
-  <span class="value">{{product.description}}</span>
+<div class="product-card__param">
+  <span class="product-card__key">Description</span>
+  <span class="product-card__value">{{product.description}}</span>
 </div>
-<div class="param">
-  <span class="key">Category</span>
-  <span class="value">{{product.category | titlecase }}</span>
+<div class="product-card__param">
+  <span class="product-card__key">Category</span>
+  <span class="product-card__value">{{product.category | titlecase }}</span>
 </div>
-<div class="param">
-  <span class="key">Ingredients</span>
-  <span class="value">
+<div class="product-card__param">
+  <span class="product-card__key">Ingredients</span>
+  <span class="product-card__value">
       <ul>
           <li *ngFor="let ingredient of product.ingredients">
             {{ingredient}}
@@ -21,32 +21,43 @@
         </ul>
   </span>
 </div>
-<div class="param">
-  <span class="key">Equivalents</span>
-  <span class="value">
+<div class="product-card__param">
+  <span class="product-card__key">Equivalents</span>
+  <span class="product-card__value">
       <ul>
         <li
           *ngFor="let equivalentId of product.equivalents"
           (click)="openProductCard(equivalentId)"
-          class="link">
+          class="product-card__link">
             {{getAlternative(equivalentId).name}}
         </li>
       </ul>
   </span>
 </div>
-<div class="param">
-    <span class="key">Available</span>
-    <span class="value">{{product.isAvailable ? '✔ In Stock' : '✖ Not Available'}}</span>
+<div class="product-card__param">
+    <span class="product-card__key">Available</span>
+    <span class="product-card__value">{{product.isAvailable ? '✔ In Stock' : '✖ Not Available'}}</span>
 </div>
-<div class="param">
-    <span class="key">Price</span>
-    <span class="value">{{product.price | currency:'UAH':'symbol-narrow':'.2':'uk'}}</span>
+<div class="product-card__param">
+    <span class="product-card__key">Price</span>
+    <span class="product-card__value">{{product.price | currency:'UAH':'symbol-narrow':'.2':'uk'}}</span>
 </div>
-<div class="param">
-    <button
-      class="button"
-      (click)="backToProducts()">
-        {{'Back to products' | uppercase}}
-    </button>
+<div class="product-card__param">
+  <button
+    class="product-card__button"
+    (click)="backToProducts()"
+  >
+      {{'Back to products' | uppercase}}
+  </button>
+  <button
+    appHighlight
+    seconds="1"
+    class="product-card__button"
+    [disabled]="!product.isAvailable"
+    [ngClass]="{'product-card__button_available': product.isAvailable, 'product-card__button_unavailable': !product.isAvailable}"
+    (click)="buyProduct()"
+  >
+    {{ (product.isAvailable ? 'buy' : 'n/a') | uppercase }}
+  </button>
 </div>
 <app-cart-list></app-cart-list>

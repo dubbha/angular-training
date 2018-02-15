@@ -16,6 +16,7 @@ export class ProductCardComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private productService: ProductService,
+    private cartService: CartService,
   ) { }
 
   ngOnInit() {
@@ -34,5 +35,14 @@ export class ProductCardComponent implements OnInit {
 
   backToProducts() {
     this.router.navigate([`/shop`]);
+  }
+
+  buyProduct() {
+    this.cartService.addToCart({
+      id: this.product.id,
+      name: this.product.name,
+      price: this.product.price,
+    },
+    1);
   }
 }

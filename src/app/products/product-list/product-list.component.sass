@@ -6,12 +6,17 @@
     overflow: hidden
 
     & > span
-      border: 1px solid grey
+      border-width: 1px 0 1px 1px
+      border-color: grey
+      border-style: solid
       box-sizing: border-box
       height: 32px
       line-height: 32px
       text-align: center
       float: left
+
+      &:last-of-type
+        border-width: 1px
 
   &__name,
   &__description
