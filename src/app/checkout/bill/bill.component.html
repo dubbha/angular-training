@@ -1,0 +1,19 @@
+<div class="title">Checkout: Step 1 [Bill]</div>
+<div *ngFor="let product of cartService.products" class="bill__info">
+  <span class="bill__key">{{product.name}}</span>
+  <span class="bill__value">
+    {{product.quantity}} x {{product.price | currency:'UAH':'code':'.0':'uk'}} =
+    <strong>{{product.quantity * product.price | currency:'UAH':'code':'.0':'uk'}}</strong>
+  </span>
+</div>
+<div class="bill__totals">
+  <div>
+    <span class="bill__total-name">Total Quantity: </span>
+    <span class="bill__total-value">{{cartService.totalQuantity}} {{'PCS' | lowercase}}</span>
+  </div>
+  <div>
+    <span class="bill__total-name">Total Price: </span>
+    <span class="bill__total-value">{{cartService.totalPrice | currency:'UAH':'code':'.0':'uk'}}</span>
+  </div>
+</div>
+<button class="bill__button" (click)="nextStep()">{{'Step 2 [Address]' | uppercase}}</button>

@@ -1,0 +1,40 @@
+.bill
+  &__info
+    &:nth-of-type(odd)
+      background-color: lightgrey
+      display: inline-block   // keep the floats inside
+      width: 100%
+
+  &__key
+    font-weight: bold
+    display: inline-block
+    width: 60%
+    float: left
+
+  &__value
+    display: inline-block
+    width: 40%
+    min-width: 250px
+    float: left
+
+  &__totals
+    margin-top: 20px
+    width: 60%
+    display: inline-block
+    float: left
+
+  &__total-name
+    display: inline-block
+    width: 150px
+
+  &__total-value
+    font-weight: bold
+
+  &__button
+    display: inline-block
+    float: left
+    width: 40%
+    //min-width: 250px
+    height: 24px
+    box-sizing: border-box
+    margin-top: 28px

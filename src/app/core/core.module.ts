@@ -19,10 +19,10 @@ const config = new ConfigOptionsService({
 });
 
 @NgModule({
+  declarations: [],
   imports: [
     CommonModule
   ],
-  declarations: [],
   providers: [
     WindowRefService,
     LocalStorageService,

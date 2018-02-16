@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { GeneratorService } from './services';
-import { NotFoundComponent } from './components';
+import { GeneratorService, MessageService } from './services';
+import { NotFoundComponent, MessageComponent } from './components';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [NotFoundComponent],
+  declarations: [NotFoundComponent, MessageComponent],
   exports: [NotFoundComponent],
   providers: [
     { provide: GeneratorService, useFactory: () => new GeneratorService(8) },
+    MessageService,
   ],
 })
 export class SharedModule { }

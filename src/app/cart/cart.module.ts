@@ -6,12 +6,12 @@ import { CartItemComponent } from './cart-item/cart-item.component';
 import { CartService } from './cart.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-  ],
   declarations: [
     CartListComponent,
     CartItemComponent,
+  ],
+  imports: [
+    CommonModule,
   ],
   exports: [
     CartListComponent,

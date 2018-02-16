@@ -12,16 +12,16 @@ import { HighlightDirective } from './highlight.directive';
 import { SortProductsPipe } from './product-list/sort-products.pipe';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    CartModule,
-  ],
   declarations: [
     ProductComponent,
     ProductListComponent,
     HighlightDirective,
     SortProductsPipe,
     ProductCardComponent,
+  ],
+  imports: [
+    CommonModule,
+    CartModule,
   ],
   exports: [
     ProductListComponent,

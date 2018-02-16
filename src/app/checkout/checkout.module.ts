@@ -1,12 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CheckoutComponent } from './checkout.component';
+import { FormsModule } from '@angular/forms';
+
+import { BillComponent } from './bill/bill.component';
+import { CartService } from '../cart/cart.service';
+
+import { CheckoutRoutingModule, checkoutRouterComponents } from './checkout.routing.module';
 
 @NgModule({
+  declarations: [checkoutRouterComponents],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    CheckoutRoutingModule,
   ],
-  declarations: [CheckoutComponent],
-  exports: [CheckoutComponent],
+  exports: [],
+  providers: [CartService],
 })
 export class CheckoutModule { }
