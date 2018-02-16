@@ -1,4 +1,9 @@
-<div class="message-grandparent" [ngClass]="{ 'message-hide': !open }" (click)="close()">
+<div
+  *ngIf="message"
+  class="message-grandparent"
+  [ngClass]="{ 'message-hide': !open }"
+  (click)="close()"
+>
   <div class="message-parent">
     <div class="message message-{{type}}">{{message}}</div>
   </div>
