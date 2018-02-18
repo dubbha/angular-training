@@ -9,7 +9,7 @@ import { CartService } from '../../cart/cart.service';
 })
 export class BillComponent implements OnInit {
   constructor(
-    private cartService: CartService,
+    public cartService: CartService,
     private router: Router,
   ) { }
 

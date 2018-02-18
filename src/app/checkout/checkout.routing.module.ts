@@ -6,7 +6,7 @@ import { AddressComponent } from './address/address.component';
 
 const routes = [
   {
-    path: 'checkout',
+    path: '',
     children: [
       { path: 'address', component: AddressComponent },
       { path: '', component: BillComponent },

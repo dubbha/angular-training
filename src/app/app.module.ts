@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { ProductsModule } from './products/products.module';
-import { CheckoutModule } from './checkout/checkout.module';
+import { CartModule } from './cart/cart.module';
 import { AppRoutingModule, appRouterComponents } from './app.routing.module';
 
 import { AppComponent } from './app.component';
@@ -20,7 +20,7 @@ import { AppComponent } from './app.component';
     CoreModule,
     SharedModule,
     ProductsModule,
-    CheckoutModule,
+    CartModule,
     AppRoutingModule,
   ],
   providers: [],

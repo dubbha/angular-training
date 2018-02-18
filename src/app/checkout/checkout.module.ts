@@ -15,6 +15,6 @@ import { CheckoutRoutingModule, checkoutRouterComponents } from './checkout.rout
     CheckoutRoutingModule,
   ],
   exports: [],
-  providers: [CartService],
+  providers: [],
 })
 export class CheckoutModule { }
