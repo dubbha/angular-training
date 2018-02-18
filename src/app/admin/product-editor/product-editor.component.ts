@@ -38,7 +38,7 @@ export class ProductEditorComponent implements OnInit {
     this.productService.removeProductMaterial(this.product.id, material);
   }
 
-  addMaterial(material: string): void {
+  addMaterial(): void {
     this.productService.addProductMaterial(this.product.id, this.newMaterial);
   }
 
