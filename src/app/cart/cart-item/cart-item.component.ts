@@ -3,6 +3,8 @@ import { Component, OnInit, OnDestroy, Input, HostBinding, HostListener } from '
 import { CartService } from '../cart.service';
 import { CartItem } from './cart-item.model';
 import { LocalStorageService } from '../../core/services';
+import { SessionStorageService } from '../../core/services';
+import { Session } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-cart-item',
@@ -24,21 +26,15 @@ export class CartItemComponent implements OnInit, OnDestroy {
 
   constructor(
     public cartService: CartService,
-    public localStorageService: LocalStorageService,
+    private localStorageService: LocalStorageService,
+    private sessionStorageService: SessionStorageService,
   ) { }
 
   ngOnInit() {
     this.cartService.notifyServerOnInit(this.product);
-
-    this.localStorageService.setItem('lastAddedProduct', this.product);
   }
 
   ngOnDestroy() {
     this.cartService.notifyServerOnDestroy(this.product);
-
-    const storedLastAddedProduct = this.localStorageService.getItem('lastAddedProduct');
-    if (storedLastAddedProduct && storedLastAddedProduct.id === this.product.id) {
-      this.localStorageService.removeItem('lastAddedProduct');
-    }
   }
 }

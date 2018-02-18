@@ -12,11 +12,11 @@
   <span class="product-card__value">{{product.category | titlecase }}</span>
 </div>
 <div class="product-card__param">
-  <span class="product-card__key">Ingredients</span>
+  <span class="product-card__key">materials</span>
   <span class="product-card__value">
       <ul>
-          <li *ngFor="let ingredient of product.ingredients">
-            {{ingredient}}
+          <li *ngFor="let material of product.materials">
+            {{material}}
           </li>
         </ul>
   </span>

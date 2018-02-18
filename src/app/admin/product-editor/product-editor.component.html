@@ -1,0 +1,83 @@
+<div class="title">{{product.name}}</div>
+<div class="product-editor__param">
+  <span class="product-editor__key">Name</span>
+  <span class="product-editor__value">
+    <input type=text [(ngModel)]="product.name" class="product-editor__input">
+  </span>
+</div>
+<div class="product-editor__param">
+  <span class="product-editor__key">Description</span>
+  <span class="product-editor__value">
+    <input type=text [(ngModel)]="product.description" class="product-editor__input">
+  </span>
+</div>
+<div class="product-editor__param">
+  <span class="product-editor__key">Category</span>
+  <span class="product-editor__value">
+    <select [(ngModel)]="product.category" class="product-editor__select">
+      <option *ngFor="let category of categories" [ngValue]="category">{{category | titlecase}}</option>
+    </select>
+  </span>
+</div>
+<div class="product-editor__param">
+    <span class="product-editor__key">Price</span>
+    <span class="product-editor__value">
+      <input
+        type="number"
+        [(ngModel)]="product.price"
+        class="product-editor__input product-editor__input_price"><span class="product-editor__currency">₴</span>
+    </span>
+</div>
+<div class="product-editor__param">
+    <span class="product-editor__key">Available</span>
+    <select [(ngModel)]="product.isAvailable" class="product-editor__input">
+      <option [ngValue]="true">✔ In Stock</option>
+      <option [ngValue]="false">✖ Not Available</option>
+    </select>
+</div>
+<div class="product-editor__param">
+  <span class="product-editor__key">Materials</span>
+  <span class="product-editor__value">
+      <div *ngFor="let material of product.materials">
+        <span class="product-editor__material">
+          {{material}}
+        </span><button
+          class="product-editor__action product-editor__action_delete"
+          (click)="removeMaterial(material)">✖</button>
+      </div>
+      <input
+        class="product-editor__input product-editor__input_with-action"
+        type=text
+        [(ngModel)]="newMaterial"
+        placeholder="add material"
+      ><button
+        class="product-editor__action product-editor__action_add"
+        (click)="addMaterial()"
+      >✔</button>
+  </span>
+</div>
+<div class="product-editor__param">
+  <span class="product-editor__key">Equivalents</span>
+  <span class="product-editor__value">
+    <select
+      class="product-editor__select product-editor__select_multi"
+      multiple
+      [(ngModel)]="product.equivalents"
+    >
+      <option
+        *ngFor="let otherProduct of otherProducts"
+        [ngValue]="otherProduct.id"
+      >
+        {{otherProduct.name}}
+      </option>
+    </select>
+  </span>
+</div>
+<div class="product-editor__param">
+  <button
+    class="product-editor__button"
+    (click)="backToProducts()"
+  >
+      {{'Back to products' | uppercase}}
+  </button>
+</div>

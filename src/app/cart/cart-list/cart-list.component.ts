@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { CartService } from '../cart.service';
 import { LocalStorageService } from '../../core/services';
+import { SessionStorageService } from '../../core/services';
 
 @Component({
   selector: 'app-cart-list',
@@ -15,11 +16,10 @@ export class CartListComponent {
     public cartService: CartService,
     private localStorageService: LocalStorageService,
     private router: Router,
-  ) { }
+  ) {}
 
   clearCart() {
     this.cartService.clear();
-    this.localStorageService.removeItem('lastAddedProduct');
   }
 
   openCheckout() {

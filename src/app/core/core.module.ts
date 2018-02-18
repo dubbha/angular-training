@@ -7,12 +7,13 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 import {
   WindowRefService,
   LocalStorageService,
+  SessionStorageService,
   ConfigOptionsService,
   constants,
   ConstantsService,
 } from './services';
 
-const config = new ConfigOptionsService({
+const config = (new ConfigOptionsService()).init({
   id: 123456,
   username: 'admin',
   email: 'admin@angular.io'
@@ -26,6 +27,7 @@ const config = new ConfigOptionsService({
   providers: [
     WindowRefService,
     LocalStorageService,
+    SessionStorageService,
     { provide: ConfigOptionsService, useValue: config },
     { provide: ConstantsService, useValue: constants },
   ],

@@ -1,4 +1,7 @@
 .product
+  width: 100%
+  float: left  // keep floats inside, avoid vertical spacing between divs themselves
+
   &__name,
   &__description,
   &__category
@@ -9,17 +12,17 @@
   &__name,
   &__description
     float: left
-    width: 15%
+    width: 19%
 
     @media screen and (max-width: 1200px)
-      width: 23%
+      width: 28%
 
   &__category
     text-transform: lowercase
-    width: 12%
+    width: 16%
 
     @media screen and (max-width: 1200px)
-      width: 14%
+      width: 20%
 
   &__materials
     display: inline-block
