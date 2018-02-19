@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Product } from '../../products/product/product.model';
 import { ProductService } from '../../products/products.service';
@@ -17,6 +18,7 @@ export class ProductsComponent implements OnInit {
   constructor(
     public productService: ProductService,
     private sortProductsPipe: SortProductsPipe,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -32,6 +34,10 @@ export class ProductsComponent implements OnInit {
     }
 
     this.products = this.sortProductsPipe.transform(this.products, key, this.order);
+  }
+
+  openAddProduct() {
+    this.router.navigate(['/admin/add']);
   }
 
 }

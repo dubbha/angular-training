@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 
 import { CartService } from '../cart.service';
 import { LocalStorageService } from '../../core/services';
-import { SessionStorageService } from '../../core/services';
 
 @Component({
   selector: 'app-cart-list',

@@ -54,4 +54,17 @@ export class ProductService {
       }
     });
   }
+
+  addProduct(product) {
+    if (!product.id) {
+      product.id = this.getNextId();
+    }
+    this.products.push(product);
+  }
+
+  getNextId() {
+    const arr = [...this.products];   // sort() would sort in place, make a copy
+    arr.sort((a, b) => a.id - b.id);
+    return arr.pop().id + 1;// next free ID
+  }
 }
