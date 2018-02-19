@@ -32,7 +32,7 @@ export class ProductService {
       return;
     }
 
-    this.getProducts().map(product => {
+    this.products.map(product => {
       if (product.id === id) {
         product.materials = product.materials.filter(curMaterial => curMaterial !== material);
       } else {
@@ -66,5 +66,9 @@ export class ProductService {
     const arr = [...this.products];   // sort() would sort in place, make a copy
     arr.sort((a, b) => a.id - b.id);
     return arr.pop().id + 1;  // next free ID
+  }
+
+  removeProduct(id) {
+    this.products = this.products.filter(product => product.id !== id);
   }
 }
