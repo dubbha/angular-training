@@ -28,6 +28,11 @@ export class SessionStorageService {
     this.notifyOtherTabs();
   }
 
+  clear(): void {
+    this.storage.clear();
+    this.notifyOtherTabs();
+  }
+
   notifyOtherTabs() { // send current sessionStorage dump to other tabs
     const storageDump = {};
     for (let i = 0; i < this.storage.length; i++) {
