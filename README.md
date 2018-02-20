@@ -1,12 +1,13 @@
 # Angular Training
 
-## Task 4. Pipes
-- CurrencyPipe used in CartItemComponent, CartListComponent, ProductComponent
-- PercentPipe used in CartItemComponent
-- UpperCasePipe used in ProductComponent, CartListComponent
-- LowerCasePipe used in CartListComponent
-- Custom SortProductsPipe used in ProductListComponent
-- Async DatePipe used in AppComponent
+## Task 5. Routes
+- CheckoutModule feature area with own routing, lazy-loaded
+- AdminModule feature area with own routing, lazy-loaded
+- AdminModule feature area is protected by canLoad guard
+- ModalComponent in a secondary router-outlet, provided by ModalService
+- SessionStorageService uses WindowRefService to access sessionStorage
+- SessionStorageService is used to maintain session after user is logged in
+- SessionStorage data is shared between tabs using LocalStorage events
 
 ## Branches
  - Task1. Introduction

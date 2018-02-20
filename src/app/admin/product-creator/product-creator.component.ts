@@ -57,6 +57,6 @@ export class ProductCreatorComponent implements OnInit {
   }
 
   backToProducts() {
-    this.router.navigate([`/admin`]);
+    this.router.navigate(['/admin']);
   }
 }
