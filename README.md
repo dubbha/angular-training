@@ -1,6 +1,6 @@
 # Angular Training
 
-## Task 5. Routes
+## Task 5. Routing
 - CheckoutModule feature area with own routing, lazy-loaded
 - AdminModule feature area with own routing, lazy-loaded
 - AdminModule feature area is protected by canLoad guard
