@@ -33,20 +33,30 @@ export class ModalComponent implements OnInit {
   }
 
   ok() {
-    this.close();
-    if (typeof this.callback === 'function') {
-      this.callback();
-    }
+    this.close().then(() => {
+      if (typeof this.callback === 'function') {
+        this.callback();
+      }
+    });
   }
 
   cancel() {
-    this.close();
-    if (typeof this.cancelCallback === 'function') {
-      this.cancelCallback();
-    }
+    this.close().then(() => {
+      if (typeof this.cancelCallback === 'function') {
+        this.cancelCallback();
+      }
+    });
   }
 
   close() {
-    this.router.navigate([{ outlets: { modal: null }}]);
+    return this.router.navigate([{ outlets: { modal: null }}]);
+  }
+
+  get isTypeAlert() {
+    return this.type === Type.Alert;
+  }
+
+  get isTypeConfirm() {
+    return this.type === Type.Confirm;
   }
 }

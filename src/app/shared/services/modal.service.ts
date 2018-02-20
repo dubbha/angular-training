@@ -63,7 +63,7 @@ export class ModalService {
     this.router.navigate([{ outlets: { modal: ['display'] } }]);
   }
 
-  confirm(message, conf?: { style: string, callback: Function, cancelCallback: Function }) {
+  confirm(message, conf?: { style: string, callback: Function, cancelCallback?: Function }) {
     this.setType(Type.Confirm);
     this.setMessage(message);
     if (conf && conf.style && typeof conf.style === 'string') {

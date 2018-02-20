@@ -27,34 +27,6 @@ export class ProductService {
     return this.getProducts().find(el => el.id === id);
   }
 
-  removeProductMaterial(id, material) {
-    if (!material) {
-      return;
-    }
-
-    this.products.map(product => {
-      if (product.id === id) {
-        product.materials = product.materials.filter(curMaterial => curMaterial !== material);
-      } else {
-        return product;
-      }
-    });
-  }
-
-  addProductMaterial(id, material) {
-    if (!material) {
-      return;
-    }
-
-    this.getProducts().map(product => {
-      if (product.id === id && !product.materials.includes(material)) {
-        product.materials.push(material);
-      } else {
-        return product;
-      }
-    });
-  }
-
   addProduct(product) {
     if (!product.id) {
       product.id = this.getNextId();
@@ -69,6 +41,21 @@ export class ProductService {
   }
 
   removeProduct(id) {
-    this.products = this.products.filter(product => product.id !== id);
+    this.products = this.products
+      .map(product => {
+        product.equivalents = product.equivalents.filter(e => e !== id);
+        return product;
+      })
+      .filter(product => product.id !== id);
+
+    // remove the product itself
+    // this.products = this.products.filter(product => product.id !== id);
+
+
+    console.log(this.products);
+  }
+
+  updateProduct(updatedProduct: Product) {
+    this.products = this.products.map(product => (product.id === updatedProduct.id) ? updatedProduct : product);
   }
 }

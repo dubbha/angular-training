@@ -1,20 +1,20 @@
-<div class="title">{{product.name}}</div>
+<div class="title">{{updatedProduct.name}}</div>
 <div class="product-editor__param">
   <span class="product-editor__key">Name</span>
   <span class="product-editor__value">
-    <input type=text [(ngModel)]="product.name" class="product-editor__input">
+    <input type=text [(ngModel)]="updatedProduct.name" class="product-editor__input">
   </span>
 </div>
 <div class="product-editor__param">
   <span class="product-editor__key">Description</span>
   <span class="product-editor__value">
-    <input type=text [(ngModel)]="product.description" class="product-editor__input">
+    <input type=text [(ngModel)]="updatedProduct.description" class="product-editor__input">
   </span>
 </div>
 <div class="product-editor__param">
   <span class="product-editor__key">Category</span>
   <span class="product-editor__value">
-    <select [(ngModel)]="product.category" class="product-editor__select">
+    <select [(ngModel)]="updatedProduct.category" class="product-editor__select">
       <option *ngFor="let category of categories" [ngValue]="category">{{category | titlecase}}</option>
     </select>
   </span>
@@ -24,13 +24,13 @@
     <span class="product-editor__value">
       <input
         type="number"
-        [(ngModel)]="product.price"
+        [(ngModel)]="updatedProduct.price"
         class="product-editor__input product-editor__input_price"><span class="product-editor__currency">₴</span>
     </span>
 </div>
 <div class="product-editor__param">
     <span class="product-editor__key">Available</span>
-    <select [(ngModel)]="product.isAvailable" class="product-editor__input">
+    <select [(ngModel)]="updatedProduct.isAvailable" class="product-editor__input">
       <option [ngValue]="true">✔ In Stock</option>
       <option [ngValue]="false">✖ Not Available</option>
     </select>
@@ -38,7 +38,7 @@
 <div class="product-editor__param">
   <span class="product-editor__key">Materials</span>
   <span class="product-editor__value">
-      <div *ngFor="let material of product.materials">
+      <div *ngFor="let material of updatedProduct.materials">
         <span class="product-editor__material">
           {{material}}
         </span><button
@@ -62,7 +62,7 @@
     <select
       class="product-editor__select product-editor__select_multi"
       multiple
-      [(ngModel)]="product.equivalents"
+      [(ngModel)]="updatedProduct.equivalents"
     >
       <option
         *ngFor="let otherProduct of otherProducts"
@@ -78,7 +78,18 @@
     class="product-editor__button"
     (click)="backToProducts()"
   >
-      {{'Back to products' | uppercase}}
+      {{'back to products' | uppercase}}
   </button>
-  <span class="product-editor__warning">⚠ CAUTION: Changes are instantly applied!</span>
+  <button
+    class="product-editor__button_save"
+    (click)="save()"
+  >
+    {{'save' | uppercase}}
+  </button>
+  <button
+    class="product-editor__button_delete"
+    (click)="delete()"
+  >
+    {{'delete' | uppercase}}
+  </button>
 </div>
