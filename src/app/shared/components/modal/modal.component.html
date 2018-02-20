@@ -1,0 +1,16 @@
+<div
+  *ngIf="message"
+  class="modal-grandparent"
+>
+  <div class="modal-parent">
+    <div class="modal modal-{{style}}">
+      <div>{{message}}</div>
+      <div class="modal-button-wrap">
+        <button type="submit" class="modal-button" id="modal-ok" (click)="ok()">
+          <img src="assets/save.png" class="modal-button-icon">
+          OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

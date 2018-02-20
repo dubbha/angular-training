@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { GeneratorService, MessageService, AuthService } from './services';
-import { NotFoundComponent, MessageComponent, AuthComponent } from './components';
+import { GeneratorService, ModalService, AuthService } from './services';
+import { NotFoundComponent, ModalComponent, AuthComponent } from './components';
 import { AuthGuard } from './guards/auth.guard';
 
 const generatorFactory = () => (new GeneratorService()).init(16);
@@ -15,7 +15,7 @@ const generatorFactory = () => (new GeneratorService()).init(16);
   ],
   declarations: [
     NotFoundComponent,
-    MessageComponent,
+    ModalComponent,
     AuthComponent,
   ],
   exports: [
@@ -24,7 +24,7 @@ const generatorFactory = () => (new GeneratorService()).init(16);
   ],
   providers: [
     { provide: GeneratorService, useFactory: generatorFactory },
-    MessageService,
+    ModalService,
     AuthService,
     AuthGuard,
   ],

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { MessageService } from '../../shared/services';
+import { ModalService } from '../../shared/services';
 import { CartService } from '../../cart/cart.service';
 import { Details } from './details.model';
 
@@ -14,7 +14,7 @@ export class AddressComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private messageService: MessageService,
+    private modalService: ModalService,
     private cartService: CartService,
   ) {}
 
@@ -24,15 +24,10 @@ export class AddressComponent implements OnInit {
 
   checkout() {
     this.cartService.clear();
-
-    this.messageService.set(
-      'order processed successfully',
-      'success',
-      () => {
-        this.router.navigate(['/']);
-      }
-    );
-    this.router.navigate([{ outlets: { message: ['display'] } }]);
+    this.modalService.alert('order processed successfully', {
+      style: 'success',
+      callback: () => this.router.navigate(['/']),
+    });
   }
 
 }
