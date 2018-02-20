@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from '../../products/product/product.model';
 import { Category } from '../../products/product/product.enum';
 import { ProductService } from '../../products/products.service';
-import { ProductCardComponent } from '../../products/product-card/product-card.component';
+import { ModalService } from '../../shared/services/modal.service';
 
 @Component({
   templateUrl: './product-creator.component.html',
@@ -15,12 +15,12 @@ export class ProductCreatorComponent implements OnInit {
   otherProducts: Array<Product>;
   categories: Array<string>;
   newMaterial: string;
-  saving = false;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private productService: ProductService,
+    private modalService: ModalService,
   ) { }
 
   ngOnInit() {
@@ -46,9 +46,13 @@ export class ProductCreatorComponent implements OnInit {
   submit(event, form) {
     event.preventDefault();
     if (form.valid) {
-      this.saving = true;
-      this.productService.addProduct(this.product);
-      this.backToProducts();
+      this.modalService.confirm('Save changes?', {
+        style: 'success',
+        callback: () => {
+          this.productService.addProduct(this.product);
+          this.backToProducts();
+        }
+      });
     }
   }
 

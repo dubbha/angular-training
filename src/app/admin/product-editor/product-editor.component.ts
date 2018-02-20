@@ -59,7 +59,7 @@ export class ProductEditorComponent implements OnInit {
   }
 
   delete() {
-    this.modalService.confirm('Are you sure?', {
+    this.modalService.confirm('Are you sure you want to delete the product?', {
       style: 'warn',
       callback: () => {
         this.productService.removeProduct(this.updatedProduct.id);
