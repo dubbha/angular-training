@@ -1,13 +1,7 @@
 # Angular Training
 
-## Task 5. Routing
-- CheckoutModule feature area with own routing, lazy-loaded
-- AdminModule feature area with own routing, lazy-loaded
-- AdminModule feature area is protected by canLoad guard
-- ModalComponent in a secondary router-outlet, provided by ModalService
-- SessionStorageService uses WindowRefService to access sessionStorage
-- SessionStorageService is used to maintain session after user is logged in
-- SessionStorage data is shared between tabs using LocalStorage events
+## Task 6. HTTP
+- 
 
 ## Branches
  - Task1. Introduction
