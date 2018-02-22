@@ -1,6 +1,7 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
@@ -8,28 +9,23 @@ import {
   WindowRefService,
   LocalStorageService,
   SessionStorageService,
-  ConfigOptionsService,
   constants,
   ConstantsService,
+  AppSettingsService,
 } from './services';
-
-const config = (new ConfigOptionsService()).init({
-  id: 123456,
-  username: 'admin',
-  email: 'admin@angular.io'
-});
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule,
   ],
   providers: [
     WindowRefService,
     LocalStorageService,
     SessionStorageService,
-    { provide: ConfigOptionsService, useValue: config },
     { provide: ConstantsService, useValue: constants },
+    AppSettingsService,
   ],
 })
 export class CoreModule {
