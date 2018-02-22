@@ -1,0 +1,22 @@
+<div *ngIf="!authService.auth()" class="auth">
+  <form class="auth__form" (submit)="onSubmit($event)">
+    <input
+      class="auth__input"
+      type="text"
+      name="username"
+      [(ngModel)]="username"
+    />
+    <input
+      class="auth__input"
+      type="password"
+      name="password"
+      [(ngModel)]="password"
+    />
+    <button class="auth__button">login</button>
+  </form>
+</div>
+<div *ngIf="authService.auth()" class="auth">
+  [{{authService.getUsername()}}/{{authService.getToken()}}]
+  <button class="auth__button" (click)="openAdminZone()">admin</button>
+  <button class="auth__button" (click)="logout()">logout</button>
+</div>

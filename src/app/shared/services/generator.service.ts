@@ -1,8 +1,12 @@
-export class GeneratorService {
-  private length: number;
+import { Injectable } from '@angular/core';
 
-  constructor(length = 4) {
+@Injectable()
+export class GeneratorService {
+  private length = 4;
+
+  init(length) {
     this.length = length;
+    return this;  // make .init() chainable
   }
 
   generate() {

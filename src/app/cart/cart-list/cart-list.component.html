@@ -1,18 +1,19 @@
-<div *ngIf="cartService.products.length">
-  <div class="title">Cart</div>
-  <app-cart-item
-    *ngFor="let product of cartService.products"
-    [product]="product"
-  ></app-cart-item>
-  <div class="cart-list__totals">
+<div class="title">Cart</div>
+<app-cart-item
+  *ngFor="let product of cartService.products"
+  [product]="product"
+></app-cart-item>
+<div class="cart-list__totals">
+    <div>
+        <span class="cart-list__total-name">Total Quantity: </span>
+        <span class="cart-list__total-value">{{cartService.totalQuantity}} {{'PCS' | lowercase}}</span>
+      </div>
       <div>
-          <span class="cart-list__total-name">Total Quantity: </span>
-          <span class="cart-list__total-value">{{cartService.totalQuantity}} {{'PCS' | lowercase}}</span>
-        </div>
-        <div>
-          <span class="cart-list__total-name">Total Price: </span>
-          <span class="cart-list__total-value">{{cartService.totalPrice | currency:'UAH':'code':'.0':'uk'}}</span>
-        </div>
-  </div>
-  <button class="cart-list__button" (click)="clearCart()">{{ 'clear' | uppercase }}</button>
+        <span class="cart-list__total-name">Total Price: </span>
+        <span class="cart-list__total-value">{{cartService.totalPrice | currency:'UAH':'code':'.0':'uk'}}</span>
+      </div>
+</div>
+<div class="cart-list__buttons">
+  <button class="cart-list__button cart-list__button_first" (click)="clearCart()">{{ 'clear' | uppercase }}</button>
+  <button class="cart-list__button" (click)="openCheckout()">{{ 'checkout' | uppercase }}</button>
 </div>

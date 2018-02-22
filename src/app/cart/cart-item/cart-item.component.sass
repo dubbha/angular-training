@@ -1,17 +1,29 @@
 .cart-item
+
   &-info
     display: inline-block
+    float: left   // prevent extra space between blocks while avoiding using comments or font-size: 0
     width: 80%
     height: 24px
+    line-height: 24px
 
   &-buttons
+    display: inline-block
+    float: left   // prevent extra space between blocks while avoiding using comments or font-size: 0
     width: 20%
+    height: 24px
 
     &__button
       width: 24px
       height: 24px
-      vertical-align: middle
       padding: 0
+      float: left   // prevent extra space between blocks while avoiding using comments or font-size: 0
+
+      &:first-of-type
+        margin-right: 6px
+
+      &:last-of-type
+        margin-left: 6px
 
 \:host
   &.basic

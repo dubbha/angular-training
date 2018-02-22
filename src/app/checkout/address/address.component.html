@@ -1,0 +1,48 @@
+<div class="title">
+  Checkout: Step 1 [Bill] > Step 2 [Address]
+</div>
+<div>
+  <form class="address__form" id="checkout-form" #form="ngForm">
+    <div>
+      <label for="name" class="address__field-name">Full Name</label>
+      <input
+        type="text"
+        name="name"
+        [(ngModel)]="details.name"
+        required
+        placeholder="Freddy Krueger"
+        class="address__field-input"
+      />
+    </div>
+    <div>
+      <label for="mobile" class="address__field-name">Mobile</label>
+      <input
+        type="text"
+        name="mobile"
+        [(ngModel)]="details.mobile"
+        required
+        class="address__field-input"
+        placeholder="+111-22-333-4444"
+      />
+    </div>
+    <div>
+      <label for="address" class="address__field-name">Address</label>
+      <input
+        type="text"
+        name="address"
+        [(ngModel)]="details.address"
+        required
+        class="address__field-input"
+        placeholder="75098, 101 Elm Street, Springwood, Ohio"
+      />
+    </div>
+    <div>
+      <button
+        class="address__button"
+        form="checkout-form"
+        [disabled]="form.invalid"
+        (click)="checkout()"
+      >{{'checkout' | uppercase}}</button>
+    </div>
+  </form>
+</div>

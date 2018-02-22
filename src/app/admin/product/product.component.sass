@@ -1,0 +1,111 @@
+.product
+  width: 100%
+  float: left  // keep floats inside, avoid vertical spacing between divs themselves
+
+  &__name,
+  &__description,
+  &__category
+    display: inline-block
+    line-height: 24px
+    float: left
+
+  &__name,
+  &__description
+    float: left
+    width: 19%
+
+    @media screen and (max-width: 1200px)
+      width: 28%
+
+  &__category
+    text-transform: lowercase
+    width: 16%
+
+    @media screen and (max-width: 1200px)
+      width: 20%
+
+  &__materials
+    display: inline-block
+    float: left
+    width: 12%
+
+    @media screen and (max-width: 1200px)
+      display: none
+
+  &__equivalents
+    display: inline-block
+    float: left
+    width: 18%
+
+    @media screen and (max-width: 1200px)
+      display: none
+
+  &__availability
+    display: inline-block
+    float: left
+    text-align: center
+    width: 8%
+
+    @media screen and (max-width: 1200px)
+      width: 14%
+
+  &__price
+    display: inline-block
+    float: left
+    height: 24px
+    text-align: center
+    background-color: grey
+    color: white
+    width: 8%
+
+    @media screen and (max-width: 1200px)
+      width: 10%
+
+  &__quantity
+    box-sizing: border-box
+    float: left
+    height: 24px
+    width: 5%
+
+    @media screen and (max-width: 1200px)
+      width: 7%
+
+  &__button
+    display: inline-block
+    float: left
+    height: 24px
+    border: 1px solid grey
+    outline: none
+    cursor: pointer
+    width: 7%
+
+    @media screen and (max-width: 1200px)
+      width: 9%
+
+    &_available
+      color: white
+      background-color: green
+
+    &_highlighted
+      color: white
+      background-color: orange
+
+    &_unavailable
+      color: #999
+      background-color: #666
+      cursor: default
+
+\:host
+  cursor: pointer
+  user-select: none
+  width: 100%
+  float: left
+
+  &.basic
+
+  &.highlighted
+    color: grey
+    background-color: orange
+
+    & .product__price
+      color: orange

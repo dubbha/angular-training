@@ -8,10 +8,10 @@ export class Product {
     public price: number,
     public isAvailable: boolean,
     public category: Category,
-    public ingredients?: Array<string>,
+    public materials?: Array<string>,
     public equivalents?: Array<number>,   // equivalent IDs
   ) {
-    this.ingredients = ingredients || [];
+    this.materials = materials || [];
     this.equivalents = equivalents || [];
   }
 }

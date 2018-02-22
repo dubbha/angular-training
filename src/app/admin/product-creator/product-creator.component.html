@@ -1,0 +1,99 @@
+<div class="title">Add New Product</div>
+<form id="product-creator-form" #form="ngForm" (submit)="submit($event, form)">
+  <div class="product-creator__param">
+    <span class="product-creator__key">Name</span>
+    <span class="product-creator__value">
+      <input type=text [(ngModel)]="product.name" name="name" class="product-creator__input" required>
+    </span>
+  </div>
+  <div class="product-creator__param">
+    <span class="product-creator__key">Description</span>
+    <span class="product-creator__value">
+      <input type=text [(ngModel)]="product.description" name="description" class="product-creator__input" required>
+    </span>
+  </div>
+  <div class="product-creator__param">
+    <span class="product-creator__key">Category</span>
+    <span class="product-creator__value">
+      <select [(ngModel)]="product.category" name="category" class="product-creator__select" required>
+        <option *ngFor="let category of categories" [ngValue]="category">{{category | titlecase}}</option>
+      </select>
+    </span>
+  </div>
+  <div class="product-creator__param">
+      <span class="product-creator__key">Price</span>
+      <span class="product-creator__value">
+        <input
+          type="number"
+          [(ngModel)]="product.price"
+          name="price"
+          class="product-creator__input product-creator__input_price"
+          min="1"
+          max="999999"
+          ><span class="product-creator__currency">₴</span>
+      </span>
+  </div>
+  <div class="product-creator__param">
+      <span class="product-creator__key">Available</span>
+      <select [(ngModel)]="product.isAvailable" name="isAvailable" class="product-creator__input">
+        <option [ngValue]="true">✔ In Stock</option>
+        <option [ngValue]="false">✖ Not Available</option>
+      </select>
+  </div>
+  <div class="product-creator__param">
+    <span class="product-creator__key">Materials</span>
+    <span class="product-creator__value">
+        <div *ngFor="let material of product.materials">
+          <span class="product-creator__material">
+            {{material}}
+          </span><button
+            class="product-creator__action product-creator__action_delete"
+            (click)="removeMaterial(material)">✖</button>
+        </div>
+        <input
+          class="product-creator__input product-creator__input_with-action"
+          type=text
+          [(ngModel)]="newMaterial"
+          name="newMaterial"
+          placeholder="add material"
+        ><button
+          class="product-creator__action product-creator__action_add"
+          (click)="addMaterial($event)"
+        >✔</button>
+    </span>
+  </div>
+  <div class="product-creator__param">
+    <span class="product-creator__key">Equivalents</span>
+    <span class="product-creator__value">
+      <select
+        class="product-creator__select product-creator__select_multi"
+        multiple
+        [(ngModel)]="product.equivalents"
+        name="equivalents"
+      >
+        <option
+          *ngFor="let otherProduct of otherProducts"
+          [ngValue]="otherProduct.id"
+        >
+          {{otherProduct.name}}
+        </option>
+      </select>
+    </span>
+  </div>
+  <div class="product-creator__param">
+    <button
+      class="product-creator__button"
+      (click)="backToProducts()"
+    >
+        {{'Back to products' | uppercase}}
+    </button>
+    <button
+      class="product-creator__button product-creator__button_save"
+      form="product-creator-form"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+        {{'save' | uppercase}}
+    </button>
+  </div>
+</form>

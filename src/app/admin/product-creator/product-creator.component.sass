@@ -1,0 +1,97 @@
+.product-creator
+
+  &__param
+    width: 100%
+    float: left     // keep floats inside, avoid vertical spacing between divs themselves
+
+    &:nth-of-type(odd)
+      background-color: lightgrey
+
+  &__key
+    font-weight: bold
+    display: inline-block
+    width: 30%
+    min-width: 180px
+    float: left
+
+  &__value
+    display: inline-block
+    float: left
+
+    & ul
+      margin: 0
+      padding: 0
+      list-style: inside square
+
+  &__link
+    cursor: pointer
+    color: green
+
+    &:hover
+      text-decoration: underline
+
+  &__input
+    height: 24px
+    width: 330px
+    box-sizing: border-box
+    outline: none
+    margin: 0
+    padding: 0
+
+    &_with-action,
+    &_price
+      width: 306px
+
+  &__currency
+    display: inline-block
+    width: 24px
+    text-align: center
+
+
+  &__select
+    height: 24px
+    width: 330px
+    box-sizing: border-box
+    outline: none
+    margin: 0
+    padding: 0
+
+    &_multi
+      height: 250px
+
+  &__material
+    display: inline-block
+    width: 306px
+
+  &__button
+    display: inline-block
+    float: left
+    height: 24px
+    border: 1px solid grey
+    outline: none
+    cursor: pointer
+    width: calc(30% - 20px)
+    min-width: 160px
+    margin: 10px 0 10px 10px
+    box-sizing: border-box
+
+    &_save
+      width: 330px
+
+      &:not(:disabled)
+        background-color: green
+        color: white
+
+  &__action
+    height: 24px
+    width: 24px
+    margin: 0
+    box-sizing: border-box
+    vertical-align: top
+
+    &_delete
+      color: red
+
+    &_add
+      color: green
+

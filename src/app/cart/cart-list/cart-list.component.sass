@@ -1,8 +1,10 @@
 .cart-list
+
   &__totals
     margin-top: 20px
     display: inline-block
     width: 80%
+    float: left   // prevent extra space between blocks while avoiding using comments or font-size: 0
 
   &__total-name
     display: inline-block
@@ -11,7 +13,14 @@
   &__total-value
     font-weight: bold
 
-  &__button
-    height: 24px
-    width: 79px
+  &__buttons
+    margin-top: 20px
+    display: inline-block
+    width: 20%
+    float: left   // prevent extra space between blocks while avoiding using comments or font-size: 0
 
+  &__button
+    display: block
+    height: 24px
+    width: 84px
+    padding: 0

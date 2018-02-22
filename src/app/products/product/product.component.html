@@ -2,15 +2,17 @@
   <span class="product__name">{{product.name}}</span>
   <span class="product__description">{{product.description}}</span>
   <span class="product__category product__category_lowercase">{{product.category}}</span>
-  <span class="product__ingredients">
-    <span *ngFor="let ingredient of product.ingredients; let isLast=last">
-      {{ingredient}}{{isLast ? '' : ', '}}
+  <span class="product__materials">
+    <span *ngFor="let material of product.materials; let isLast=last">
+      {{material}}{{isLast ? '' : ', '}}
     </span>
+    <span *ngIf="!product.materials.length">&nbsp;</span>
   </span>
   <span class="product__equivalents">
     <span *ngFor="let equivalent of product.equivalents; let isLast=last">
       {{getAlternative(equivalent).name}}{{isLast ? '' : ', '}}
     </span>
+    <span *ngIf="!product.equivalents.length">&nbsp;</span>
   </span>
   <span class="product__availability">{{product.isAvailable ? '✔' : '✖'}}</span>
   <span class="product__price">{{product.price | currency:'UAH':'symbol-narrow':'.2':'uk'}}</span>
@@ -23,13 +25,16 @@
     [disabled]="!product.isAvailable"
     (change)="onChangeQuantity($event)"
     (blur)="onBlurQuantity($event)"
+    (click)="stopPropagation($event)"
   />
   <button
     appHighlight
-    seconds="2"
+    seconds="1"
     class="product__button"
     [disabled]="!product.isAvailable"
     [ngClass]="{'product__button_available': product.isAvailable, 'product__button_unavailable': !product.isAvailable}"
-    (click)="buyProduct()"
-  >{{ (product.isAvailable ? 'buy' : 'n/a') | uppercase }}</button>
+    (click)="buyProduct($event)"
+  >
+    {{ (product.isAvailable ? 'buy' : 'n/a') | uppercase }}
+  </button>
 </div>

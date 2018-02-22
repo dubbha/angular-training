@@ -1,0 +1,26 @@
+<div *ngIf="message" class="modal-grandparent">
+  <div class="modal-parent">
+    <div class="modal modal-{{style}}">
+      <div *ngIf="isTypeAlert">
+        <div>{{message}}</div>
+        <div class="modal-button-wrap">
+          <button class="modal-button" (click)="ok()">
+            <img src="assets/ok.png" class="modal-button-icon">
+            OK
+          </button>
+        </div>
+      </div>
+      <div *ngIf="isTypeConfirm">
+        <div>{{message}}</div>
+        <button class="modal-button" (click)="ok()">
+          <img src="assets/ok.png" class="modal-button-icon">
+          OK
+        </button>
+        <button class="modal-button" (click)="cancel()">
+          <img src="assets/cancel.png" class="modal-button-icon">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

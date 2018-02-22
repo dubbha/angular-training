@@ -1,8 +1,12 @@
-export class ConfigOptionsService {
-  private configOptions: object;
+import { Injectable } from '@angular/core';
 
-  constructor(configOptions = {}) {
+@Injectable()
+export class ConfigOptionsService {
+  private configOptions = {};
+
+  init(configOptions) {
     this.configOptions = configOptions;
+    return this;  // make .init() chainable
   }
 
   set(optionKey, optionValue): void {

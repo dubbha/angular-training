@@ -1,35 +1,33 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
-import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 import { ProductsModule } from './products/products.module';
 import { CartModule } from './cart/cart.module';
-import { WindowRefService } from './shared/window-ref.service';
-import { LocalStorageService } from './shared/local-storage.service';
-import { ConfigOptionsService } from './shared/config-options.service';
-import { constants, ConstantsService } from './shared/constants.service';
-import { GeneratorService } from './shared/generator.service';
+import { AppRoutingModule, appRouterComponents } from './app.routing.module';
 
-const config = new ConfigOptionsService({
-  id: 123456,
-  username: 'admin',
-  email: 'admin@angular.io'
-});
+import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    appRouterComponents
+  ],
   imports: [
     BrowserModule,
+    CoreModule,
+    SharedModule,
     ProductsModule,
     CartModule,
+    AppRoutingModule,
   ],
-  providers: [
-    WindowRefService,
-    LocalStorageService,
-    { provide: ConfigOptionsService, useValue: config },
-    { provide: ConstantsService, useValue: constants },
-    { provide: GeneratorService, useFactory: () => new GeneratorService(8) },
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(router: Router) {
+    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+  }
+}

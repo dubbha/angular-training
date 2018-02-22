@@ -1,0 +1,58 @@
+.product-card
+
+  &__param
+    width: 100%
+    float: left
+
+
+    &:nth-of-type(odd)
+      background-color: lightgrey
+
+  &__key
+    font-weight: bold
+    display: inline-block
+    width: 30%
+    min-width: 180px
+    float: left
+
+  &__value
+    display: inline-block
+    width: 70%
+    float: left
+
+    & ul
+      margin: 0
+      padding: 0
+      list-style: inside square
+
+  &__link
+    cursor: pointer
+    color: green
+
+    &:hover
+      text-decoration: underline
+
+  &__button
+    display: inline-block
+    float: left
+    height: 24px
+    border: 1px solid grey
+    outline: none
+    cursor: pointer
+    width: calc(30% - 20px)
+    min-width: 160px
+    margin: 10px 0 10px 10px
+
+
+    &_available
+      color: white
+      background-color: green
+
+    &_highlighted
+      color: white
+      background-color: orange
+
+    &_unavailable
+      color: #999
+      background-color: #666
+      cursor: default

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+
 import { Product } from '../products/product/product.model';
+import { LocalStorageService } from '../core/services';
 
 @Injectable()
 export class CartService {
@@ -7,7 +9,11 @@ export class CartService {
   totalPrice = 0;
   totalQuantity = 0;
 
-  constructor() { }
+  constructor(
+    private localStorageService: LocalStorageService,
+  ) {
+    this.restoreProductsFromLocalStorage();
+  }
 
   addToCart(
     product: { id: number, name: string, price: number },
@@ -22,6 +28,7 @@ export class CartService {
           quantity,
         });
     this.updateTotals();
+    this.updateLocalStorage();
   }
 
   updateQuantity(id, way, delta = 1) {
@@ -43,11 +50,13 @@ export class CartService {
         });
     }
     this.updateTotals();
+    this.updateLocalStorage();
   }
 
   removeProduct(id) {
     this.products = this.products.filter(item => item.id !== id);
     this.updateTotals();
+    this.updateLocalStorage();
   }
 
   updateTotalPrice() {
@@ -67,11 +76,24 @@ export class CartService {
     this.products = [];
     this.totalPrice = 0;
     this.totalQuantity = 0;
+    this.updateLocalStorage();
   }
 
   getProductPercentage(id) {
     const product = this.products.find(item => item.id === id);
     return product ? ((product.price * product.quantity) / this.totalPrice) : 0;
+  }
+
+  updateLocalStorage() {
+    this.localStorageService.setItem('cartProducts', this.products);
+  }
+
+  restoreProductsFromLocalStorage() {
+    const storedProducts = this.localStorageService.getItem('cartProducts');
+    if (storedProducts) {
+      this.products = storedProducts;
+      this.updateTotals();
+    }
   }
 
   notifyServerOnInit(product) {
