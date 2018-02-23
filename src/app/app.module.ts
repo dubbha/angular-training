@@ -28,6 +28,6 @@ import { AppComponent } from './app.component';
 })
 export class AppModule {
   constructor(router: Router) {
-    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+    // console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
   }
 }

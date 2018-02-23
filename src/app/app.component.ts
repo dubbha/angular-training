@@ -17,8 +17,6 @@ registerLocaleData(localeUk);
 })
 export class AppComponent implements OnInit {
   public pi: number;
-  public title: string;
-  public version: string;
   public date: Observable<Date>;
   public appSettings: Observable<any>;
 
@@ -30,9 +28,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.pi = this.constants.pi;
-    // this.appSettings = this.appSettingsService.appSettings;
-    // this.title = this.appSettings.title;
-    // this.version = this.appSettings.version;
+    this.appSettings = this.appSettingsService.appSettings;
     this.startClock();
   }
 
