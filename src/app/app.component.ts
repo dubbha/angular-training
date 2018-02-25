@@ -18,7 +18,7 @@ registerLocaleData(localeUk);
 export class AppComponent implements OnInit {
   public pi: number;
   public date: Observable<Date>;
-  public appSettings: Observable<any>;
+  public appSettings: any;
 
   constructor(
     @Inject(ConstantsService) private constants,

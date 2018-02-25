@@ -1,0 +1,82 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Liebherr Fridge",
+      "description": "Cools your food",
+      "price": 800,
+      "isAvailable": true,
+      "category": "HOUSEHOLD",
+      "materials": [
+        "metal",
+        "cooler"
+      ],
+      "alternatives": [
+        2
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Siemens Fridge",
+      "description": "Cools your food",
+      "price": 750,
+      "isAvailable": true,
+      "category": "HOUSEHOLD",
+      "materials": [
+        "metal",
+        "cooler"
+      ],
+      "alternatives": [
+        1
+      ]
+    },
+    {
+      "id": 3,
+      "name": "TV 40 inches",
+      "description": "Washes your brain",
+      "price": 300,
+      "isAvailable": true,
+      "category": "ELECTRONICS",
+      "materials": [
+        "plastic",
+		"glass"
+      ],
+      "alternatives": [
+        4,
+        5
+      ]
+    },
+    {
+      "id": 4,
+      "name": "TV 50 inches",
+      "description": "Washes your brain",
+      "price": 320,
+      "isAvailable": true,
+      "category": "ELECTRONICS",
+      "materials": [
+        "plastic",
+        "glass"
+      ],
+      "alternatives": [
+        3,
+        5
+      ]
+    },
+    {
+      "id": 5,
+      "name": "TV 55 inches",
+      "description": "Washes your brain",
+      "price": 320,
+      "isAvailable": false,
+      "category": "ELECTRONICS",
+      "materials": [
+        "plastic",
+        "glass"
+      ],
+      "alternatives": [
+        3,
+        4
+      ]
+    }
+  ]
+}

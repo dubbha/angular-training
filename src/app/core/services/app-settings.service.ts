@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -10,36 +10,38 @@ import 'rxjs/add/observable/throw';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable()
-export class AppSettingsService implements OnDestroy {
-  sub: Subscription;
-  appSettings: Observable<any>;
+export class AppSettingsService {
+  appSettings: any;
 
   constructor(
     private localStorageService: LocalStorageService,
     private http: HttpClient,
-  ) {
+  ) {}
+
+  init(): Promise<any> {
     const storedSettings = this.localStorageService.getItem('appSettings');
     if (storedSettings) {
-      this.appSettings = Observable.of(storedSettings);
+      return Promise.resolve(storedSettings).then(data => this.appSettings = data);
     } else {
-      this.appSettings = this.http.get('./assets/app-settings.json')
-        .pipe(
-          tap(data => console.log(data)),
-          catchError(this.handleError),
-          share()   // prevent a separate http request for each async pipe, a "warm" Observable:
-                    // https://blog.thoughtram.io/angular/2016/06/16/cold-vs-hot-observables.html#caveat-http-with-observables
-        );
-      this.sub = this.appSettings.subscribe(data => {
-        this.localStorageService.setItem('appSettings', data);
-      });
+      return this.http.get('./assets/app-settings.json')
+        .toPromise()
+        .then(data => {
+          this.appSettings = data;
+          this.localStorageService.setItem('appSettings', data);
+        })
+        .catch(err => {
+          console.error(err);
+          this.setDefaults();
+        });
     }
   }
 
-  handleError(err: any): Observable<any> {
-    return Observable.throw(err);
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
+  setDefaults() {
+    this.appSettings = {
+      title: 'Default Title',
+      version: 1,
+      cacheTimeToLiveSeconds: 300,
+      apiBaseUrl: 'http://127.0.0.1:3000/api',
+    };
   }
 }

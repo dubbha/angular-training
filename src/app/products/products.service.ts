@@ -1,61 +1,141 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { tap, catchError } from 'rxjs/operators';
+import 'rxjs/add/observable/throw';
+
+import { AppSettingsService } from '../core/services';
 import { Product } from './product/product.model';
 import { Category } from './product/product.enum';
 
-const initProducts = [
-  new Product(1, 'Liebherr Fridge', 'Cools your food', 800, true, Category.Household, ['metal', 'cooler'], [2]),
-  new Product(2, 'Siemens Fridge', 'Cools your food', 750, true, Category.Household, ['metal', 'cooler'], [1]),
-  new Product(3, 'TV 40 inches', 'Washes your brain', 300, true, Category.Electronics, ['plastic', 'glass'], [4, 5]),
-  new Product(4, 'TV 50 inches', 'Washes your brain', 320, true, Category.Electronics, ['plastic', 'glass'], [3, 5]),
-  new Product(5, 'TV 55 inches', 'Washes your brain', 320, false, Category.Electronics, ['plastic', 'glass'], [3, 4]),
-];
-
 @Injectable()
 export class ProductService {
-  products: Array<Product>;
+  productsCache: Array<Product>;
+  cacheTimeToLiveSeconds: number;
+  productsCacheExpiryTime: number;
+  apiBaseUrl: string;
+  apiEndpoint = 'products';
 
-  constructor() {
-    this.products = initProducts;
+  constructor(
+    private http: HttpClient,
+    private appSettingsService: AppSettingsService,
+  ) {
+    this.apiBaseUrl = this.appSettingsService.appSettings.apiBaseUrl;
+    this.cacheTimeToLiveSeconds = this.appSettingsService.appSettings.cacheTimeToLiveSeconds;
   }
 
-  getProducts(): Array<Product> {
-    return this.products;
-  }
+  getProducts(): Promise<Array<Product>> {
+    if (!this.productsCache || Date.now() > this.productsCacheExpiryTime) {
+      return this.http.get(`${this.apiBaseUrl}/${this.apiEndpoint}`)
+        .toPromise()
+        .then(data => {
+          const castedData = <Array<Product>>data;
 
-  getProductById(id) {
-    return this.getProducts().find(el => el.id === id);
-  }
+          const transformedData = castedData.map(product => {
+            product.alternativesWithNames = product.alternatives.map(altId => ({
+              id: altId,
+              name: castedData.find(p => p.id === altId).name
+            }));
 
-  addProduct(product) {
-    if (!product.id) {
-      product.id = this.getNextId();
+            return product;
+          });
+
+          this.productsCache = transformedData;
+          this.productsCacheExpiryTime = Date.now() + this.cacheTimeToLiveSeconds * 1000;
+          return <Array<Product>>data;
+        });
+    } else {
+      return Promise.resolve(this.productsCache);
     }
-    this.products.push(product);
   }
 
-  getNextId() {
-    const arr = [...this.products];   // sort() would sort in place, make a copy
-    arr.sort((a, b) => a.id - b.id);
-    return arr.pop().id + 1;  // next free ID
+  getProductById(id): Promise<Product> {
+    return this.getProducts()
+      .then(products => products.find(p => p.id === id));
   }
 
-  removeProduct(id) {
-    this.products = this.products
-      .map(product => {
-        product.equivalents = product.equivalents.filter(e => e !== id);
-        return product;
-      })
-      .filter(product => product.id !== id);
+  addProduct(product: Product): Observable<any> {
+    delete product.alternativesWithNames;
 
-    // remove the product itself
-    // this.products = this.products.filter(product => product.id !== id);
+    return this.http.post(`${this.apiBaseUrl}/${this.apiEndpoint}`, product)
+      .pipe(
+        tap((createdProduct) => {
+          const castedProduct = <Product>createdProduct;
 
+          castedProduct.alternativesWithNames = castedProduct.alternatives.map(altId => ({
+            id: altId,
+            name: this.productsCache.find(p => p.id === altId).name
+          }));
 
-    console.log(this.products);
+          this.productsCache.push(castedProduct);
+        }),
+        catchError(err => Observable.throw(err)),
+      );
   }
 
-  updateProduct(updatedProduct: Product) {
-    this.products = this.products.map(product => (product.id === updatedProduct.id) ? updatedProduct : product);
+  removeProduct(id: number): Observable<any> {
+    return this.http.delete(`${this.apiBaseUrl}/${this.apiEndpoint}/${id}`)
+      .pipe(
+        tap(() => {
+          this.productsCache = this.productsCache
+            .filter(product => product.id !== id)
+            .map(product => {
+              if (product.alternatives.includes(id)) {
+                product.alternatives = product.alternatives.filter(e => e !== id);
+                product.alternativesWithNames = product.alternativesWithNames
+                  .reduce((aggr, cur) => {
+                    if (cur.id !== id) {
+                      aggr.push(cur);
+                    }
+                    return aggr;
+                  }, []);
+                this.patchProduct(
+                  product.id,
+                  { alternatives: product.alternatives },
+                ).subscribe();  // https://stackoverflow.com/a/41381265/8861667
+              }
+              return product;
+            });
+        }),
+        catchError(err => Observable.throw(err)),
+      );
+  }
+
+  updateProduct(updatedProduct: Product): Observable<any> {
+    const dbProduct = { ...updatedProduct };
+    delete dbProduct.alternativesWithNames;
+
+    return this.http.put(`${this.apiBaseUrl}/${this.apiEndpoint}/${dbProduct.id}`, dbProduct)
+      .pipe(
+        tap(() => {
+          this.productsCache = this.productsCache
+            .map(product => {
+              // Re-create alternativesWithNames of the updated product, in case alternatives were updated
+              if (product.id === dbProduct.id) {
+                dbProduct.alternativesWithNames = dbProduct.alternatives.map(altId => ({
+                  id: altId,
+                  name: this.productsCache.find(p => p.id === altId).name
+                }));
+
+                return dbProduct;
+              }
+
+              // If we changed the name of the product, we need to update alternativesWithNames of others
+              if (product.alternatives.includes(dbProduct.id)) {
+                product.alternativesWithNames
+                  .find(alt => alt.id === dbProduct.id)
+                  .name = dbProduct.name;
+              }
+              return product;
+            });
+        }),
+        catchError(err => Observable.throw(err)),
+      );
+  }
+
+  patchProduct(id: number, partial: any): Observable<any> {
+    return this.http.patch(`${this.apiBaseUrl}/${this.apiEndpoint}/${id}`, partial);
   }
 }

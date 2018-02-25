@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Product } from '../product/product.model';
@@ -7,7 +7,7 @@ import { CartService } from '../../cart/cart.service';
 
 @Component({
   templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.sass']
+  styleUrls: ['./product-card.component.sass'],
 })
 export class ProductCardComponent implements OnInit {
   product: Product;
@@ -21,12 +21,9 @@ export class ProductCardComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.product = this.productService.getProductById(+params.id);
+      this.productService.getProductById(+params.id)
+        .then(data => this.product = data);
     });
-  }
-
-  getAlternative(id) {
-    return this.productService.getProductById(id);
   }
 
   openProductCard(id) {

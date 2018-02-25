@@ -1,5 +1,5 @@
 <div class="title">Add New Product</div>
-<form id="product-creator-form" #form="ngForm" (submit)="submit($event, form)">
+<form id="product-creator-form" #form="ngForm" (keypress)="preventEnter($event)">
   <div class="product-creator__param">
     <span class="product-creator__key">Name</span>
     <span class="product-creator__value">
@@ -43,33 +43,36 @@
   <div class="product-creator__param">
     <span class="product-creator__key">Materials</span>
     <span class="product-creator__value">
-        <div *ngFor="let material of product.materials">
-          <span class="product-creator__material">
-            {{material}}
-          </span><button
-            class="product-creator__action product-creator__action_delete"
-            (click)="removeMaterial(material)">✖</button>
-        </div>
-        <input
-          class="product-creator__input product-creator__input_with-action"
-          type=text
-          [(ngModel)]="newMaterial"
-          name="newMaterial"
-          placeholder="add material"
-        ><button
-          class="product-creator__action product-creator__action_add"
-          (click)="addMaterial($event)"
-        >✔</button>
+      <div *ngFor="let material of product.materials">
+        <span class="product-creator__material">
+          {{material}}
+        </span><button
+          type="button"
+          class="product-creator__action product-creator__action_delete"
+          (click)="removeMaterial(material)"
+        >✖</button>
+      </div>
+      <input
+        class="product-creator__input product-creator__input_with-action"
+        type=text
+        [(ngModel)]="newMaterial"
+        name="newMaterial"
+        placeholder="add material"
+      ><button
+        type="button"
+        class="product-creator__action product-creator__action_add"
+        (click)="addMaterial()"
+      >✔</button>
     </span>
   </div>
   <div class="product-creator__param">
-    <span class="product-creator__key">Equivalents</span>
+    <span class="product-creator__key">Alternatives</span>
     <span class="product-creator__value">
       <select
         class="product-creator__select product-creator__select_multi"
         multiple
-        [(ngModel)]="product.equivalents"
-        name="equivalents"
+        [(ngModel)]="product.alternatives"
+        name="alternatives"
       >
         <option
           *ngFor="let otherProduct of otherProducts"
@@ -90,10 +93,12 @@
     <button
       class="product-creator__button product-creator__button_save"
       form="product-creator-form"
-      type="submit"
+      type="button"
       [disabled]="form.invalid"
+      (click)="save(form)"
     >
         {{'save' | uppercase}}
     </button>
   </div>
 </form>
+<div *ngIf="error" class="error">Error: {{error}}</div>

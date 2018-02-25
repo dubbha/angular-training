@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostBinding, HostListener, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, HostBinding, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Product } from '../../products/product/product.model';
@@ -11,7 +11,7 @@ import { CartService } from '../../cart/cart.service';
   styleUrls: ['./product.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent {
   quantity = 1;
 
   @Input() product: Product;
@@ -33,12 +33,6 @@ export class ProductComponent implements OnInit {
     private productService: ProductService,
     private router: Router,
   ) {}
-
-  ngOnInit() {}
-
-  getAlternative(id) {
-    return this.productService.getProductById(id);
-  }
 
   openProductEditor() {
     this.router.navigate([`/admin/edit/${this.product.id}`]);
