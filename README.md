@@ -1,12 +1,7 @@
 # Angular Training
 
-## Task 6. HTTP
-- Backend using json-server, serving API, static assets, SPA default route
-- RESTful API using various HTTP methods: GET, POST, PUT, PATCH, DELETE
-- AppSettingsService getting initial settings from localStorage, server-side JSON, or the defaults
-- App bootstrapping is deferred until AppSettingsService in initialized thanks to APP_INITIALIZER
-- ProductsService using HttpClient via both Promise and Observable patterns
-- TimingInterceptor counting the request round-trip time for certain requests
+## Task 7. NgRX
+- 
 
 ## Branches
  - Task1. Introduction
