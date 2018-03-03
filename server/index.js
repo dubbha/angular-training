@@ -1,20 +1,17 @@
-const express = require('express');
+const jsonServer = require('json-server');
 const path = require('path');
 
-const app = express();
+const server = jsonServer.create();
+const router = jsonServer.router(path.join(__dirname, 'db.json'));
+const middlewares = jsonServer.defaults({ static: path.join(__dirname, '../dist') });
 
-app.use((req, res, next) => {  // https://enable-cors.org/server_expressjs.html
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  next();
-});
+server.use(middlewares);
+server.use('/api', router);
 
-app.use(express.static(path.join(__dirname, '../dist')));
-
-app.get('*', (req, res) => { // SPA default route
+server.get('*', (req, res) => { // SPA default route
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
-app.listen(3000, () => {
-  console.log('listening on *:3000');  // eslint-disable-line
-});
+server.listen(3000, () => {
+  console.log('listening on *:3000');
+})

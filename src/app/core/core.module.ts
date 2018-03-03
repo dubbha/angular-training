@@ -1,35 +1,43 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgModule, Optional, SkipSelf, APP_INITIALIZER,  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { throwIfAlreadyLoaded } from './module-import-guard';
+import { throwIfAlreadyLoaded } from './guards/module-import-guard';
+import { TimingInterceptor } from './interceptors/http-interceptor';
 
 import {
   WindowRefService,
   LocalStorageService,
   SessionStorageService,
-  ConfigOptionsService,
   constants,
   ConstantsService,
+  AppSettingsService,
 } from './services';
-
-const config = (new ConfigOptionsService()).init({
-  id: 123456,
-  username: 'admin',
-  email: 'admin@angular.io'
-});
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule,
   ],
   providers: [
     WindowRefService,
     LocalStorageService,
     SessionStorageService,
-    { provide: ConfigOptionsService, useValue: config },
     { provide: ConstantsService, useValue: constants },
+    AppSettingsService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (settings: AppSettingsService) => () => settings.init(),
+      deps: [AppSettingsService],
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TimingInterceptor,
+      multi: true,
+    }
   ],
 })
 export class CoreModule {

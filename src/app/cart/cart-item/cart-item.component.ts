@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, HostBinding, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, HostBinding, HostListener, ChangeDetectionStrategy } from '@angular/core';
 
 import { CartService } from '../cart.service';
 import { CartItem } from './cart-item.model';
@@ -7,7 +7,8 @@ import { LocalStorageService } from '../../core/services';
 @Component({
   selector: 'app-cart-item',
   templateUrl: './cart-item.component.html',
-  styleUrls: ['./cart-item.component.sass']
+  styleUrls: ['./cart-item.component.sass'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartItemComponent implements OnInit, OnDestroy {
   @Input() product: CartItem;

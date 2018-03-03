@@ -21,7 +21,8 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.products = this.productService.getProducts();
+    this.productService.getProducts()
+      .then(products => this.products = products);
   }
 
   sortProducts(key) {

@@ -1,63 +1,67 @@
-<div class="title">{{product.name}}</div>
-<div class="product-card__param">
-  <span class="product-card__key">Name</span>
-  <span class="product-card__value">{{product.name}}</span>
-</div>
-<div class="product-card__param">
-  <span class="product-card__key">Description</span>
-  <span class="product-card__value">{{product.description}}</span>
-</div>
-<div class="product-card__param">
-  <span class="product-card__key">Category</span>
-  <span class="product-card__value">{{product.category | titlecase }}</span>
-</div>
-<div class="product-card__param">
-  <span class="product-card__key">materials</span>
-  <span class="product-card__value">
+<div *ngIf="product">
+  <div class="title">{{product.name}}</div>
+  <div class="product-card__param">
+    <span class="product-card__key">Name</span>
+    <span class="product-card__value">{{product.name}}</span>
+  </div>
+  <div class="product-card__param">
+    <span class="product-card__key">Description</span>
+    <span class="product-card__value">{{product.description}}</span>
+  </div>
+  <div class="product-card__param">
+    <span class="product-card__key">Category</span>
+    <span class="product-card__value">{{product.category | titlecase }}</span>
+  </div>
+  <div class="product-card__param">
+    <span class="product-card__key">Materials</span>
+    <span class="product-card__value">
       <ul>
-          <li *ngFor="let material of product.materials">
-            {{material}}
-          </li>
-        </ul>
-  </span>
-</div>
-<div class="product-card__param">
-  <span class="product-card__key">Equivalents</span>
-  <span class="product-card__value">
-      <ul>
-        <li
-          *ngFor="let equivalentId of product.equivalents"
-          (click)="openProductCard(equivalentId)"
-          class="product-card__link">
-            {{getAlternative(equivalentId).name}}
+        <li *ngFor="let material of product.materials">
+          {{material}}
         </li>
       </ul>
-  </span>
+    </span>
+  </div>
+  <div class="product-card__param">
+    <span class="product-card__key">Alternatives</span>
+    <span class="product-card__value">
+        <ul>
+          <li
+            *ngFor="let alternative of product.alternativesWithNames"
+            (click)="openProductCard(alternative.id)"
+            class="product-card__link">
+              {{alternative.name}}
+          </li>
+        </ul>
+    </span>
+  </div>
+  <div class="product-card__param">
+      <span class="product-card__key">Available</span>
+      <span class="product-card__value">
+        {{product.isAvailable ? '✔ In Stock' : '✖ Not Available'}}
+      </span>
+  </div>
+  <div class="product-card__param">
+      <span class="product-card__key">Price</span>
+      <span class="product-card__value">{{product.price | currency:'UAH':'symbol-narrow':'.2':'uk'}}</span>
+  </div>
+  <div class="product-card__param">
+    <button
+      class="product-card__button"
+      (click)="backToProducts()"
+    >
+        {{'Back to products' | uppercase}}
+    </button>
+    <button
+      appHighlight
+      seconds="1"
+      class="product-card__button"
+      [disabled]="!product.isAvailable"
+      [ngClass]="{'product-card__button_available': product.isAvailable, 'product-card__button_unavailable': !product.isAvailable}"
+      (click)="buyProduct()"
+    >
+      {{ (product.isAvailable ? 'buy' : 'n/a') | uppercase }}
+    </button>
+  </div>
+  <app-cart-list></app-cart-list>
 </div>
-<div class="product-card__param">
-    <span class="product-card__key">Available</span>
-    <span class="product-card__value">{{product.isAvailable ? '✔ In Stock' : '✖ Not Available'}}</span>
-</div>
-<div class="product-card__param">
-    <span class="product-card__key">Price</span>
-    <span class="product-card__value">{{product.price | currency:'UAH':'symbol-narrow':'.2':'uk'}}</span>
-</div>
-<div class="product-card__param">
-  <button
-    class="product-card__button"
-    (click)="backToProducts()"
-  >
-      {{'Back to products' | uppercase}}
-  </button>
-  <button
-    appHighlight
-    seconds="1"
-    class="product-card__button"
-    [disabled]="!product.isAvailable"
-    [ngClass]="{'product-card__button_available': product.isAvailable, 'product-card__button_unavailable': !product.isAvailable}"
-    (click)="buyProduct()"
-  >
-    {{ (product.isAvailable ? 'buy' : 'n/a') | uppercase }}
-  </button>
-</div>
-<app-cart-list></app-cart-list>

@@ -5,7 +5,7 @@ import localeUk from '@angular/common/locales/uk';
 import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
 
-import { ConfigOptionsService, ConstantsService } from './core/services';
+import { ConstantsService, AppSettingsService } from './core/services';
 import { GeneratorService } from './shared/services';
 
 registerLocaleData(localeUk);
@@ -16,23 +16,19 @@ registerLocaleData(localeUk);
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit {
-  public title: string;
-  public version: string;
-  public user: string;
-  public pass: string;
+  public pi: number;
   public date: Observable<Date>;
+  public appSettings: any;
 
   constructor(
-    private configOptionsService: ConfigOptionsService,
     @Inject(ConstantsService) private constants,
     @Optional() private generatorService: GeneratorService,
+    public appSettingsService: AppSettingsService,
   ) {}
 
   ngOnInit() {
-    this.title = this.constants.title;
-    this.version = this.constants.version;
-    this.user = this.configOptionsService.get('username');
-    this.pass = this.generatorService ? this.generatorService.generate() : '12345678';
+    this.pi = this.constants.pi;
+    this.appSettings = this.appSettingsService.appSettings;
     this.startClock();
   }
 

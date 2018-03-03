@@ -9,9 +9,11 @@ export class Product {
     public isAvailable: boolean,
     public category: Category,
     public materials?: Array<string>,
-    public equivalents?: Array<number>,   // equivalent IDs
+    public alternatives?: Array<number>,   // alternative IDs
+    public alternativesWithNames?: Array<{ id: number, name: string }>, // alternative IDs with names
   ) {
     this.materials = materials || [];
-    this.equivalents = equivalents || [];
+    this.alternatives = alternatives || [];
+    this.alternativesWithNames = alternativesWithNames || [];
   }
 }

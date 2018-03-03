@@ -1,5 +1,7 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import { Subscription } from 'rxjs/Subscription';
 
 import { Product } from '../../products/product/product.model';
 import { Category } from '../../products/product/product.enum';
@@ -10,11 +12,13 @@ import { ModalService } from '../../shared/services';
   templateUrl: './product-editor.component.html',
   styleUrls: ['./product-editor.component.sass']
 })
-export class ProductEditorComponent implements OnInit {
+export class ProductEditorComponent implements OnInit, OnDestroy {
+  sub: Subscription;
   updatedProduct: Product;
   otherProducts: Array<Product>;
   categories: Array<string>;
-  newMaterial: string;
+  newMaterial = '';
+  error = '';
 
   constructor(
     private router: Router,
@@ -25,11 +29,20 @@ export class ProductEditorComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.updatedProduct = { ...this.productService.getProductById(+params.id) };
-      this.otherProducts = this.productService.getProducts()
-        .filter(product => product.id !== +params.id);
+      this.productService.getProductById(+params.id)
+        .then(product => {
+          this.updatedProduct = { ...product };
+          this.productService.getProducts()
+            .then(products => this.otherProducts = products.filter(p => p.id !== +params.id));
+        });
     });
     this.categories = Object.keys(Category).map(key => Category[key]);
+  }
+
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 
   getAlternative(id) {
@@ -41,7 +54,9 @@ export class ProductEditorComponent implements OnInit {
   }
 
   addMaterial(): void {
-    this.updatedProduct.materials.push(this.newMaterial);
+    if (this.newMaterial && !this.updatedProduct.materials.includes(this.newMaterial)) {
+      this.updatedProduct.materials.push(this.newMaterial);
+    }
   }
 
   backToProducts() {
@@ -52,8 +67,11 @@ export class ProductEditorComponent implements OnInit {
     this.modalService.confirm('Save changes?', {
       style: 'success',
       callback: () => {
-        this.productService.updateProduct(this.updatedProduct);
-        this.router.navigate(['/admin']);
+        this.sub = this.productService.updateProduct(this.updatedProduct)
+          .subscribe(
+            () => this.router.navigate(['/admin']),
+            err => this.error = err.message,
+          );
       }
     });
   }
@@ -62,8 +80,11 @@ export class ProductEditorComponent implements OnInit {
     this.modalService.confirm('Are you sure you want to delete the product?', {
       style: 'warn',
       callback: () => {
-        this.productService.removeProduct(this.updatedProduct.id);
-        this.router.navigate(['/admin']);
+        this.sub = this.productService.removeProduct(this.updatedProduct.id)
+          .subscribe(
+            () => this.router.navigate(['/admin']),
+            err => this.error = err.message,
+          );
       }
     });
   }
