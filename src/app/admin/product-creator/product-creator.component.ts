@@ -1,5 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { AppState, getProductsData, getProductsError } from './../../+store';
+import * as ProductsActions from './../../+store/actions/products.actions';
+import * as RouterActions from './../../+store/actions/router.actions';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -7,39 +12,37 @@ import { Product } from '../../products/product/product.model';
 import { Category } from '../../products/product/product.enum';
 import { ProductService } from '../../products/products.service';
 import { ModalService } from '../../shared/services/modal.service';
+import { AutoUnsubscribe } from '../../core/decorators';
 
 @Component({
   templateUrl: './product-creator.component.html',
   styleUrls: ['./product-creator.component.sass']
 })
-export class ProductCreatorComponent implements OnInit, OnDestroy {
+@AutoUnsubscribe()
+export class ProductCreatorComponent implements OnInit {
+  sub: Subscription;
   product: Product;
   otherProducts: Array<Product>;
   categories: Array<string>;
   newMaterial: string;
-  sub: Subscription;
-  error: string;
+  productsError$: Store<string>;
 
   constructor(
-    private router: Router,
+    private store: Store<AppState>,
     private route: ActivatedRoute,
     private productService: ProductService,
     private modalService: ModalService,
-  ) { }
-
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.product = new Product(null, '', '', 1, true, null);
-      this.productService.getProducts()
-        .then(products => this.otherProducts = products.filter(p => p.id !== this.product.id));
-    });
-    this.categories = Object.keys(Category).map(key => Category[key]);
+  ) {
+    this.sub = new Subscription();
   }
 
-  ngOnDestroy() {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
+  ngOnInit() {
+    this.productsError$ = this.store.select(getProductsError);
+    this.store.dispatch(new ProductsActions.GetProducts());
+    this.sub.add(this.store.select(getProductsData).subscribe(products => this.otherProducts = products));
+
+    this.product = new Product(null, '', '', 1, true, null);
+    this.categories = Object.keys(Category).map(key => Category[key]);
   }
 
   removeMaterial(material: string): void {
@@ -60,21 +63,12 @@ export class ProductCreatorComponent implements OnInit, OnDestroy {
     if (form.valid) {
       this.modalService.confirm('Save changes?', {
         style: 'success',
-        callback: () => {
-          this.sub = this.productService.addProduct(this.product)
-            .subscribe(
-              () => this.backToProducts(),
-              err => {
-                console.error(err);
-                this.error = err.message;
-              }
-            );
-        }
+        callback: () => this.store.dispatch(new ProductsActions.AddProduct(this.product))
       });
     }
   }
 
   backToProducts() {
-    this.router.navigate(['/admin']);
+    this.store.dispatch(new RouterActions.Go({ path: ['/admin'] }));
   }
 }

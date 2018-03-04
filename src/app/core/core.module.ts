@@ -4,8 +4,10 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, ActionReducerMap } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { rootReducers, RouterStateSerializerProvider, RouterEffects } from '../+store';
 import { appSettingsReducer } from '../+store/reducers/index';
 
 import { throwIfAlreadyLoaded } from './guards/module-import-guard';
@@ -28,9 +30,10 @@ import { reducers } from '../+store';
   imports: [
     CommonModule,
     HttpClientModule,
-    StoreModule.forRoot({'appSettings': appSettingsReducer}),
-    EffectsModule.forRoot([]),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreModule.forRoot(rootReducers),
+    StoreRouterConnectingModule.forRoot(),
+    EffectsModule.forRoot([RouterEffects]),
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }),
   ],
   providers: [
     WindowRefService,
@@ -50,6 +53,7 @@ import { reducers } from '../+store';
       multi: true,
     },
     AppInitializerGuard,
+    RouterStateSerializerProvider,
   ],
 })
 export class CoreModule {

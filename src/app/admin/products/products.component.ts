@@ -1,44 +1,63 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import {
+  AppState,
+  getProductsError,
+  getSortedProducts,
+  getProductsSortKey,
+  getProductsSortOrder
+} from './../../+store';
+import * as ProductsActions from './../../+store/actions/products.actions';
+import * as RouterActions from './../../+store/actions/router.actions';
+
+import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs/Subscription';
 
 import { Product } from '../../products/product/product.model';
-import { ProductService } from '../../products/products.service';
-import { SortProductsPipe } from '../../products/product-list/sort-products.pipe';
+import { AutoUnsubscribe } from '../../core/decorators';
 
 @Component({
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.sass'],
-  providers: [SortProductsPipe],
 })
+@AutoUnsubscribe()
 export class ProductsComponent implements OnInit {
-  products: Array<Product> = [];
+  sub: Subscription;
   key: string;
-  order = 'desc';
+  order: string;
+  products$: Store<ReadonlyArray<Product>>;
+  productsError$: Store<string>;
 
   constructor(
-    public productService: ProductService,
-    private sortProductsPipe: SortProductsPipe,
-    private router: Router,
+    private store: Store<AppState>,
   ) { }
 
   ngOnInit() {
-    this.productService.getProducts()
-      .then(products => this.products = products);
+    this.products$ = this.store.select(getSortedProducts);
+    this.productsError$ = this.store.select(getProductsError);
+
+    this.sub = new Subscription();
+    this.sub.add(this.store.select(getProductsSortKey).subscribe(key => this.key = key));
+    this.sub.add(this.store.select(getProductsSortOrder).subscribe(order => this.order = order));
+
+    this.store.dispatch(new ProductsActions.GetProducts());
   }
 
   sortProducts(key) {
+    let order;
     if (this.key === key) {
-      this.order = this.order === 'asc' ? 'desc' : 'asc';
+      order = this.order === 'asc' ? 'desc' : 'asc';    // toggle order
     } else {
-      this.key = key;       // save key
-      this.order = 'desc';  // reset order
+      order = 'desc';    // reset order
     }
 
-    this.products = this.sortProductsPipe.transform(this.products, key, this.order);
+    this.store.dispatch(new ProductsActions.SetSortKey(key));
+    this.store.dispatch(new ProductsActions.SetSortOrder(order));
   }
 
   openAddProduct() {
-    this.router.navigate(['/admin/add']);
+    this.store.dispatch(new RouterActions.Go({ path: ['/admin/add'] }));
   }
 
 }

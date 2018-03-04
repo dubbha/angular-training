@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { AppState } from '../../+store';
+import * as RouterActions from './../../+store/actions/router.actions';
 
 import { CartService } from '../cart.service';
 import { LocalStorageService } from '../../core/services';
@@ -13,8 +16,8 @@ export class CartListComponent {
 
   constructor(
     public cartService: CartService,
+    private store: Store<AppState>,
     private localStorageService: LocalStorageService,
-    private router: Router,
   ) {}
 
   clearCart() {
@@ -22,6 +25,6 @@ export class CartListComponent {
   }
 
   openCheckout() {
-    this.router.navigate(['/checkout']);
+    this.store.dispatch(new RouterActions.Go({ path: ['/checkout'] }));
   }
 }

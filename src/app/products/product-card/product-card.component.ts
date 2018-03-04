@@ -1,37 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { AppState, getProductByUrl } from './../../+store';
+import * as ProductsActions from './../../+store/actions/products.actions';
+import * as RouterActions from './../../+store/actions/router.actions';
+
+import { Subscription } from 'rxjs/Subscription';
 
 import { Product } from '../product/product.model';
-import { ProductService } from '../products.service';
 import { CartService } from '../../cart/cart.service';
+import { AutoUnsubscribe } from '../../core/decorators';
 
 @Component({
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.sass'],
 })
+@AutoUnsubscribe()
 export class ProductCardComponent implements OnInit {
+  sub: Subscription;
   product: Product;
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private productService: ProductService,
+    private store: Store<AppState>,
     private cartService: CartService,
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.productService.getProductById(+params.id)
-        .then(data => this.product = data);
-    });
+    this.store.dispatch(new ProductsActions.GetProducts());
+    this.sub = this.store.select(getProductByUrl).subscribe(product => this.product = product);
   }
 
   openProductCard(id) {
-    this.router.navigate([`/product/${id}`]);
+    this.store.dispatch(new RouterActions.Go({ path: [`/product/${id}`] }));
   }
 
   backToProducts() {
-    this.router.navigate([`/shop`]);
+    this.store.dispatch(new RouterActions.Go({ path: ['/shop'] }));
   }
 
   buyProduct() {

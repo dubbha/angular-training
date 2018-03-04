@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { AppState } from '../../+store';
+import * as RouterActions from '../../+store/actions/router.actions';
 
 import { GeneratorService } from './generator.service';
 import { SessionStorageService } from '../../core/services';
@@ -7,7 +10,7 @@ import { SessionStorageService } from '../../core/services';
 @Injectable()
 export class AuthService {
   constructor(
-    private router: Router,
+    private store: Store<AppState>,
     private generatorService: GeneratorService,
     private sessionStorageService: SessionStorageService,
   ) {}
@@ -25,7 +28,7 @@ export class AuthService {
   login(username, password): void {
     if (username === 'admin' && password === 'admin') {
       this.saveSession(this.generatorService.generate(), 'admin');
-      this.router.navigate(['/admin']);
+      this.store.dispatch(new RouterActions.Go({ path: ['/admin'] }));
     }
   }
 

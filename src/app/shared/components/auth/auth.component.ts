@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../+store';
+import * as RouterActions from '../../../+store/actions/router.actions';
 
 import { AuthService } from '../../services';
 
@@ -13,7 +16,7 @@ export class AuthComponent implements OnInit {
   password = 'admin';
 
   constructor(
-    public router: Router,
+    private store: Store<AppState>,
     public authService: AuthService,
   ) {}
 
@@ -25,11 +28,11 @@ export class AuthComponent implements OnInit {
   }
 
   openAdminZone() {
-    this.router.navigate(['/admin']);
+    this.store.dispatch(new RouterActions.Go({ path: ['/admin'] }));
   }
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/']);
+    this.store.dispatch(new RouterActions.Go({ path: ['/'] }));
   }
 }

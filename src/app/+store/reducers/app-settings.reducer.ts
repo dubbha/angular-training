@@ -6,8 +6,6 @@ export function appSettingsReducer(
   state = initialAppSettingsState,
   action: AppSettingsActions,
 ): AppSettingsState {
-  console.log(`Reducer: Action came in! ${action.type}`);
-
   switch (action.type) {
     case AppSettingsActionTypes.INIT:
       return {

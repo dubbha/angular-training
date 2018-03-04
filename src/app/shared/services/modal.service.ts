@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { AppState } from '../../+store';
+import * as RouterActions from './../../+store/actions/router.actions';
 
 import { Type } from '../components/modal/type.enum';
 
@@ -12,7 +15,7 @@ export class ModalService {
   private cancelCallback: Function;
 
   constructor(
-    private router: Router,
+    private store: Store<AppState>,
   ) {}
 
   getMessage(): string {
@@ -60,7 +63,7 @@ export class ModalService {
     if (conf && conf.callback && typeof conf.callback === 'function') {
       this.setCallback(conf.callback);
     }
-    this.router.navigate([{ outlets: { modal: ['display'] } }]);
+    this.store.dispatch(new RouterActions.Go({ path: [{ outlets: { modal: 'display' } }] }));
   }
 
   confirm(message, conf?: { style: string, callback: Function, cancelCallback?: Function }) {
@@ -75,6 +78,6 @@ export class ModalService {
     if (conf && conf.cancelCallback && typeof conf.cancelCallback === 'function') {
       this.setCancelCallback(conf.cancelCallback);
     }
-    this.router.navigate([{ outlets: { modal: ['display'] } }]);
+    this.store.dispatch(new RouterActions.Go({ path: [{ outlets: { modal: 'display' } }] }));
   }
 }
