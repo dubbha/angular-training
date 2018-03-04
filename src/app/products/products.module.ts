@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { productsReducer } from '../+store/reducers';
+import { ProductsEffects } from '../+store/effects';
+
 import { CartModule } from '../cart/cart.module';
 
 import { ProductComponent } from './product/product.component';
@@ -21,6 +26,8 @@ import { SortProductsPipe } from './product-list/sort-products.pipe';
   ],
   imports: [
     CommonModule,
+    StoreModule.forFeature('products', productsReducer),
+    EffectsModule.forFeature([ProductsEffects]),
     CartModule,
   ],
   exports: [

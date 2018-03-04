@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { Store } from '@ngrx/store';
+
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { tap, catchError } from 'rxjs/operators';
@@ -9,6 +11,7 @@ import 'rxjs/add/observable/throw';
 import { AppSettingsService } from '../core/services';
 import { Product } from './product/product.model';
 import { Category } from './product/product.enum';
+import { AppState } from '../+store';
 
 @Injectable()
 export class ProductService {
@@ -21,9 +24,19 @@ export class ProductService {
   constructor(
     private http: HttpClient,
     private appSettingsService: AppSettingsService,
+    private store: Store<AppState>,
   ) {
-    this.apiBaseUrl = this.appSettingsService.appSettings.apiBaseUrl;
-    this.cacheTimeToLiveSeconds = this.appSettingsService.appSettings.cacheTimeToLiveSeconds;
+    // TODO Move to selectors, won't be availbale when effects initialized
+    // this.apiBaseUrl = this.appSettingsService.appSettings.apiBaseUrl;
+    // this.cacheTimeToLiveSeconds = this.appSettingsService.appSettings.cacheTimeToLiveSeconds;
+    this.store.select('appSettings')
+      .pipe(tap(appSettings => {
+        console.log('appSettings', appSettings);
+        if (appSettings.settings) {
+          this.apiBaseUrl = appSettings.settings.apiBaseUrl;
+        }
+      }))
+      .subscribe();
   }
 
   getProducts(): Promise<Array<Product>> {

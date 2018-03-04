@@ -1,5 +1,5 @@
 {
-  "version": 6.0,
+  "version": 7.0,
   "title": "Angular Training",
   "cacheTimeToLiveSeconds": 60,
   "apiBaseUrl": "http://127.0.0.1:3000/api"

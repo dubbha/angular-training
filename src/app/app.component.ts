@@ -1,12 +1,17 @@
-import { Component, OnInit, Inject, Optional } from '@angular/core';
+import { Component, OnInit, Inject, Optional, OnDestroy } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeUk from '@angular/common/locales/uk';
 
+import { Store } from '@ngrx/store';
+
 import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
+import { Subscription } from 'rxjs/Subscription';
+import { map } from 'rxjs/operators';
 
 import { ConstantsService, AppSettingsService } from './core/services';
 import { GeneratorService } from './shared/services';
+import { AppState } from './+store';
 
 registerLocaleData(localeUk);
 
@@ -15,21 +20,29 @@ registerLocaleData(localeUk);
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   public pi: number;
   public date: Observable<Date>;
-  public appSettings: any;
+  public appSettings$: Observable<any>;
+  private sub: Subscription;
 
   constructor(
     @Inject(ConstantsService) private constants,
     @Optional() private generatorService: GeneratorService,
-    public appSettingsService: AppSettingsService,
+    private store: Store<AppState>,
   ) {}
 
   ngOnInit() {
     this.pi = this.constants.pi;
-    this.appSettings = this.appSettingsService.appSettings;
+    this.appSettings$ = this.store.select('appSettings').pipe(map(i => i.settings));
+    this.sub = this.appSettings$.subscribe();
     this.startClock();
+  }
+
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 
   startClock() {
