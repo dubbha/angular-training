@@ -17,8 +17,9 @@ import { AutoUnsubscribe } from '../../core/decorators';
 })
 @AutoUnsubscribe()
 export class ProductCardComponent implements OnInit {
-  sub: Subscription;
   product: Product;
+
+  private sub: Subscription;
 
   constructor(
     private store: Store<AppState>,

@@ -20,12 +20,13 @@ import { AutoUnsubscribe } from '../../core/decorators';
 })
 @AutoUnsubscribe()
 export class ProductEditorComponent implements OnInit {
-  sub: Subscription;
   updatedProduct: Product;
   otherProducts: Array<Product>;
   categories: Array<string>;
   newMaterial = '';
   error = '';
+
+  private sub: Subscription;
 
   constructor(
     private store: Store<AppState>,

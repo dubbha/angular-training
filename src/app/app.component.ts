@@ -23,9 +23,10 @@ registerLocaleData(localeUk);
 })
 @AutoUnsubscribe()
 export class AppComponent implements OnInit {
-  public pi: number;
-  public date: Observable<Date>;
-  public appSettings$: Observable<any>;
+  pi: number;
+  date: Observable<Date>;
+  appSettings$: Observable<any>;
+
   private sub: Subscription;
 
   constructor(

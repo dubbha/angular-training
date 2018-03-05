@@ -15,12 +15,13 @@ import { AppState } from '../+store';
 
 @Injectable()
 export class ProductService {
-  sub: Subscription;
   productsCache: Array<Product>;
   cacheTimeToLiveSeconds: number;
   productsCacheExpiryTime: number;
   apiBaseUrl: string;
   apiEndpoint = 'products';
+
+  private sub: Subscription;
 
   constructor(
     private http: HttpClient,
