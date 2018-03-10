@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { AppState } from '../../+store';
+import * as RouterActions from './../../+store/actions/router.actions';
 
 import { CartService } from '../../cart/cart.service';
 
@@ -10,13 +13,13 @@ import { CartService } from '../../cart/cart.service';
 export class BillComponent implements OnInit {
   constructor(
     public cartService: CartService,
-    private router: Router,
+    private store: Store<AppState>,
   ) { }
 
   ngOnInit() {
   }
 
   nextStep() {
-    this.router.navigate(['/checkout/address']);
+    this.store.dispatch(new RouterActions.Go({ path: ['/checkout/address'] }));
   }
 }

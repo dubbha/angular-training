@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { Store } from '@ngrx/store';
+
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { tap, catchError } from 'rxjs/operators';
@@ -9,6 +11,7 @@ import 'rxjs/add/observable/throw';
 import { AppSettingsService } from '../core/services';
 import { Product } from './product/product.model';
 import { Category } from './product/product.enum';
+import { AppState } from '../+store';
 
 @Injectable()
 export class ProductService {
@@ -18,12 +21,24 @@ export class ProductService {
   apiBaseUrl: string;
   apiEndpoint = 'products';
 
+  private sub: Subscription;
+
   constructor(
     private http: HttpClient,
     private appSettingsService: AppSettingsService,
+    private store: Store<AppState>,
   ) {
-    this.apiBaseUrl = this.appSettingsService.appSettings.apiBaseUrl;
-    this.cacheTimeToLiveSeconds = this.appSettingsService.appSettings.cacheTimeToLiveSeconds;
+    this.sub = new Subscription();
+    this.sub.add(this.store.select('appSettings')
+      .pipe(
+        tap(appSettings => {
+          console.log('appSettings', appSettings);
+          if (appSettings.settings) {
+            this.apiBaseUrl = appSettings.settings.apiBaseUrl;
+          }
+        }))
+      .subscribe()
+    );
   }
 
   getProducts(): Promise<Array<Product>> {
@@ -70,6 +85,7 @@ export class ProductService {
           }));
 
           this.productsCache.push(castedProduct);
+          return castedProduct;
         }),
         catchError(err => Observable.throw(err)),
       );
@@ -84,6 +100,7 @@ export class ProductService {
             .map(product => {
               if (product.alternatives.includes(id)) {
                 product.alternatives = product.alternatives.filter(e => e !== id);
+
                 product.alternativesWithNames = product.alternativesWithNames
                   .reduce((aggr, cur) => {
                     if (cur.id !== id) {
@@ -91,10 +108,11 @@ export class ProductService {
                     }
                     return aggr;
                   }, []);
-                this.patchProduct(
-                  product.id,
-                  { alternatives: product.alternatives },
-                ).subscribe();  // https://stackoverflow.com/a/41381265/8861667
+
+                  this.sub.add(this.patchProduct(
+                      product.id,
+                      { alternatives: product.alternatives },
+                    ).subscribe());  // https://stackoverflow.com/a/41381265/8861667
               }
               return product;
             });

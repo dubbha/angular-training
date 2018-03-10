@@ -1,9 +1,10 @@
 import { Component, Input, HostBinding, HostListener, ChangeDetectionStrategy } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { AppState } from './../../+store';
+import * as RouterActions from './../../+store/actions/router.actions';
 
 import { Product } from '../../products/product/product.model';
-import { ProductService } from '../../products/products.service';
-import { CartService } from '../../cart/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -29,12 +30,10 @@ export class ProductComponent {
   onClick() { this.openProductEditor(); }
 
   constructor(
-    private cartService: CartService,
-    private productService: ProductService,
-    private router: Router,
+    private store: Store<AppState>,
   ) {}
 
   openProductEditor() {
-    this.router.navigate([`/admin/edit/${this.product.id}`]);
+    this.store.dispatch(new RouterActions.Go({ path: [`/admin/edit/${this.product.id}`] }));
   }
 }

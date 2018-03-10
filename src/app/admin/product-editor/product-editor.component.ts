@@ -1,5 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { AppState, getProductsData, getProductsError } from './../../+store';
+import * as ProductsActions from './../../+store/actions/products.actions';
+import * as RouterActions from './../../+store/actions/router.actions';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -7,21 +12,24 @@ import { Product } from '../../products/product/product.model';
 import { Category } from '../../products/product/product.enum';
 import { ProductService } from '../../products/products.service';
 import { ModalService } from '../../shared/services';
+import { AutoUnsubscribe } from '../../core/decorators';
 
 @Component({
   templateUrl: './product-editor.component.html',
   styleUrls: ['./product-editor.component.sass']
 })
-export class ProductEditorComponent implements OnInit, OnDestroy {
-  sub: Subscription;
+@AutoUnsubscribe()
+export class ProductEditorComponent implements OnInit {
   updatedProduct: Product;
   otherProducts: Array<Product>;
   categories: Array<string>;
   newMaterial = '';
   error = '';
 
+  private sub: Subscription;
+
   constructor(
-    private router: Router,
+    private store: Store<AppState>,
     private route: ActivatedRoute,
     private productService: ProductService,
     private modalService: ModalService,
@@ -39,12 +47,6 @@ export class ProductEditorComponent implements OnInit, OnDestroy {
     this.categories = Object.keys(Category).map(key => Category[key]);
   }
 
-  ngOnDestroy() {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
-  }
-
   getAlternative(id) {
     return this.productService.getProductById(id);
   }
@@ -60,32 +62,20 @@ export class ProductEditorComponent implements OnInit, OnDestroy {
   }
 
   backToProducts() {
-    this.router.navigate(['/admin']);
+    this.store.dispatch(new RouterActions.Go({ path: ['/admin'] }));
   }
 
   save() {
     this.modalService.confirm('Save changes?', {
       style: 'success',
-      callback: () => {
-        this.sub = this.productService.updateProduct(this.updatedProduct)
-          .subscribe(
-            () => this.router.navigate(['/admin']),
-            err => this.error = err.message,
-          );
-      }
+      callback: () => this.store.dispatch(new ProductsActions.UpdateProduct(this.updatedProduct)),
     });
   }
 
   delete() {
     this.modalService.confirm('Are you sure you want to delete the product?', {
       style: 'warn',
-      callback: () => {
-        this.sub = this.productService.removeProduct(this.updatedProduct.id)
-          .subscribe(
-            () => this.router.navigate(['/admin']),
-            err => this.error = err.message,
-          );
-      }
+      callback: () => this.store.dispatch(new ProductsActions.RemoveProduct(this.updatedProduct.id)),
     });
   }
 }

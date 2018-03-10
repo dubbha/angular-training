@@ -1,5 +1,8 @@
 import { Component, Input, HostBinding, HostListener, ChangeDetectionStrategy } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { AppState } from '../../+store';
+import * as RouterActions from './../../+store/actions/router.actions';
 
 import { Product } from './product.model';
 import { ProductService } from '../products.service';
@@ -29,9 +32,9 @@ export class ProductComponent {
   onClick() { this.openProductCard(); }
 
   constructor(
+    private store: Store<AppState>,
     private cartService: CartService,
     private productService: ProductService,
-    private router: Router,
   ) {}
 
   buyProduct(event) {
@@ -65,6 +68,6 @@ export class ProductComponent {
   }
 
   openProductCard() {
-    this.router.navigate([`/product/${this.product.id}`]);
+    this.store.dispatch(new RouterActions.Go({ path: [`/product/${this.product.id}`] }));
   }
 }

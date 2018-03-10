@@ -1,4 +1,5 @@
 <div class="title">Add New Product</div>
+<div *ngIf="(productsError$ | async) as error" class="error">{{error}}</div>
 <form id="product-creator-form" #form="ngForm" (keypress)="preventEnter($event)">
   <div class="product-creator__param">
     <span class="product-creator__key">Name</span>
@@ -85,6 +86,7 @@
   </div>
   <div class="product-creator__param">
     <button
+      type="button"
       class="product-creator__button"
       (click)="backToProducts()"
     >
@@ -101,4 +103,3 @@
     </button>
   </div>
 </form>
-<div *ngIf="error" class="error">Error: {{error}}</div>

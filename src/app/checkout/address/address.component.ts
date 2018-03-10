@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { AppState } from '../../+store';
+import * as RouterActions from './../../+store/actions/router.actions';
 
 import { ModalService } from '../../shared/services';
 import { CartService } from '../../cart/cart.service';
@@ -13,7 +16,7 @@ export class AddressComponent implements OnInit {
   details: Details;
 
   constructor(
-    private router: Router,
+    private store: Store<AppState>,
     private modalService: ModalService,
     private cartService: CartService,
   ) {}
@@ -26,7 +29,7 @@ export class AddressComponent implements OnInit {
     this.cartService.clear();
     this.modalService.alert('order processed successfully', {
       style: 'success',
-      callback: () => this.router.navigate(['/']),
+      callback: () => this.store.dispatch(new RouterActions.Go({ path: ['/'] })),
     });
   }
 

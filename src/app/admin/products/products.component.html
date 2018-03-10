@@ -8,8 +8,9 @@
   <span class="products__availability sortable" (click)="sortProducts('isAvailable')">Available</span>
   <span class="products__price sortable" (click)="sortProducts('price')">Price</span>
 </header>
+<div *ngIf="(productsError$ | async) as error" class="error">{{error}}</div>
 <app-product
-  *ngFor="let product of products"
+  *ngFor="let product of (products$ | async)"
   [product]="product"
 ></app-product>
 <button class="products__button" (click)="openAddProduct()">{{'add new product' | uppercase}}</button>

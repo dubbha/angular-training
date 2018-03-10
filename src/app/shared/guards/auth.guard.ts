@@ -1,19 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Router, Route, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, CanLoad } from '@angular/router';
+import { Route, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, CanLoad } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { AppState } from '../../+store';
+import * as RouterActions from '../../+store/actions/router.actions';
+
 import { AuthService } from '../services';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanLoad {
   constructor(
+    private store: Store<AppState>,
     private authService: AuthService,
-    private router: Router
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     console.log('canActivate guard is called');
     const auth = this.authService.auth();
     if (!auth) {
-      this.router.navigate(['/shop']);
+      this.store.dispatch(new RouterActions.Go({ path: ['/shop'] }));
     }
     return auth;
   }
@@ -22,7 +27,7 @@ export class AuthGuard implements CanActivate, CanLoad {
     console.log('canLoad guard is activated');
     const auth = this.authService.auth();
     if (!auth) {
-      this.router.navigate(['/shop']);
+      this.store.dispatch(new RouterActions.Go({ path: ['/shop'] }));
     }
     return auth;
   }

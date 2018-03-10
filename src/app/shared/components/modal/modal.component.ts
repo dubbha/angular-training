@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../+store';
+import * as RouterActions from '../../../+store/actions/router.actions';
 
 import { ModalService } from '../../services';
 import { Type } from './type.enum';
@@ -16,7 +19,7 @@ export class ModalComponent implements OnInit {
   style = 'info';
 
   constructor(
-    private router: Router,
+    private store: Store<AppState>,
     private modalService: ModalService,
   ) {}
 
@@ -49,7 +52,9 @@ export class ModalComponent implements OnInit {
   }
 
   close() {
-    return this.router.navigate([{ outlets: { modal: null }}]);
+    return Promise.resolve(
+      this.store.dispatch(new RouterActions.Go({ path: [{ outlets: { modal: null } }] }))
+    );
   }
 
   get isTypeAlert() {
