@@ -20,6 +20,7 @@
  - Task6. HTTP
  - Task7. NgRX
  - Task8. Forms
+ - Task9. Unit Tests
 
 ## Run Development Server
 ```
