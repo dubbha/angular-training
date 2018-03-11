@@ -6,6 +6,7 @@
 
     &:nth-of-type(odd)
       background-color: lightgrey
+      margin: 1px 0
 
   &__key
     font-weight: bold
@@ -13,6 +14,12 @@
     width: 30%
     min-width: 180px
     float: left
+
+    &_required
+      &:after
+        content: '*'
+        color: red
+        margin-left: 1px
 
   &__value
     display: inline-block
@@ -42,6 +49,9 @@
     &_price
       width: 306px
 
+    &.ng-touched.ng-invalid:not(:focus)
+      background-color: red
+
   &__currency
     display: inline-block
     width: 24px
@@ -58,6 +68,9 @@
 
     &_multi
       height: 250px
+
+    &.ng-touched.ng-invalid:not(:focus)
+      background-color: red
 
   &__material
     display: inline-block

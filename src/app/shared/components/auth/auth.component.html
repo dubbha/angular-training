@@ -1,16 +1,14 @@
 <div *ngIf="!authService.auth()" class="auth">
-  <form class="auth__form" (submit)="onSubmit($event)">
+  <form class="auth__form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
     <input
       class="auth__input"
       type="text"
-      name="username"
-      [(ngModel)]="username"
+      formControlName="username"
     />
     <input
       class="auth__input"
       type="password"
-      name="password"
-      [(ngModel)]="password"
+      formControlName="password"
     />
     <button class="auth__button">login</button>
   </form>

@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   login(username, password): void {
-    if (username === 'admin' && password === 'admin') {
+    if (username === 'admin' && password === 'password') {
       this.saveSession(this.generatorService.generate(), 'admin');
       this.store.dispatch(new RouterActions.Go({ path: ['/admin'] }));
     }
