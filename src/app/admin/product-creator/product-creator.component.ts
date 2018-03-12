@@ -48,13 +48,15 @@ export class ProductCreatorComponent implements OnInit {
     this.categories = Object.keys(Category).map(key => Category[key]);
 
     this.form = new FormGroup({
-      name: new FormControl(this.product.name, Validators.required),
-      description: new FormControl(this.product.description, Validators.required),
-      category: new FormControl(this.product.category, Validators.required),
-      price: new FormControl(this.product.price, [Validators.required, Validators.min(1), Validators.max(999999)]),
-      isAvailable: new FormControl(this.product.isAvailable),
-      alternatives: new FormControl(this.product.alternatives),
-    });
+        name: new FormControl(this.product.name, Validators.required),
+        description: new FormControl(this.product.description, Validators.required),
+        category: new FormControl(this.product.category, Validators.required),
+        price: new FormControl(this.product.price, [Validators.required, Validators.min(1), Validators.max(999999)]),
+        isAvailable: new FormControl(this.product.isAvailable),
+        alternatives: new FormControl(this.product.alternatives),
+      },
+      { updateOn: 'blur'},
+    );
 
     this.newMaterialSubForm = new FormGroup({
       newMaterial: new FormControl(),

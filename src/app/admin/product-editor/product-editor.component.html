@@ -2,33 +2,55 @@
   <div class="title">{{updatedProduct.name}}</div>
   <form #form="ngForm" (ngSubmit)="save(form)">
     <div class="product-editor__param">
-      <span class="product-editor__key product-editor__key_required">Name</span>
-      <span class="product-editor__value">
+      <span class="product-editor__key required">Name</span>
+      <span class="product-editor__value tooltip__container">
         <input
           type=text
           [(ngModel)]="updatedProduct.name" name="name"
-          class="product-editor__input"
+          #name="ngModel"
+          class="product-editor__input tooltip__input"
           required
         />
+        <span
+          class="tooltip__text"
+          [ngClass]="{
+            tooltip__text_visible: name.touched
+              && name.invalid
+              && name.errors.required
+          }"
+        >
+          Required Field
+        </span>
       </span>
     </div>
     <div class="product-editor__param">
-      <span class="product-editor__key product-editor__key_required">Description</span>
-      <span class="product-editor__value">
+      <span class="product-editor__key required">Description</span>
+      <span class="product-editor__value tooltip__container">
         <input
           type=text
           [(ngModel)]="updatedProduct.description" name="description"
-          class="product-editor__input"
+          #description="ngModel"
+          class="product-editor__input tooltip__input"
           required
         />
+        <span
+          class="tooltip__text"
+          [ngClass]="{
+            tooltip__text_visible: description.touched
+              && description.invalid
+              && description.errors.required
+          }"
+        >
+          Required Field
+        </span>
       </span>
     </div>
     <div class="product-editor__param">
-      <span class="product-editor__key product-editor__key_required">Category</span>
-      <span class="product-editor__value">
+      <span class="product-editor__key">Category</span>
+      <span class="product-editor__value tooltip__container">
         <select
           [(ngModel)]="updatedProduct.category" name="category"
-          class="product-editor__select"
+          class="product-editor__select tooltip__input"
           required
         >
           <option *ngFor="let category of categories" [ngValue]="category">
@@ -38,17 +60,29 @@
       </span>
     </div>
     <div class="product-editor__param">
-        <span class="product-editor__key product-editor__key_required">Price</span>
-        <span class="product-editor__value">
-          <input
-            type="number"
-            min="1"
-            max="999999"
-            [(ngModel)]="updatedProduct.price" name="price"
-            class="product-editor__input product-editor__input_price"
-            required
-          /><span class="product-editor__currency">₴</span>
+      <span class="product-editor__key required">Price</span>
+      <span class="product-editor__value tooltip__container">
+        <input
+          type="number"
+          min="1"
+          max="999999"
+          [(ngModel)]="updatedProduct.price" name="price"
+          #price="ngModel"
+          class="product-editor__input product-editor__input_price tooltip__input"
+          required
+        />
+        <span
+          class="tooltip__text"
+          [ngClass]="{
+            tooltip__text_visible: price.touched
+              && price.invalid
+              && price.errors.required
+          }"
+        >
+          Required Field
         </span>
+      </span>
+      <span class="product-editor__currency">₴</span>
     </div>
     <div class="product-editor__param">
         <span class="product-editor__key">Available</span>

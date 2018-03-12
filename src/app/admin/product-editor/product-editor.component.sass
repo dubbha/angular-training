@@ -15,12 +15,6 @@
     min-width: 180px
     float: left
 
-    &_required
-      &:after
-        content: '*'
-        color: red
-        margin-left: 1px
-
   &__value
     display: inline-block
     float: left
@@ -51,7 +45,7 @@
       width: 306px
 
     &.ng-touched.ng-invalid:not(:focus)
-      background-color: red
+      border-color: red
 
   &__currency
     display: inline-block

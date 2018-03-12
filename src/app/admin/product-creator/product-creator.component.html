@@ -2,34 +2,97 @@
 <div *ngIf="(productsError$ | async) as error" class="error">{{error}}</div>
 <form [formGroup]="form" (ngSubmit)="save()">
   <div class="product-creator__param">
-    <span class="product-creator__key product-creator__key_required">Name</span>
-    <span class="product-creator__value">
-      <input type=text formControlName="name" class="product-creator__input">
+    <span class="product-creator__key required">Name</span>
+    <span class="product-creator__value tooltip__container">
+      <input type=text formControlName="name" class="product-creator__input tooltip__input" />
+      <span
+        class="tooltip__text"
+        [ngClass]="{
+          tooltip__text_visible: this.form.get('name').touched
+            && this.form.get('name').invalid
+            && this.form.get('name').errors.required
+        }"
+      >
+        Required Field
+      </span>
     </span>
   </div>
   <div class="product-creator__param">
-    <span class="product-creator__key product-creator__key_required">Description</span>
-    <span class="product-creator__value">
-      <input type=text formControlName="description" class="product-creator__input">
+    <span class="product-creator__key required">Description</span>
+    <span class="product-creator__value tooltip__container">
+      <input type=text formControlName="description" class="product-creator__input tooltip__input">
+      <span
+        class="tooltip__text"
+        [ngClass]="{
+          tooltip__text_visible: this.form.get('description').touched
+            && this.form.get('description').invalid
+            && this.form.get('description').errors.required
+        }"
+      >
+        Required Field
+      </span>
     </span>
   </div>
   <div class="product-creator__param">
-    <span class="product-creator__key product-creator__key_required">Category</span>
-    <span class="product-creator__value">
-      <select formControlName="category" class="product-creator__select">
+    <span class="product-creator__key required">Category</span>
+    <span class="product-creator__value tooltip__container">
+      <select formControlName="category" class="product-creator__select tooltip__input">
         <option *ngFor="let category of categories" [ngValue]="category">{{category | titlecase}}</option>
       </select>
+      <span
+        class="tooltip__text"
+        [ngClass]="{
+          tooltip__text_visible: this.form.get('category').touched
+            && this.form.get('category').invalid
+            && this.form.get('category').errors.required
+        }"
+      >
+        Required Field
+      </span>
     </span>
   </div>
   <div class="product-creator__param">
-      <span class="product-creator__key product-creator__key_required">Price</span>
-      <span class="product-creator__value">
+      <span class="product-creator__key required">Price</span>
+      <span class="product-creator__value tooltip__container">
         <input
           type="number"
           formControlName="price"
-          class="product-creator__input product-creator__input_price"
-          ><span class="product-creator__currency">₴</span>
+          class="product-creator__input product-creator__input_price tooltip__input"
+        />
+        <span
+          class="tooltip__text"
+          [ngClass]="{
+            tooltip__text_visible: this.form.get('price').touched
+              && this.form.get('price').invalid
+              && this.form.get('price').errors.required
+          }"
+        >
+          Required Field
+        </span>
+        <span
+          class="tooltip__text"
+          *ngIf="this.form.get('price').errors && this.form.get('price').errors.min"
+          [ngClass]="{
+            tooltip__text_visible: this.form.get('price').touched
+              && this.form.get('price').invalid
+              && this.form.get('price').errors.min
+          }"
+        >
+          Minimum number allowed is {{this.form.get('price').errors.min.min}}
+        </span>
+        <span
+          class="tooltip__text"
+          *ngIf="this.form.get('price').errors && this.form.get('price').errors.max"
+          [ngClass]="{
+            tooltip__text_visible: this.form.get('price').touched
+              && this.form.get('price').invalid
+              && this.form.get('price').errors.max
+          }"
+        >
+          Maximum number allowed is {{this.form.get('price').errors.max.max}}
+        </span>
       </span>
+      <span class="product-creator__currency">₴</span>
   </div>
   <div class="product-creator__param">
       <span class="product-creator__key">Available</span>

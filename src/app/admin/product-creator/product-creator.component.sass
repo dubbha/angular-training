@@ -15,12 +15,6 @@
     min-width: 180px
     float: left
 
-    &_required
-      &:after
-        content: '*'
-        color: red
-        margin-left: 1px
-
   &__value
     display: inline-block
     float: left
@@ -40,6 +34,7 @@
   &__input
     height: 24px
     width: 330px
+    border: 1px solid grey
     box-sizing: border-box
     outline: none
     margin: 0
@@ -50,7 +45,7 @@
       width: 306px
 
     &.ng-touched.ng-invalid:not(:focus)
-      background-color: red
+      border-color: red
 
   &__currency
     display: inline-block
@@ -61,6 +56,7 @@
   &__select
     height: 24px
     width: 330px
+    border: 1px solid grey
     box-sizing: border-box
     outline: none
     margin: 0
@@ -70,7 +66,7 @@
       height: 250px
 
     &.ng-touched.ng-invalid:not(:focus)
-      background-color: red
+      border-color: red
 
   &__material
     display: inline-block
@@ -107,4 +103,3 @@
 
     &_add
       color: green
-
