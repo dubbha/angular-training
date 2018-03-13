@@ -1,7 +1,7 @@
 # Angular Training
 
 ## Task 8. Forms
-- CheckoutComponent using Reactive Form with required, email and pattern-based validations
+- AddressComponent using Reactive Form with required, email and pattern-based validations
 - Class-generated error messages, with full support for the initial touch-and-blur scenario
 - Cross-field case-insensitive validation of emails, with a nice double-arrow error tooltip
 - Conditional adjustment of validation rules depending on the deliveryRequired switch
