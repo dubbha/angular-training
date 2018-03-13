@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { GeneratorService, ModalService, AuthService } from './services';
 import { NotFoundComponent, ModalComponent, AuthComponent } from './components';
@@ -11,7 +11,7 @@ const generatorFactory = () => (new GeneratorService()).init(16);
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     NotFoundComponent,

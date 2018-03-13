@@ -2,46 +2,148 @@
   Checkout: Step 1 [Bill] > Step 2 [Address]
 </div>
 <div>
-  <form class="address__form" id="checkout-form" #form="ngForm">
-    <div>
-      <label for="name" class="address__field-name">Full Name</label>
-      <input
-        type="text"
-        name="name"
-        [(ngModel)]="details.name"
-        required
-        placeholder="Freddy Krueger"
-        class="address__field-input"
-      />
+  <form class="address__form" [formGroup]="form" (ngSubmit)="checkout()">
+    <div class="address__param">
+      <span class="address__key required">Full Name</span>
+      <span class="address__value tooltip__container">
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="Freddy Krueger"
+          class="address__input tooltip__input"
+        />
+        <span
+          class="tooltip__text tooltip__text_visible"
+          *ngIf="form.get('name').touched && errors['name']"
+        >
+          {{errors['name']}}
+        </span>
+      </span>
     </div>
-    <div>
-      <label for="mobile" class="address__field-name">Mobile</label>
-      <input
-        type="text"
-        name="mobile"
-        [(ngModel)]="details.mobile"
-        required
-        class="address__field-input"
-        placeholder="+111-22-333-4444"
-      />
+    <div class="address__param" formGroupName="emailGroup">
+      <span class="address__key required">Email</span>
+      <span class="address__value tooltip__container">
+        <input
+          type="text"
+          formControlName="email"
+          placeholder="freddy@elm.st"
+          class="address__input tooltip__input"
+          [ngClass]="{address__input_invalid: errors['emailGroup']}"
+        />
+        <span
+          class="tooltip__text tooltip__text_visible"
+          *ngIf="form.get('emailGroup.email').touched && errors['emailGroup.email']"
+        >
+          {{errors['emailGroup.email']}}
+        </span>
+        <span
+          class="tooltip__text tooltip__text_double tooltip__text_visible"
+          *ngIf="errors['emailGroup']"
+        >
+          {{errors['emailGroup']}}
+        </span>
+      </span>
     </div>
-    <div>
-      <label for="address" class="address__field-name">Address</label>
-      <input
-        type="text"
-        name="address"
-        [(ngModel)]="details.address"
-        required
-        class="address__field-input"
-        placeholder="75098, 101 Elm Street, Springwood, Ohio"
-      />
+    <div class="address__param" formGroupName="emailGroup">
+      <span class="address__key required">Confirm Email</span>
+      <span class="address__value tooltip__container">
+        <input
+          type="text"
+          formControlName="confirmEmail"
+          placeholder="freddy@elm.st"
+          class="address__input tooltip__input"
+          [ngClass]="{address__input_invalid: errors['emailGroup']}"
+        />
+        <span
+          class="tooltip__text tooltip__text_visible"
+          *ngIf="form.get('emailGroup.confirmEmail').touched && errors['emailGroup.confirmEmail']"
+        >
+          {{errors['emailGroup.confirmEmail']}}
+        </span>
+      </span>
+    </div>
+    <div class="address__param">
+      <span class="address__key">Delivery required</span>
+      <span class="address__value tooltip__container">
+        <input
+          type="checkbox"
+          formControlName="deliveryRequired"
+          class="address__checkbox"
+        />
+      </span>
+    </div>
+
+    <div class="address__param">
+      <span
+        class="address__key"
+        [ngClass]="{required: form.get('deliveryRequired').value}"
+      >
+        Mobile
+      </span>
+      <span
+        class="address__value tooltip__container"
+        formArrayName="mobiles"
+        *ngFor="let mobile of mobiles.controls; let i = index"
+      >
+        <input
+          type="text"
+          [formControlName]="i"
+          placeholder="+111-22-333-4444"
+          class="address__input tooltip__input"
+        />
+        <span
+          class="tooltip__text tooltip__text_visible"
+          *ngIf="mobile.touched && errors['mobiles.' + i]"
+        >
+          {{errors['mobiles.' + i]}}
+        </span>
+        <span
+          *ngIf="i === 0"
+          class="address__action address__action_add"
+          (click)="addMobile()">+</span>
+        <span
+          *ngIf="i > 0"
+          class="address__action address__action_delete"
+          (click)="deleteMobile(i)">x</span>
+      </span>
+    </div>
+    <div class="address__param">
+      <span
+        class="address__key"
+        [ngClass]="{required: form.get('deliveryRequired').value}"
+      >
+        Address
+      </span>
+      <span class="address__value tooltip__container">
+        <input
+          type="text"
+          formControlName="address"
+          placeholder="75098, 101 Elm Street, Springwood, Ohio"
+          class="address__input tooltip__input"
+        />
+        <span
+          class="tooltip__text tooltip__text_visible"
+          *ngIf="form.get('address').touched && errors['address']"
+        >
+          {{errors['address']}}
+        </span>
+      </span>
+    </div>
+    <div class="address__param">
+      <span class="address__key required">I accept Terms and Conditions</span>
+      <span class="address__value tooltip__container">
+        <input
+          type="checkbox"
+          formControlName="rulesAccepted"
+          class="address__checkbox"
+        />
+      </span>
     </div>
     <div>
       <button
+        type="submit"
         class="address__button"
-        form="checkout-form"
         [disabled]="form.invalid"
-        (click)="checkout()"
       >{{'checkout' | uppercase}}</button>
     </div>
   </form>

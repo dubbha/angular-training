@@ -1,15 +1,16 @@
 # Angular Training
 
-## Task 7. NgRX
-- One-way data flow thanks to @ngrx/store
-- App initialization performed via store, still using AppSettingsService and APP_INITIALIZER
-- Combined root reducers used in StoreModule.forRoot(): AppSettingsReducer and RouterReducer
-- Router connected to Store using @ngrx/router-store, navigation performed using router actions
-- Products sorting performed via store. Reducer CRUD operations performed using @ngrx/entity
-- No direct interactions with ProductsService, server communications initialized by @ngrx/effects
-- Redux DevTools chrome extension used thanks to @ngrx/store-devtools, logOnly in production
-- AutoUnsubscribe decorator used for unsbscription, multiple subscriptions using sub.add()
-- AppInitializerGuard implemented but not currently used
+## Task 8. Forms
+- AddressComponent using Reactive Form with required, email and pattern-based validations
+- Class-generated error messages, with full support for the initial touch-and-blur scenario
+- Cross-field case-insensitive validation of emails, with a nice double-arrow error tooltip
+- Conditional adjustment of validation rules depending on the deliveryRequired switch
+- FormArray of mobiles allowing to add and delete mobiles, individual error tracking
+- ProductCreatorComponent using Reactive Form with validations and a subform for materials
+- ProductEditorComponent using Template-driven Form for contrast
+- AuthComponent using very basic Reactive Form
+- Validations run moment configured to fire onBlur, onChange
+- Not using FormBuilder because of issues like [updateOn](https://github.com/angular/angular/issues/19163)
 
 ## Branches
  - Task1. Introduction

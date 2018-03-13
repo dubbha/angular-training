@@ -6,6 +6,7 @@
 
     &:nth-of-type(odd)
       background-color: lightgrey
+      margin: 1px 0
 
   &__key
     font-weight: bold
@@ -33,6 +34,7 @@
   &__input
     height: 24px
     width: 330px
+    border: 1px solid grey
     box-sizing: border-box
     outline: none
     margin: 0
@@ -41,6 +43,9 @@
     &_with-action,
     &_price
       width: 306px
+
+    &.ng-touched.ng-invalid:not(:focus)
+      border-color: red
 
   &__currency
     display: inline-block
@@ -51,6 +56,7 @@
   &__select
     height: 24px
     width: 330px
+    border: 1px solid grey
     box-sizing: border-box
     outline: none
     margin: 0
@@ -58,6 +64,9 @@
 
     &_multi
       height: 250px
+
+    &.ng-touched.ng-invalid:not(:focus)
+      border-color: red
 
   &__material
     display: inline-block
@@ -94,4 +103,3 @@
 
     &_add
       color: green
-

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../+store';
@@ -12,19 +13,24 @@ import { AuthService } from '../../services';
   styleUrls: ['./auth.component.sass']
 })
 export class AuthComponent implements OnInit {
-  username = 'admin';
-  password = 'admin';
+  authForm: FormGroup;
+  username = new FormControl('admin', Validators.required);
+  password = new FormControl('password', Validators.required);
 
   constructor(
     private store: Store<AppState>,
     public authService: AuthService,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authForm = new FormGroup({
+      username: this.username,
+      password: this.password,
+    });
+  }
 
-  onSubmit(event) {
-    this.authService.login(this.username, this.password);
-    event.preventDefault();
+  onSubmit() {
+    this.authService.login(this.username.value, this.password.value);
   }
 
   openAdminZone() {

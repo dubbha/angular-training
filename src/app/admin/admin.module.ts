@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ProductComponent } from './product/product.component';
 import { AdminRoutingModule, adminRouterComponents } from './admin.routing.module';
@@ -13,6 +13,7 @@ import { AdminRoutingModule, adminRouterComponents } from './admin.routing.modul
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     AdminRoutingModule,
   ],
   exports: [],

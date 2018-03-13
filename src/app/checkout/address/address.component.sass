@@ -2,23 +2,76 @@
   &__form
     margin: 20px 0
 
-  &__field-name
-    display: inline-block
-    float: left
-    width: 40%
+  &__param
+    width: 100%
+    float: left     // keep floats inside, avoid vertical spacing between divs themselves
 
-  &__field-input
+    &:nth-of-type(odd)
+      background-color: lightgrey
+      margin: 1px 0
+
+  &__key
+    font-weight: bold
+    display: inline-block
+    width: 30%
+    min-width: 180px
+    float: left
+
+  &__value
+    display: inline-block
+    float: right
+    width: 70%
+
+  &__input
     display: inline-block
     float: left
     height: 24px
-    width: 60%
+    width: 100%
     outline: none
     box-sizing: border-box
+    border: 1px solid grey
+
+    &.ng-touched.ng-invalid:not(:focus),
+    &_invalid
+      border-color: red
+
+
+  &__checkbox
+    height: 24px
+    width: 24px
+    line-height: 24px
+    border: 1px solid grey
+    outline: none
+    margin: 0
+    display: block
+    background-color: white
 
   &__button
     display: inline-block
     float: right
-    width: 60%
+    width: 70%
     height: 24px
     box-sizing: border-box
     outline: none
+    margin: 1px 0
+
+  &__action
+    position: absolute
+    right: 1px
+    top: 1px
+    width: 20px
+    height: 20px
+    line-height: 18px
+    margin: 1px
+    text-align: center
+    border: 1px solid grey
+    box-sizing: border-box
+    cursor: pointer
+    user-select: none
+
+    &_add
+      color: green
+
+    &_delete
+      color: red
+

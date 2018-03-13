@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { BillComponent } from './bill/bill.component';
 import { CartService } from '../cart/cart.service';
@@ -11,7 +11,7 @@ import { CheckoutRoutingModule, checkoutRouterComponents } from './checkout.rout
   declarations: [checkoutRouterComponents],
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     CheckoutRoutingModule,
   ],
   exports: [],

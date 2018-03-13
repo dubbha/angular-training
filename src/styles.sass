@@ -20,3 +20,58 @@ body
 .error
   color: red
   font-size: smaller
+
+.required
+  &:after
+    content: '*'
+    color: red
+    margin-left: 1px
+
+.tooltip
+  &__container
+    position: relative
+    display: inline-block
+
+  &__text
+    position: absolute
+    z-index: 1
+    visibility: hidden
+    background-color: red
+    color: white
+    text-align: center
+    padding: 2px 6px
+    border-radius: 2px
+    right: 3px
+    top: 3px
+    font-family: Arial
+    font-size: 12px
+    line-height: 14px
+
+    &::after
+      content: ""
+      position: absolute
+      top: 50%
+      right: 100%
+      margin-top: -5px
+      border-width: 5px
+      border-style: solid
+      border-color: transparent red transparent transparent
+
+    &_double
+      line-height: 39px
+
+      &::after
+        margin-top: -16px
+
+      &::before
+        content: ""
+        position: absolute
+        bottom: 50%
+        right: 100%
+        margin-bottom: -16px
+        border-width: 5px
+        border-style: solid
+        border-color: transparent red transparent transparent
+
+  &__input:not(:focus) ~ &__text_visible  // only show tooltip when input (or select) is not in focus
+    visibility: visible

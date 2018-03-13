@@ -1,98 +1,163 @@
 <div *ngIf="updatedProduct">
   <div class="title">{{updatedProduct.name}}</div>
-  <div class="product-editor__param">
-    <span class="product-editor__key">Name</span>
-    <span class="product-editor__value">
-      <input type=text [(ngModel)]="updatedProduct.name" class="product-editor__input">
-    </span>
-  </div>
-  <div class="product-editor__param">
-    <span class="product-editor__key">Description</span>
-    <span class="product-editor__value">
-      <input type=text [(ngModel)]="updatedProduct.description" class="product-editor__input">
-    </span>
-  </div>
-  <div class="product-editor__param">
-    <span class="product-editor__key">Category</span>
-    <span class="product-editor__value">
-      <select [(ngModel)]="updatedProduct.category" class="product-editor__select">
-        <option *ngFor="let category of categories" [ngValue]="category">{{category | titlecase}}</option>
-      </select>
-    </span>
-  </div>
-  <div class="product-editor__param">
-      <span class="product-editor__key">Price</span>
-      <span class="product-editor__value">
+  <form #form="ngForm" (ngSubmit)="save(form)">
+    <div class="product-editor__param">
+      <span class="product-editor__key required">Name</span>
+      <span class="product-editor__value tooltip__container">
+        <input
+          type=text
+          [(ngModel)]="updatedProduct.name" name="name"
+          #name="ngModel"
+          class="product-editor__input tooltip__input"
+          required
+        />
+        <span
+          class="tooltip__text"
+          [ngClass]="{
+            tooltip__text_visible: name.touched
+              && name.invalid
+              && name.errors.required
+          }"
+        >
+          Required Field
+        </span>
+      </span>
+    </div>
+    <div class="product-editor__param">
+      <span class="product-editor__key required">Description</span>
+      <span class="product-editor__value tooltip__container">
+        <input
+          type=text
+          [(ngModel)]="updatedProduct.description" name="description"
+          #description="ngModel"
+          class="product-editor__input tooltip__input"
+          required
+        />
+        <span
+          class="tooltip__text"
+          [ngClass]="{
+            tooltip__text_visible: description.touched
+              && description.invalid
+              && description.errors.required
+          }"
+        >
+          Required Field
+        </span>
+      </span>
+    </div>
+    <div class="product-editor__param">
+      <span class="product-editor__key">Category</span>
+      <span class="product-editor__value tooltip__container">
+        <select
+          [(ngModel)]="updatedProduct.category" name="category"
+          class="product-editor__select tooltip__input"
+          required
+        >
+          <option *ngFor="let category of categories" [ngValue]="category">
+            {{category | titlecase}}
+          </option>
+        </select>
+      </span>
+    </div>
+    <div class="product-editor__param">
+      <span class="product-editor__key required">Price</span>
+      <span class="product-editor__value tooltip__container">
         <input
           type="number"
-          [(ngModel)]="updatedProduct.price"
-          class="product-editor__input product-editor__input_price"><span class="product-editor__currency">₴</span>
-      </span>
-  </div>
-  <div class="product-editor__param">
-      <span class="product-editor__key">Available</span>
-      <select [(ngModel)]="updatedProduct.isAvailable" class="product-editor__input">
-        <option [ngValue]="true">✔ In Stock</option>
-        <option [ngValue]="false">✖ Not Available</option>
-      </select>
-  </div>
-  <div class="product-editor__param">
-    <span class="product-editor__key">Materials</span>
-    <span class="product-editor__value">
-      <div *ngFor="let material of updatedProduct.materials">
-        <span class="product-editor__material">
-          {{material}}
-        </span><button
-          class="product-editor__action product-editor__action_delete"
-          (click)="removeMaterial(material)">✖</button>
-      </div>
-      <input
-        class="product-editor__input product-editor__input_with-action"
-        type=text
-        [(ngModel)]="newMaterial"
-        placeholder="add material"
-      ><button
-        class="product-editor__action product-editor__action_add"
-        (click)="addMaterial()"
-      >✔</button>
-    </span>
-  </div>
-  <div class="product-editor__param">
-    <span class="product-editor__key">Alternatives</span>
-    <span class="product-editor__value">
-      <select
-        class="product-editor__select product-editor__select_multi"
-        multiple
-        [(ngModel)]="updatedProduct.alternatives"
-      >
-        <option
-          *ngFor="let otherProduct of otherProducts"
-          [ngValue]="otherProduct.id"
+          min="1"
+          max="999999"
+          [(ngModel)]="updatedProduct.price" name="price"
+          #price="ngModel"
+          class="product-editor__input product-editor__input_price tooltip__input"
+          required
+        />
+        <span
+          class="tooltip__text"
+          [ngClass]="{
+            tooltip__text_visible: price.touched
+              && price.invalid
+              && price.errors.required
+          }"
         >
-          {{otherProduct.name}}
-        </option>
-      </select>
-    </span>
-  </div>
-  <div class="product-editor__param">
-    <button
-      class="product-editor__button"
-      (click)="backToProducts()"
-    >
-        {{'back to products' | uppercase}}
-    </button>
-    <button
-      class="product-editor__button product-editor__button_save"
-      (click)="save()"
-    >
-      {{'save' | uppercase}}
-    </button>
-    <button
-      class="product-editor__button product-editor__button_delete"
-      (click)="delete()"
-    >
-      {{'delete' | uppercase}}
-    </button>
-  </div>
+          Required Field
+        </span>
+      </span>
+      <span class="product-editor__currency">₴</span>
+    </div>
+    <div class="product-editor__param">
+        <span class="product-editor__key">Available</span>
+        <select
+          [(ngModel)]="updatedProduct.isAvailable" name="isAvailable"
+          class="product-editor__input"
+        >
+          <option [ngValue]="true">✔ In Stock</option>
+          <option [ngValue]="false">✖ Not Available</option>
+        </select>
+    </div>
+    <div class="product-editor__param">
+      <span class="product-editor__key">Materials</span>
+      <span class="product-editor__value">
+        <div *ngFor="let material of updatedProduct.materials">
+          <span class="product-editor__material">
+            {{material}}
+          </span><button
+            type="button"
+            class="product-editor__action product-editor__action_delete"
+            (click)="removeMaterial(material)">✖</button>
+        </div>
+        <form (ngSubmit)="addMaterial()">
+          <input
+            class="product-editor__input product-editor__input_with-action"
+            type=text
+            [(ngModel)]="newMaterial" [ngModelOptions]="{standalone: true}"
+            placeholder="add material"
+          /><button
+            type="submit"
+            class="product-editor__action product-editor__action_add"
+          >✔</button>
+        </form>
+      </span>
+    </div>
+    <div class="product-editor__param">
+      <span class="product-editor__key">Alternatives</span>
+      <span class="product-editor__value">
+        <select
+          class="product-editor__select product-editor__select_multi"
+          multiple
+          [(ngModel)]="updatedProduct.alternatives" name="alternatives"
+        >
+          <option
+            *ngFor="let otherProduct of otherProducts"
+            [ngValue]="otherProduct.id"
+          >
+            {{otherProduct.name}}
+          </option>
+        </select>
+      </span>
+    </div>
+    <div class="product-editor__param">
+      <button
+        type="button"
+        class="product-editor__button"
+        (click)="backToProducts()"
+      >
+          {{'back to products' | uppercase}}
+      </button>
+      <button
+        type="submit"
+        class="product-editor__button product-editor__button_save"
+        [disabled]="form.invalid"
+      >
+        {{'save' | uppercase}}
+      </button>
+      <button
+        type="button"
+        class="product-editor__button product-editor__button_delete"
+        (click)="delete()"
+      >
+        {{'delete' | uppercase}}
+      </button>
+    </div>
+  </form>
 </div>
 <div *ngIf="error" class="error">Error: {{error}}</div>

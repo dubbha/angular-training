@@ -65,11 +65,14 @@ export class ProductEditorComponent implements OnInit {
     this.store.dispatch(new RouterActions.Go({ path: ['/admin'] }));
   }
 
-  save() {
-    this.modalService.confirm('Save changes?', {
-      style: 'success',
-      callback: () => this.store.dispatch(new ProductsActions.UpdateProduct(this.updatedProduct)),
-    });
+  save(form) {
+    console.log(form.valid);
+    if (form.valid) {
+      this.modalService.confirm('Save changes?', {
+        style: 'success',
+        callback: () => this.store.dispatch(new ProductsActions.UpdateProduct(this.updatedProduct)),
+      });
+    }
   }
 
   delete() {
