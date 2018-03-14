@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { map } from 'rxjs/operators';
 
 import { ConstantsService, AppSettingsService } from './core/services';
-import { GeneratorService } from './shared/services';
 import { AutoUnsubscribe } from './core/decorators';
 
 registerLocaleData(localeUk);
@@ -31,7 +30,6 @@ export class AppComponent implements OnInit {
 
   constructor(
     @Inject(ConstantsService) private constants,
-    @Optional() private generatorService: GeneratorService,
     private store: Store<AppState>,
   ) {}
 
