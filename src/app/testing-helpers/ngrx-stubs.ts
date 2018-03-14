@@ -15,7 +15,6 @@ export class StoreStub {
     this.subject.next(initialState);
   }
 
-  // гетер и сетер для testParams
   get testParams() { return this._state; }
   set testParams(state: {}) {
     this._state = state;
@@ -23,7 +22,7 @@ export class StoreStub {
   }
 
   select() {
-    console.log('select called, returning', this._state);
+    // console.log('select called, returning', this._state);
     return this._state;
   }
 }

@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, async, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement, Component } from '@angular/core';
 
@@ -52,23 +52,33 @@ describe('AppComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should display original title', async(() => {
-    // de = fixture.debugElement.query(By.css('img'));
-    // expect(de.nativeElement.alt).toBe('Angular');
+  it('should display original title', fakeAsync(() => {
+    de = fixture.debugElement.query(By.css('img'));
+    expect(de.nativeElement.alt).toBe('Angular');
+
+    tick();
+    //fixture.detectChanges();
 
     // console.log(fixture);
     console.log(component.appSettings$);
-    fixture.whenStable().then(() => {
-      console.log('after whenStable');
-      //console.log(component.pi);
-      console.log(component.appSettings$);
-      fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        console.log('after second detectChanges');
-        console.log(component.appSettings$);
-      });
-      // console.log(fixture);
-    });
+
+    tick();
+
+    // fixture.detectChanges();
+    console.log(component.appSettings$);
+    console.log(component.pi);
+
+    // fixture.whenStable().then(() => {
+    //   console.log('after whenStable');
+    //   //console.log(component.pi);
+    //   console.log(component.appSettings$);
+    //   fixture.detectChanges();
+    //   fixture.whenStable().then(() => {
+    //     console.log('after second detectChanges');
+    //     console.log(component.appSettings$);
+    //   });
+    //   // console.log(fixture);
+    // });
 
 
     // fixture.detectChanges();
@@ -78,19 +88,3 @@ describe('AppComponent', () => {
     // });
   }));
 });
-
-function createComponent() {
-  fixture = TestBed.createComponent(AppComponent);
-  component = fixture.componentInstance;
-
-  // Первый цикл запускает ngOnInit, который получает product
-  fixture.detectChanges();
-  return fixture.whenStable().then(() => {
-    // Второй цикл отображает полученные products
-    fixture.detectChanges();
-    // if (component.product) {
-    //     idDisplay = fixture.debugElement.queryAll(By.css('span'))[0].nativeElement;
-    //     nameDisplay   = fixture.debugElement.queryAll(By.css('span'))[1].nativeElement;
-    // }
-  });
-}
