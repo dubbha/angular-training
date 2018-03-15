@@ -15,7 +15,7 @@ export function AutoUnsubscribe(subName: string = 'sub') {
         original.apply(this, arguments);
       }
 
-      console.log('AutoUnsubscribe decorator is called');
+      // console.log('AutoUnsubscribe decorator is called');
     };
   };
 }

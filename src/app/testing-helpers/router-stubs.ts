@@ -5,25 +5,17 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class ActivatedRouteStub {
-
-  // ActivatedRoute.paramMap - Observable
-  // BehaviorSubject управляет параметрами.
-  // Возвращает одно и то же значение каждому подписчику paramMap,
-  // пока не будет присвоено новое значение.
   private subject = new BehaviorSubject(this.testParams);
   private _testParams: {};
 
-  // Создаем Observable
   paramMap = this.subject.asObservable();
 
-  // гетер и сетер для testParams
   get testParams() { return this._testParams; }
   set testParams(paramMap: {}) {
     this._testParams = paramMap;
     this.subject.next(paramMap);
   }
 
-  // ActivatedRoute snapshot
   get snapshot() {
     return { paramMap: this.testParams };
   }

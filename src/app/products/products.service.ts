@@ -8,7 +8,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { tap, catchError } from 'rxjs/operators';
 import 'rxjs/add/observable/throw';
 
-import { AppSettingsService } from '../core/services';
 import { Product } from './product/product.model';
 import { Category } from './product/product.enum';
 import { AppState } from '../+store';
@@ -25,14 +24,12 @@ export class ProductService {
 
   constructor(
     private http: HttpClient,
-    private appSettingsService: AppSettingsService,
     private store: Store<AppState>,
   ) {
     this.sub = new Subscription();
     this.sub.add(this.store.select('appSettings')
       .pipe(
         tap(appSettings => {
-          console.log('appSettings', appSettings);
           if (appSettings.settings) {
             this.apiBaseUrl = appSettings.settings.apiBaseUrl;
           }
@@ -84,7 +81,10 @@ export class ProductService {
             name: this.productsCache.find(p => p.id === altId).name
           }));
 
-          this.productsCache.push(castedProduct);
+          this.productsCache
+            ? this.productsCache.push(castedProduct)
+            : this.productsCache = [castedProduct];
+
           return castedProduct;
         }),
         catchError(err => Observable.throw(err)),

@@ -1,11 +1,11 @@
-import { TestBed, ComponentFixture, async, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement, Component } from '@angular/core';
 
-import { Store } from '@ngrx/store';
+import { Store, StoreModule, combineReducers } from '@ngrx/store';
+import { AppState, rootReducers } from './+store';
 
-
-import { RouterLinkStubDirective, RouterOutletStubComponent, StoreStub } from './testing-helpers';
+import { RouterLinkStubDirective, RouterOutletStubComponent } from './testing-helpers';
 import { AppComponent } from './app.component';
 
 import { ConstantsService } from './core/services';
@@ -13,26 +13,33 @@ import { ConstantsService } from './core/services';
 @Component({ selector: 'app-auth', template: '' })
 export class AppAuthStubComponent { }
 
-const constantsServiceStub = { pi: 3.14 };
+const constantsServiceStub = { pi: 3.1415 };
 
 let component: AppComponent;
 let fixture: ComponentFixture<AppComponent>;
 let de: DebugElement;
 let el: HTMLElement;
+let elImg: HTMLImageElement;
 
-const storeStub = new StoreStub({
-  settings: {
-    title: 'Default Title',
-    version: 1,
-    cacheTimeToLiveSeconds: 300,
-    apiBaseUrl: 'http://127.0.0.1:3000/api',
+const initState = {
+  appSettings: {
+    settings: {
+      title: 'Test Title',
+      version: 1,
+    }
   }
-});
+};
 
 describe('AppComponent', () => {
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        StoreModule.forRoot(
+          rootReducers,
+          { initialState: <Partial<AppState>>initState },
+        ),
+      ],
       declarations: [
         AppComponent,
         RouterLinkStubDirective,
@@ -41,50 +48,98 @@ describe('AppComponent', () => {
       ],
       providers: [
         { provide: ConstantsService, useValue: constantsServiceStub },
-        { provide: Store, useValue: storeStub },
       ],
     })
     .compileComponents();
-  }));
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
+
+    jasmine.clock().install();
+    jasmine.clock().mockDate(new Date(2015, 2, 8, 18, 30));
   });
 
-  it('should display original title', fakeAsync(() => {
-    de = fixture.debugElement.query(By.css('img'));
-    expect(de.nativeElement.alt).toBe('Angular');
+  afterEach(() => {
+    jasmine.clock().uninstall();
+  });
 
-    tick();
-    //fixture.detectChanges();
+  describe('logo', () => {
+    it('should have an \'Angular\' alt text', () => {
+      de = fixture.debugElement.query(By.css('img'));
+      elImg = de.nativeElement;
 
-    // console.log(fixture);
-    console.log(component.appSettings$);
+      expect(elImg.alt).toBe('Angular');
+    });
 
-    tick();
+    it('should have a correct class name', () => {
+      de = fixture.debugElement.query(By.css('img'));
+      elImg = de.nativeElement;
 
-    // fixture.detectChanges();
-    console.log(component.appSettings$);
-    console.log(component.pi);
+      expect(elImg.className).toBe('app__logo');
+    });
 
-    // fixture.whenStable().then(() => {
-    //   console.log('after whenStable');
-    //   //console.log(component.pi);
-    //   console.log(component.appSettings$);
-    //   fixture.detectChanges();
-    //   fixture.whenStable().then(() => {
-    //     console.log('after second detectChanges');
-    //     console.log(component.appSettings$);
-    //   });
-    //   // console.log(fixture);
-    // });
+    it('should be an inline svg image', () => {
+      de = fixture.debugElement.query(By.css('img'));
+      elImg = de.nativeElement;
 
+      expect(elImg.src).toMatch(/^data\:image\/svg\+xml;base64,*/);
+    });
+  });
 
-    // fixture.detectChanges();
-    // fixture.whenStable().then(() => {
-    //   fixture.detectChanges();
-    //   expect(de.nativeElement.alt).toBe('Angular');
-    // });
-  }));
+  describe('text block near logo', () => {
+    it('should contain title from AppSettingsService', () => {
+      fixture.detectChanges();
+
+      de = fixture.debugElement.query(By.css('span'));
+      el = de.nativeElement;
+
+      expect(el.innerText).toContain('Test Title');
+    });
+
+    it('should contain version from AppSettingsService formatted correctly', () => {
+      fixture.detectChanges();
+
+      de = fixture.debugElement.query(By.css('span'));
+      el = de.nativeElement;
+
+      expect(el.innerText).toContain('ver 1.0');
+    });
+
+    it('should contain pi value from ConstantsService and formatted correctly', () => {
+      fixture.detectChanges();
+
+      de = fixture.debugElement.query(By.css('span'));
+      el = de.nativeElement;
+
+      expect(el.innerText).toContain('𝛑: 3.14');
+    });
+
+    it('should contain clock date formatted correctly', () => {
+      fixture.detectChanges();
+
+      de = fixture.debugElement.query(By.css('span'));
+      el = de.nativeElement;
+
+      expect(el.innerText).toContain('08.03.15');
+    });
+
+    it('should contain clock time formatted correctly', () => {
+      fixture.detectChanges();
+
+      de = fixture.debugElement.query(By.css('span'));
+      el = de.nativeElement;
+
+      expect(el.innerText).toContain('18:30:00');
+    });
+
+    it('should display next second correctly', () => {
+      jasmine.clock().tick(1000);
+      fixture.detectChanges();
+
+      de = fixture.debugElement.query(By.css('span'));
+      el = de.nativeElement;
+
+      expect(el.innerText).toContain('18:30:01');
+    });
+  });
 });
