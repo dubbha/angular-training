@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/app/+store/effects/products.effects.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\..\index.html">All files</a> / <a href="index.html">src/app/+store/effects</a> products.effects.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">52.5% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>21/40</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">5.88% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>19/38</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Injectable } from '@angular/core';
+&nbsp;
+import { Action } from '@ngrx/store';
+import { Actions, Effect } from '@ngrx/effects';
+import { ProductsActionTypes } from './../actions';
+import * as ProductsActions from './../actions/products.actions';
+import * as RouterActions from './../actions/router.actions';
+&nbsp;
+import { Observable } from 'rxjs/Observable';
+import { map, switchMap, tap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs/observable/of';
+import 'rxjs/add/observable/throw';
+&nbsp;
+import { ProductService } from './../../products/products.service';
+&nbsp;
+@Injectable()
+export class ProductsEffects {
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >  constructor(</span></span>
+    private <span class="cstat-no" title="statement not covered" >actions$: Actions,</span>
+    private <span class="cstat-no" title="statement not covered" >productService: ProductService,</span>
+  ) {
+<span class="cstat-no" title="statement not covered" >    console.log('[PRODUCTS EFFECTS]');</span>
+  }
+&nbsp;
+  @Effect() getProducts$: Observable&lt;Action&gt; = this.actions$
+    .ofType&lt;ProductsActions.GetProducts&gt;(ProductsActionTypes.GET_PRODUCTS)
+    .pipe(
+    switchMap(<span class="fstat-no" title="function not covered" >action =&gt;</span>
+<span class="cstat-no" title="statement not covered" >      this.productService.getProducts()</span>
+       .then(<span class="fstat-no" title="function not covered" >products =&gt; <span class="cstat-no" title="statement not covered" >new ProductsActions.GetProductsSuccess(products))</span></span>
+       .catch(<span class="fstat-no" title="function not covered" >err =&gt; <span class="cstat-no" title="statement not covered" >new ProductsActions.GetProductsError(err))</span></span>
+    )
+  );
+&nbsp;
+  @Effect() addProduct$: Observable&lt;Action&gt; = this.actions$
+    .ofType&lt;ProductsActions.AddProduct&gt;(ProductsActionTypes.ADD_PRODUCT)
+    .pipe(
+      switchMap(<span class="fstat-no" title="function not covered" >action =&gt;</span>
+<span class="cstat-no" title="statement not covered" >        this.productService.addProduct(action.payload)</span>
+          .pipe(
+            map(<span class="fstat-no" title="function not covered" >product =&gt; <span class="cstat-no" title="statement not covered" >new ProductsActions.AddProductSuccess(product))</span>,</span>
+            catchError(<span class="fstat-no" title="function not covered" >err =&gt; <span class="cstat-no" title="statement not covered" >of(new ProductsActions.AddProductError(err)))</span>,</span>
+          )
+      )
+    );
+&nbsp;
+  @Effect() addProductSuccess$: Observable&lt;Action&gt; = this.actions$
+    .ofType&lt;ProductsActions.AddProductSuccess&gt;(ProductsActionTypes.ADD_PRODUCT_SUCCESS)
+    .pipe(
+      map(<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>new RouterActions.Go({ path: ['/admin'] }))</span>,
+    );
+&nbsp;
+  @Effect() updateProduct$: Observable&lt;Action&gt; = this.actions$
+    .ofType&lt;ProductsActions.UpdateProduct&gt;(ProductsActionTypes.UPDATE_PRODUCT)
+    .pipe(
+      switchMap(<span class="fstat-no" title="function not covered" >action =&gt;</span>
+<span class="cstat-no" title="statement not covered" >        this.productService.updateProduct(action.payload)</span>
+          .pipe(
+            map(<span class="fstat-no" title="function not covered" >product =&gt; <span class="cstat-no" title="statement not covered" >new ProductsActions.UpdateProductSuccess(product))</span>,</span>
+            catchError(<span class="fstat-no" title="function not covered" >err =&gt; <span class="cstat-no" title="statement not covered" >of(new ProductsActions.UpdateProductError(err)))</span>,</span>
+          )
+    )
+  );
+&nbsp;
+  @Effect() updateProductSuccess$: Observable&lt;Action&gt; = this.actions$
+    .ofType&lt;ProductsActions.UpdateProductSuccess&gt;(ProductsActionTypes.UPDATE_PRODUCT_SUCCESS)
+    .pipe(
+      map(<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>new RouterActions.Go({ path: ['/admin'] }))</span>,
+    );
+&nbsp;
+  @Effect() removeProduct$: Observable&lt;Action&gt; = this.actions$
+    .ofType&lt;ProductsActions.RemoveProduct&gt;(ProductsActionTypes.REMOVE_PRODUCT)
+    .pipe(
+      switchMap(<span class="fstat-no" title="function not covered" >action =&gt;</span>
+<span class="cstat-no" title="statement not covered" >        this.productService.removeProduct(action.payload)</span>
+          .pipe(
+            map(<span class="fstat-no" title="function not covered" >product =&gt; <span class="cstat-no" title="statement not covered" >new ProductsActions.RemoveProductSuccess(action.payload))</span>,</span>
+            catchError(<span class="fstat-no" title="function not covered" >err =&gt; <span class="cstat-no" title="statement not covered" >of(new ProductsActions.RemoveProductError(err)))</span>,</span>
+          )
+    )
+  );
+&nbsp;
+  @Effect() removeProductSuccess$: Observable&lt;Action&gt; = this.actions$
+    .ofType&lt;ProductsActions.RemoveProductSuccess&gt;(ProductsActionTypes.REMOVE_PRODUCT_SUCCESS)
+    .pipe(
+      map(<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>new RouterActions.Go({ path: ['/admin'] }))</span>,
+    );
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Mar 15 2018 05:06:07 GMT+0200 (Финляндия (зима))
+</div>
+</div>
+<script src="..\..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\..\sorter.js"></script>
+</body>
+</html>

@@ -5,7 +5,8 @@
 - ProductsService: HttpClientTestingModule, promises, observers, HTTP GET/POST/DELETE/PUT/PATCH
 - SortProductsPipe: unit tests performing various sorting transformations
 - ProductListComponent: StoreModule.forRoot(), .forFeature(), spyOn() store.dispatch()
-- ProductCard component not yet working, failing on @ngrx/router-store selectors
+- ProductCardComponent: not yet working, failing on @ngrx/router-store selectors
+- Code coverage generated and added to the repository
 
 ## Branches
  - Task1. Introduction

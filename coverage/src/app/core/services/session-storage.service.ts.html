@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/app/core/services/session-storage.service.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\..\index.html">All files</a> / <a href="index.html">src/app/core/services</a> session-storage.service.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">32.5% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>13/40</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">10% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">30.56% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>11/36</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Injectable } from '@angular/core';
+import { WindowRefService } from './window-ref.service';
+import { LocalStorageService } from './local-storage.service';
+&nbsp;
+@Injectable()
+export class SessionStorageService {
+  private storage: any;
+&nbsp;
+<span class="fstat-no" title="function not covered" >  constructor(</span>
+    private <span class="cstat-no" title="statement not covered" >windowRefService: WindowRefService,</span>
+    private <span class="cstat-no" title="statement not covered" >localStorageService: LocalStorageService,</span>
+  ) {
+<span class="cstat-no" title="statement not covered" >    this.storage = windowRefService.nativeWindow.sessionStorage;</span>
+<span class="cstat-no" title="statement not covered" >    this.shareSessionBetweenTabs();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  getItem(</span>keyName): any {
+<span class="cstat-no" title="statement not covered" >    return JSON.parse(this.storage.getItem(keyName));</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  setItem(</span>keyName, keyValue): void {
+<span class="cstat-no" title="statement not covered" >    this.storage.setItem(keyName, JSON.stringify(keyValue));</span>
+<span class="cstat-no" title="statement not covered" >    this.notifyOtherTabs();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  removeItem(</span>keyName): void {
+<span class="cstat-no" title="statement not covered" >    this.storage.removeItem(keyName);</span>
+<span class="cstat-no" title="statement not covered" >    this.notifyOtherTabs();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  clear(): void {</span>
+<span class="cstat-no" title="statement not covered" >    this.storage.clear();</span>
+<span class="cstat-no" title="statement not covered" >    this.notifyOtherTabs();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  notifyOtherTabs() { // send current sessionStorage dump to other tabs</span>
+    const storageDump = <span class="cstat-no" title="statement not covered" >{};</span>
+<span class="cstat-no" title="statement not covered" >    for (let i = 0; i &lt; this.storage.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >      storageDump[this.storage.key(i)] = this.storage.getItem(this.storage.key(i));</span>
+    }
+<span class="cstat-no" title="statement not covered" >    this.localStorageService.setItem('sessionStorage', storageDump); </span> // notify other tabs by sending a localStorage event
+<span class="cstat-no" title="statement not covered" >    this.localStorageService.removeItem('sessionStorage'); </span> // clear the data from localStorage right away
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >  shareSessionBetweenTabs() {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (!this.storage.length) { // initial sessionStorage is empty in this tab, ask for the initial session data from other tabs</span>
+<span class="cstat-no" title="statement not covered" >      localStorage.setItem('getSessionStorage', `${Date.now()}`);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.windowRefService.nativeWindow.addEventListener('storage', <span class="fstat-no" title="function not covered" >(</span>event) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (event.key === 'getSessionStorage') {  // another tab asked for the initial sessionStorage dump, send it</span>
+<span class="cstat-no" title="statement not covered" >        this.notifyOtherTabs();</span>
+      } else <span class="cstat-no" title="statement not covered" >if (event.key === 'sessionStorage' &amp;&amp; event.newValue) {   // another tab sent the sessionStorage dump</span>
+        const data = <span class="cstat-no" title="statement not covered" >JSON.parse(event.newValue);</span>
+<span class="cstat-no" title="statement not covered" >        this.storage.clear();</span>
+<span class="cstat-no" title="statement not covered" >        Object.keys(data).forEach(<span class="fstat-no" title="function not covered" >key =&gt; <span class="cstat-no" title="statement not covered" >this.storage.setItem(key, data[key]))</span>;</span></span>
+      }
+    });
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Mar 15 2018 05:06:07 GMT+0200 (Финляндия (зима))
+</div>
+</div>
+<script src="..\..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\..\sorter.js"></script>
+</body>
+</html>
