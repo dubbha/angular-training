@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/app/products/products.service.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\index.html">All files</a> / <a href="index.html">src/app/products</a> products.service.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">77.78% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>63/81</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">62.5% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>10/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">61.29% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>19/31</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">80% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>56/70</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+&nbsp;
+import { Store } from '@ngrx/store';
+&nbsp;
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { tap, catchError } from 'rxjs/operators';
+import 'rxjs/add/observable/throw';
+&nbsp;
+import { Product } from './product/product.model';
+import { Category } from './product/product.enum';
+import { AppState } from '../+store';
+&nbsp;
+@Injectable()
+export class ProductService {
+  productsCache: Array&lt;Product&gt;;
+  cacheTimeToLiveSeconds: number;
+  productsCacheExpiryTime: number;
+  apiBaseUrl: string;
+  apiEndpoint = 'products';
+&nbsp;
+  private sub: Subscription;
+&nbsp;
+  constructor(
+    private http: HttpClient,
+    private store: Store&lt;AppState&gt;,
+  ) {
+    this.sub = new Subscription();
+    this.sub.add(this.store.select('appSettings')
+      .pipe(
+        tap(appSettings =&gt; {
+          <span class="missing-if-branch" title="else path not taken" >E</span>if (appSettings.settings) {
+            this.apiBaseUrl = appSettings.settings.apiBaseUrl;
+          }
+        }))
+      .subscribe()
+    );
+  }
+&nbsp;
+  getProducts(): Promise&lt;Array&lt;Product&gt;&gt; {
+    if (!this.productsCache || Date.now() &gt; this.productsCacheExpiryTime) {
+      return this.http.get(`${this.apiBaseUrl}/${this.apiEndpoint}`)
+        .toPromise()
+        .then(data =&gt; {
+          const castedData = &lt;Array&lt;Product&gt;&gt;data;
+&nbsp;
+          const transformedData = castedData.map(product =&gt; {
+            product.alternativesWithNames = product.alternatives.map(<span class="fstat-no" title="function not covered" >altId =&gt; <span class="cstat-no" title="statement not covered" >({</span></span>
+              id: altId,
+              name: castedData.find(<span class="fstat-no" title="function not covered" >p =&gt; <span class="cstat-no" title="statement not covered" >p.id === altId)</span>.name</span>
+            }));
+&nbsp;
+            return product;
+          });
+&nbsp;
+          this.productsCache = transformedData;
+          this.productsCacheExpiryTime = Date.now() + this.cacheTimeToLiveSeconds * 1000;
+          return &lt;Array&lt;Product&gt;&gt;data;
+        });
+    } else {
+      return Promise.resolve(this.productsCache);
+    }
+  }
+&nbsp;
+  getProductById(id): Promise&lt;Product&gt; {
+    return this.getProducts()
+      .then(products =&gt; products.find(p =&gt; p.id === id));
+  }
+&nbsp;
+  addProduct(product: Product): Observable&lt;any&gt; {
+    delete product.alternativesWithNames;
+&nbsp;
+    return this.http.post(`${this.apiBaseUrl}/${this.apiEndpoint}`, product)
+      .pipe(
+        tap((createdProduct) =&gt; {
+          const castedProduct = &lt;Product&gt;createdProduct;
+&nbsp;
+          castedProduct.alternativesWithNames = castedProduct.alternatives.map(<span class="fstat-no" title="function not covered" >altId =&gt; <span class="cstat-no" title="statement not covered" >({</span></span>
+            id: altId,
+            name: this.productsCache.find(<span class="fstat-no" title="function not covered" >p =&gt; <span class="cstat-no" title="statement not covered" >p.id === altId)</span>.name</span>
+          }));
+&nbsp;
+          this.productsCache
+            ? <span class="branch-0 cbranch-no" title="branch not covered" >this.productsCache.push(castedProduct)</span>
+            : this.productsCache = [castedProduct];
+&nbsp;
+          return castedProduct;
+        }),
+        catchError(<span class="fstat-no" title="function not covered" >err =&gt; <span class="cstat-no" title="statement not covered" >Observable.throw(err))</span>,</span>
+      );
+  }
+&nbsp;
+  removeProduct(id: number): Observable&lt;any&gt; {
+    return this.http.delete(`${this.apiBaseUrl}/${this.apiEndpoint}/${id}`)
+      .pipe(
+        tap(() =&gt; {
+          this.productsCache = this.productsCache
+            .filter(product =&gt; product.id !== id)
+            .map(product =&gt; {
+              <span class="missing-if-branch" title="if path not taken" >I</span>if (product.alternatives.includes(id)) {
+<span class="cstat-no" title="statement not covered" >                product.alternatives = product.alternatives.filter(<span class="fstat-no" title="function not covered" >e =&gt; <span class="cstat-no" title="statement not covered" >e !== id)</span>;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                product.alternativesWithNames = product.alternativesWithNames</span>
+                  .reduce(<span class="fstat-no" title="function not covered" >(</span>aggr, cur) =&gt; {
+<span class="cstat-no" title="statement not covered" >                    if (cur.id !== id) {</span>
+<span class="cstat-no" title="statement not covered" >                      aggr.push(cur);</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    return aggr;</span>
+                  }, []);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                  this.sub.add(this.patchProduct(</span>
+                      product.id,
+                      { alternatives: product.alternatives },
+                    ).subscribe());  // https://stackoverflow.com/a/41381265/8861667
+              }
+              return product;
+            });
+        }),
+        catchError(<span class="fstat-no" title="function not covered" >err =&gt; <span class="cstat-no" title="statement not covered" >Observable.throw(err))</span>,</span>
+      );
+  }
+&nbsp;
+  updateProduct(updatedProduct: Product): Observable&lt;any&gt; {
+    const dbProduct = { ...updatedProduct };
+    delete dbProduct.alternativesWithNames;
+&nbsp;
+    return this.http.put(`${this.apiBaseUrl}/${this.apiEndpoint}/${dbProduct.id}`, dbProduct)
+      .pipe(
+        tap(() =&gt; {
+          this.productsCache = this.productsCache
+            .map(product =&gt; {
+              // Re-create alternativesWithNames of the updated product, in case alternatives were updated
+              if (product.id === dbProduct.id) {
+                dbProduct.alternativesWithNames = dbProduct.alternatives.map(<span class="fstat-no" title="function not covered" >altId =&gt; <span class="cstat-no" title="statement not covered" >({</span></span>
+                  id: altId,
+                  name: this.productsCache.find(<span class="fstat-no" title="function not covered" >p =&gt; <span class="cstat-no" title="statement not covered" >p.id === altId)</span>.name</span>
+                }));
+&nbsp;
+                return dbProduct;
+              }
+&nbsp;
+              // If we changed the name of the product, we need to update alternativesWithNames of others
+              <span class="missing-if-branch" title="if path not taken" >I</span>if (product.alternatives.includes(dbProduct.id)) {
+<span class="cstat-no" title="statement not covered" >                product.alternativesWithNames</span>
+                  .find(<span class="fstat-no" title="function not covered" >alt =&gt; <span class="cstat-no" title="statement not covered" >alt.id === dbProduct.id)</span></span>
+                  .name = dbProduct.name;
+              }
+              return product;
+            });
+        }),
+        catchError(<span class="fstat-no" title="function not covered" >err =&gt; <span class="cstat-no" title="statement not covered" >Observable.throw(err))</span>,</span>
+      );
+  }
+&nbsp;
+  patchProduct(id: number, partial: any): Observable&lt;any&gt; {
+    return this.http.patch(`${this.apiBaseUrl}/${this.apiEndpoint}/${id}`, partial);
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Mar 15 2018 05:06:07 GMT+0200 (Финляндия (зима))
+</div>
+</div>
+<script src="..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\sorter.js"></script>
+</body>
+</html>

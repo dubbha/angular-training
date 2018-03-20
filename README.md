@@ -1,16 +1,12 @@
 # Angular Training
 
-## Task 8. Forms
-- AddressComponent using Reactive Form with required, email and pattern-based validations
-- Class-generated error messages, with full support for the initial touch-and-blur scenario
-- Cross-field case-insensitive validation of emails, with a nice double-arrow error tooltip
-- Conditional adjustment of validation rules depending on the deliveryRequired switch
-- FormArray of mobiles allowing to add and delete mobiles, individual error tracking
-- ProductCreatorComponent using Reactive Form with validations and a subform for materials
-- ProductEditorComponent using Template-driven Form for contrast
-- AuthComponent using very basic Reactive Form
-- Validations run moment configured to fire onBlur, onChange
-- Not using FormBuilder because of issues like [updateOn](https://github.com/angular/angular/issues/19163)
+## Task 9. Unit Tests
+- AppComponent: appSettings store mock, constants mock, jasmine.clock(), regexp match
+- ProductsService: HttpClientTestingModule, promises, observers, HTTP GET/POST/DELETE/PUT/PATCH
+- SortProductsPipe: unit tests performing various sorting transformations
+- ProductListComponent: StoreModule.forRoot(), .forFeature(), spyOn() store.dispatch()
+- ProductCardComponent: not yet working, failing on @ngrx/router-store selectors
+- Code coverage generated and added to the repository
 
 ## Branches
  - Task1. Introduction

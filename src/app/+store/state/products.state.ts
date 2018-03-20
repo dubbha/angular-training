@@ -17,5 +17,5 @@ export const initialProductsState: ProductsState = productsAdapter.getInitialSta
     loading: false,
     error: null,
     sortKey: 'id',
-    sortOrder: 'asc',
+    sortOrder: 'desc',
 });

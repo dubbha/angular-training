@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/app/cart/cart.service.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\index.html">All files</a> / <a href="index.html">src/app/cart</a> cart.service.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">27.69% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>18/65</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/18</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">4.76% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/21</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">28.07% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>16/57</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Injectable } from '@angular/core';
+&nbsp;
+import { Product } from '../products/product/product.model';
+import { LocalStorageService } from '../core/services';
+&nbsp;
+@Injectable()
+export class CartService {
+<span class="cstat-no" title="statement not covered" >  products: Array&lt;any&gt; = [];</span>
+<span class="cstat-no" title="statement not covered" >  totalPrice = 0;</span>
+<span class="cstat-no" title="statement not covered" >  totalQuantity = 0;</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >  constructor(</span>
+    private <span class="cstat-no" title="statement not covered" >localStorageService: LocalStorageService,</span>
+  ) {
+<span class="cstat-no" title="statement not covered" >    this.restoreProductsFromLocalStorage();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  addToCart(</span>
+    product: { id: number, name: string, price: number },
+<span class="cstat-no" title="statement not covered" >    quantity = 1,</span>
+  ) {
+<span class="cstat-no" title="statement not covered" >    this.products.find(<span class="fstat-no" title="function not covered" >item =&gt; <span class="cstat-no" title="statement not covered" >item.id === product.id)</span></span></span>
+      ? this.updateQuantity(product.id, '+', quantity)
+      : this.products.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity,
+        });
+<span class="cstat-no" title="statement not covered" >    this.updateTotals();</span>
+<span class="cstat-no" title="statement not covered" >    this.updateLocalStorage();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  updateQuantity(</span>id, way, <span class="cstat-no" title="statement not covered" >delta = 1)</span> {
+<span class="cstat-no" title="statement not covered" >    switch (way) {</span>
+      case '-':
+<span class="cstat-no" title="statement not covered" >        this.products = this.products.map(<span class="fstat-no" title="function not covered" >item =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (item.id === id &amp;&amp; item.quantity &gt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >            item.quantity -= delta;</span>
+          }
+<span class="cstat-no" title="statement not covered" >          return item;</span>
+        });
+<span class="cstat-no" title="statement not covered" >        break;</span>
+      case '+':
+<span class="cstat-no" title="statement not covered" >        this.products = this.products.map(<span class="fstat-no" title="function not covered" >item =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (item.id === id) {</span>
+<span class="cstat-no" title="statement not covered" >            item.quantity += delta;</span>
+          }
+<span class="cstat-no" title="statement not covered" >          return item;</span>
+        });
+    }
+<span class="cstat-no" title="statement not covered" >    this.updateTotals();</span>
+<span class="cstat-no" title="statement not covered" >    this.updateLocalStorage();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  removeProduct(</span>id) {
+<span class="cstat-no" title="statement not covered" >    this.products = this.products.filter(<span class="fstat-no" title="function not covered" >item =&gt; <span class="cstat-no" title="statement not covered" >item.id !== id)</span>;</span></span>
+<span class="cstat-no" title="statement not covered" >    this.updateTotals();</span>
+<span class="cstat-no" title="statement not covered" >    this.updateLocalStorage();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  updateTotalPrice() {</span>
+<span class="cstat-no" title="statement not covered" >    this.totalPrice =  this.products.reduce(<span class="fstat-no" title="function not covered" >(</span>acc, cur) =&gt; <span class="cstat-no" title="statement not covered" >acc + cur.price * cur.quantity,</span> 0);</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  updateTotalQuantity() {</span>
+<span class="cstat-no" title="statement not covered" >    this.totalQuantity = this.products.reduce(<span class="fstat-no" title="function not covered" >(</span>acc, cur) =&gt; <span class="cstat-no" title="statement not covered" >acc + cur.quantity,</span> 0);</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  updateTotals() {</span>
+<span class="cstat-no" title="statement not covered" >    this.updateTotalPrice();</span>
+<span class="cstat-no" title="statement not covered" >    this.updateTotalQuantity();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  clear() {</span>
+<span class="cstat-no" title="statement not covered" >    this.products = [];</span>
+<span class="cstat-no" title="statement not covered" >    this.totalPrice = 0;</span>
+<span class="cstat-no" title="statement not covered" >    this.totalQuantity = 0;</span>
+<span class="cstat-no" title="statement not covered" >    this.updateLocalStorage();</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  getProductPercentage(</span>id) {
+    const product = <span class="cstat-no" title="statement not covered" >this.products.find(<span class="fstat-no" title="function not covered" >item =&gt; <span class="cstat-no" title="statement not covered" >item.id === id)</span>;</span></span>
+<span class="cstat-no" title="statement not covered" >    return product ? ((product.price * product.quantity) / this.totalPrice) : 0;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  updateLocalStorage() {</span>
+<span class="cstat-no" title="statement not covered" >    this.localStorageService.setItem('cartProducts', this.products);</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  restoreProductsFromLocalStorage() {</span>
+    const storedProducts = <span class="cstat-no" title="statement not covered" >this.localStorageService.getItem('cartProducts');</span>
+<span class="cstat-no" title="statement not covered" >    if (storedProducts) {</span>
+<span class="cstat-no" title="statement not covered" >      this.products = storedProducts;</span>
+<span class="cstat-no" title="statement not covered" >      this.updateTotals();</span>
+    }
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  notifyServerOnInit(</span>product) {
+<span class="cstat-no" title="statement not covered" >    console.log(`Product with ID ${product.id} added to cart`);</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  notifyServerOnDestroy(</span>product) {
+<span class="cstat-no" title="statement not covered" >    console.log(`Product with ID ${product.id} removed from cart`);</span>
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Mar 15 2018 05:06:07 GMT+0200 (Финляндия (зима))
+</div>
+</div>
+<script src="..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\sorter.js"></script>
+</body>
+</html>
